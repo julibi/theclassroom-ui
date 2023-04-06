@@ -1,0 +1,21 @@
+.characterSetupForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  margin: 24px;
+}
+
+.label, .input {
+  margin-block-end: 6px;
+}
+
+.error {
+  color: red;
+  height: 24px;
+}
+
+.descriptionField {
+  resize: none;
+  min-height: 300px;
+}

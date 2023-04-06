@@ -20,11 +20,9 @@ export const WalletConnection = () => {
   const [name, setName] = useState<Address | undefined>(undefined);
 
   const fetchENS = useCallback(async () => {
-    console.log({ chain });
     if (!address) return;
     try {
       const bla = await fetchEnsName({ address });
-      console.log({ bla });
     } catch (e) {}
   }, [name]);
 
