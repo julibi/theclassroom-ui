@@ -1,38 +1,51 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { useContract } from "@/hooks/use-contract";
-import ABI from "../../abis/TCR.json";
-import { TCR_DEV } from "../../constants";
-import { Abi } from "abitype";
-
+import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
+import { useSetupCharacter } from "@/hooks/use-setup-character";
+import styles from "./admin-input.module.css";
 export const AdminInput = () => {
   const [text, setText] = useState("");
-  const { write, status, error } = useContract({
-    address: TCR_DEV,
-    abi: ABI as Abi,
-    functionName: "configureAdmins",
-    args: [[text], [true]],
-  });
+  const [textIpfsHash, setTextIpfsHash] = useState("");
+  const [name, setName] = useState("");
+  const { uploadText } = useIpfsTextUpload();
+  const { write, status, error } = useSetupCharacter(name, textIpfsHash);
+
   const pending = useMemo(
     () => ["confirming", "waiting"].includes(status),
     [status]
   );
-  const handleClick = useCallback(() => {
+
+  const upload = useCallback(async () => {
+    try {
+      const textCID = await uploadText(text);
+      setTextIpfsHash(textCID);
+      handleSubmit();
+    } catch (e) {
+      console.log({ e });
+    }
+  }, [text]);
+
+  const handleSubmit = useCallback(async () => {
     try {
       write?.();
     } catch (e) {
       console.log({ e });
     }
-  }, [write]);
-  console.log({ write, error, status, pending });
+  }, [textIpfsHash, write]);
+
   return (
-    <div>
+    <div className={styles.characterSetup}>
+      <input
+        type="text"
+        value={name}
+        onChange={({ target: { value } }) => setName(value)}
+      />
       <input
         type="text"
         disabled={pending}
         value={text}
         onChange={({ target: { value } }) => setText(value)}
       />
-      <button onClick={handleClick}>{pending ? "..." : "add character"}</button>
+      <button onClick={upload}>{pending ? "..." : "Add character"}</button>
     </div>
   );
 };

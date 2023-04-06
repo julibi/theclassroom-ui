@@ -92,7 +92,7 @@ export function useContract({
     setStatus("idle");
     reset();
   }, [reset]);
-  console.log({ prepareError, res, txRes });
+
   return {
     write: process,
     writeAsync: processAsync,

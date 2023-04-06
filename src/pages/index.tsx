@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { WalletConnection } from "@/components/wallet-connection";
-import { AdminInput } from "@/components/admin-input";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +15,6 @@ export default function Home() {
       </Head> */}
       <main>
         <div>THIS IS HOME</div>
-        <AdminInput />
       </main>
     </div>
   );

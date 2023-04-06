@@ -1,10 +1,28 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
-import { WalletConnection } from "../wallet-connection";
-import styles from "./navbar.module.css";
+import { useContractRead } from "wagmi";
+import { getAccount } from "@wagmi/core";
+import { TCR_DEV } from "@/constants";
 import { routes } from "./routes";
+import { WalletConnection } from "../wallet-connection";
+import ABI from "../../abis/TCR.json";
+import styles from "./navbar.module.css";
 
 export const Navbar = () => {
+  const { address } = getAccount();
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const { data: readData } = useContractRead({
+    address: TCR_DEV,
+    abi: ABI,
+    functionName: "admins",
+    args: [address],
+  });
+
+  // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
+  useEffect(() => {
+    setIsAdmin(!!readData as boolean);
+  }, [readData]);
+
   return (
     <div className={styles.navbar}>
       <ul>
@@ -15,6 +33,13 @@ export const Navbar = () => {
             </Link>
           </li>
         ))}
+        {!!isAdmin && (
+          <li key="admin">
+            <Link href={"/admin"} passHref>
+              {"admin"}
+            </Link>
+          </li>
+        )}
       </ul>
       <WalletConnection />
     </div>
