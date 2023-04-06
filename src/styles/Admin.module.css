@@ -1,4 +1,25 @@
 .admin {
   display: flex;
-  
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  display: 100%;
+  list-style-type: none;
+  display: flex;
+}
+
+.listItem {
+  display: block;
+
+}
+
+.characterItem {
+  margin: 12px;
+  height: 300px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid grey;
 }

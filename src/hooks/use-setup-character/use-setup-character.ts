@@ -7,7 +7,11 @@ import ABI from "../../abis/TCR.json";
 // TODO: PIN DATA TO PINATA
 
 export function useSetupCharacter(name: string, textIpfsHash: string) {
-  const { write, status, error } = useContract({
+  if (!!textIpfsHash.length) {
+    throw new Error("No textIpfsHash specified.");
+  }
+
+  const { write, status, error, data } = useContract({
     address: TCR_DEV,
     abi: ABI as Abi,
     functionName: "setupCharacter",
@@ -20,6 +24,7 @@ export function useSetupCharacter(name: string, textIpfsHash: string) {
       write,
       status,
       error,
+      data,
     }),
     [error, status, write]
   );
