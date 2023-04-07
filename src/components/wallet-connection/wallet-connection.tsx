@@ -16,21 +16,23 @@ export const WalletConnection = () => {
 
   // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
   useEffect(() => {
-    const nm =
-      ensName && !ensError
-        ? ensName
-        : address
-        ? truncateAddress(address)
-        : null;
+    if (isConnected) {
+      const nm =
+        ensName && !ensError
+          ? ensName
+          : address
+          ? truncateAddress(address)
+          : null;
 
-    nm && setName(nm);
-  }, [address, ensName, ensError]);
-  console.log({ name });
+      nm && setName(nm);
+    }
+  }, [address, ensName, ensError, isConnected]);
+
   return (
     <div className={style.walletConnection}>
-      {name && isConnected && <span>{name}</span>}
-
-      {!isConnected && (
+      {name ? (
+        <span>{name}</span>
+      ) : (
         <Button onClick={() => setIsOpenModal(true)}>Connect</Button>
       )}
 

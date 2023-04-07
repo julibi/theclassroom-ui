@@ -38,9 +38,10 @@ export const WalletConnectionModal = ({
       if (connector === "MetaMask") {
         selectedConnector = injectedConnector;
       }
-      // if (!selectedConnector) {
-      //   throw new Error("No connector found");
-      // }
+      if (!selectedConnector) {
+        setConnectError("Connector is undefined.");
+        return;
+      }
       try {
         const result = await connect({
           connector: selectedConnector,
