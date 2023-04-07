@@ -6,20 +6,16 @@
 }
 
 .list {
-  display: 100%;
+  width: 100vw;
+  overflow-x: scroll;
   list-style-type: none;
   display: flex;
 }
 
 .listItem {
   display: block;
-
 }
 
-.characterItem {
-  margin: 12px;
-  height: 300px;
-  width: 300px;
-  border-radius: 5px;
-  border: 1px solid grey;
+.title {
+  margin-block: 24px;
 }

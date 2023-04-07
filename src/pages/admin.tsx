@@ -7,6 +7,8 @@ import { CharacterItem } from "@/components/admin-input/admin-input.types";
 import { TCR_DEV } from "@/constants";
 import { Address } from "abitype";
 import ABI from "../abis/TCR.json";
+import { Title } from "@/components/title";
+import { CharacterCard } from "@/components/character-card";
 
 const Admin = () => {
   const [characters, setCharacters] = useState<null | CharacterItem[]>(null);
@@ -67,9 +69,8 @@ const Admin = () => {
       .map((item: any) => ({
         name: item.name,
         textIpfsHash: item.textIPFSHash,
+        imageIpfsHash: item.imageIpfsHash,
       }));
-
-    console.log({ definedCharacters });
 
     definedCharacters?.length && setCharacters(definedCharacters);
   }, []);
@@ -80,14 +81,24 @@ const Admin = () => {
 
   return (
     <div className={styles.admin}>
+      <Title size={1} className={styles.title}>
+        Characters
+      </Title>
       <ul className={styles.list}>
         {characters?.map((character, idx) => (
           <li key={idx} className={styles.listItem}>
-            <div className={styles.characterItem}>{character.name}</div>
+            <CharacterCard character={character} />
           </li>
         ))}
       </ul>
-      <AdminInput refetch={fetchCharacters} />
+      {typeof characters?.length == "number" && characters?.length < 10 && (
+        <>
+          <Title size={1} className={styles.title}>
+            Create New Character
+          </Title>
+          <AdminInput refetch={fetchCharacters} />
+        </>
+      )}
     </div>
   );
 };

@@ -1,0 +1,12 @@
+.characterCard {
+  margin: 12px;
+  padding: 12px;
+  height: 300px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.title {
+  margin-block-end: 12px;
+}
