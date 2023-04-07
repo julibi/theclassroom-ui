@@ -5,6 +5,7 @@ import { ButtonProps } from "./button.types";
 
 export const Button = ({
   text,
+  children,
   className,
   onClick,
   pending,
@@ -20,7 +21,8 @@ export const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {pending ? "..." : text}
+      {text && pending ? "..." : text}
+      {children ?? ""}
     </button>
   );
 };
