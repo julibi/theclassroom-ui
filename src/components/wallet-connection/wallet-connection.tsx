@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Address, FetchEnsAddressArgs } from "@wagmi/core";
-import { getNetwork, connect, fetchEnsName, getAccount } from "@wagmi/core";
-import { injectedConnector } from "@/providers/wagmiProvider/wagmiProvider";
+import { Address } from "@wagmi/core";
+import { fetchEnsName, getAccount } from "@wagmi/core";
 import style from "./wallet-connection.module.css";
 import { truncateAddress } from "@/utils/truncateAddress";
+import { WalletConnectionModal } from "../wallet-connection-modal/wallet-connection-modal";
+import { Button } from "../button";
 
 export const WalletConnection = () => {
   const { address } = getAccount();
-  const { chain } = getNetwork();
+  const [isModalOpen, setIsOpenModal] = useState(false);
 
   const handleConnect = async () => {
     // const result = await connect({
@@ -37,7 +38,10 @@ export const WalletConnection = () => {
       {name ? (
         <span>{truncateAddress(name)}</span>
       ) : (
-        <button onClick={handleConnect}>Connect</button>
+        <Button onClick={() => setIsOpenModal(true)}>Connect</Button>
+      )}
+      {isModalOpen && (
+        <WalletConnectionModal onClose={() => setIsOpenModal(false)} />
       )}
     </div>
   );

@@ -17,11 +17,6 @@ export default function Home() {
       </Head> */}
       <main>
         <div>THIS IS HOME</div>
-        <WalletConnectionModal
-          onClose={() => {
-            console.log("onClose");
-          }}
-        />
       </main>
     </div>
   );
