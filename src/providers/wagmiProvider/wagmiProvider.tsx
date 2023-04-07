@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { WagmiConfig, configureChains, createClient } from "wagmi";
-import { polygon, polygonMumbai } from "@wagmi/core/chains";
+import { polygon, polygonMumbai, mainnet } from "@wagmi/core/chains";
 import { publicProvider } from "@wagmi/core/providers/public";
 import { infuraProvider } from "@wagmi/core/providers/infura";
 import { InjectedConnector } from "@wagmi/core/connectors/injected";
@@ -12,6 +12,7 @@ const isProd = process.env.ENVIRONMENT == "PROD";
 const { chains, provider } = configureChains(
   // what about dev and mainnet environments?
   [isProd ? polygon : polygonMumbai],
+
   [
     infuraProvider({
       apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY as string,

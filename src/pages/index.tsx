@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { Modal } from "@/components/modal/modal";
+import { WalletConnectionModal } from "@/components/wallet-connection-modal/wallet-connection-modal";
 
 const inter = Inter({ subsets: ["latin"] });
 

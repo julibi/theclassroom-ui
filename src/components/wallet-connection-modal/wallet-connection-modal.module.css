@@ -1,0 +1,21 @@
+.content {
+  margin-block-start: 48px;
+  width: 300px;
+  height: fit-content;
+}
+
+.connector {
+  border-radius: 5px;
+  border: 1.5px solid #13293d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding: 6px 12px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.error {
+  color: red;
+}
