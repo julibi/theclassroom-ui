@@ -1,2 +1,2 @@
-export const TCR_DEV = "0x4Efb44431b217680A3DafA4024F6A7cf8FD258AB";
+export const TCR_DEV = "0xb66c6275bc2b26A73aB2e58753e278E3D8f6Beb2";
 export const connectors = ["MetaMask", "Coinbase", "WalletConnect"] as const;

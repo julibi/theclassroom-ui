@@ -21,10 +21,6 @@ const Admin = () => {
       contracts: [
         {
           ...call,
-          args: [0],
-        },
-        {
-          ...call,
           args: [1],
         },
         {
@@ -59,6 +55,10 @@ const Admin = () => {
           ...call,
           args: [9],
         },
+        {
+          ...call,
+          args: [10],
+        },
       ],
     });
 
@@ -68,6 +68,8 @@ const Admin = () => {
         name: item.name,
         textIpfsHash: item.textIPFSHash,
       }));
+
+    console.log({ definedCharacters });
 
     definedCharacters?.length && setCharacters(definedCharacters);
   }, []);
@@ -85,7 +87,7 @@ const Admin = () => {
           </li>
         ))}
       </ul>
-      <AdminInput />
+      <AdminInput refetch={fetchCharacters} />
     </div>
   );
 };

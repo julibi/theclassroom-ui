@@ -1,30 +1,37 @@
-import React, {
-  FormEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import cx from "classnames";
-
 import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
-import { useSetupCharacter } from "@/hooks/use-setup-character";
 import styles from "./admin-input.module.css";
 import { Button } from "../button";
 import { Textarea } from "../textarea";
+import { useContractWrite, useWaitForTransaction } from "wagmi";
+import ABI from "../../abis/TCR.json";
+import { TCR_DEV } from "@/constants";
+import { AdminInputProps } from "./admin-input.types";
 
-export const AdminInput = () => {
+export const AdminInput = ({ refetch }: AdminInputProps) => {
   const [text, setText] = useState("");
-  const [textIpfsHash, setTextIpfsHash] = useState("");
+  const [textIPFSHash, setTextIPFSHash] = useState("");
   const [name, setName] = useState("");
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const { uploadText } = useIpfsTextUpload();
   const {
-    write,
-    status,
     error: contractError,
+    write,
+    status: writeStatus,
     data,
-  } = useSetupCharacter(name, textIpfsHash);
+  } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: TCR_DEV,
+    abi: ABI,
+    functionName: "setupCharacter",
+    args: [name, textIPFSHash, ""],
+  });
+  const { status: waitStatus, error: waitError } = useWaitForTransaction({
+    hash: data?.hash,
+  });
 
   const nameError = useMemo(() => {
     // TOOD: validate a characters like this does not already exist
@@ -51,46 +58,49 @@ export const AdminInput = () => {
     () => ["confirming", "waiting", "fetching"].includes(status),
     [status]
   );
-  
+
   const handleChange = (value: string) => {
     setText(value);
   };
 
-  const upload = useCallback(
+  const handleSubmit = useCallback(
     async (evt: React.ChangeEvent) => {
       evt.preventDefault();
+
       try {
         const textCID = await uploadText(text);
-        setTextIpfsHash(textCID);
-        handleSubmit();
+        write?.({ recklesslySetUnpreparedArgs: [name, textCID, ""] });
       } catch (e) {
         console.log({ e });
       }
     },
-    [text]
+    [text, uploadText, write, name]
   );
-
-  const handleSubmit = useCallback(async () => {
-    try {
-      write?.();
-    } catch (e) {
-      console.log({ e });
-    }
-  }, [textIpfsHash, write]);
 
   const reset = () => {
     setText("");
-    setTextIpfsHash("");
+    setTextIPFSHash("");
     setName("");
   };
 
   useEffect(() => {
-    if (status === "success") {
-      reset();
-      console.log("should refetch");
-      // refetch stuff
+    if (writeStatus === "loading" || writeStatus === "success") {
+      setStatus("pending");
     }
-  }, [status]);
+    if (writeStatus === "success" && waitStatus === "success") {
+      setStatus("success");
+      reset();
+      refetch();
+    }
+  }, [writeStatus, waitStatus]);
+
+  useEffect(() => {
+    if (contractError && contractError?.name !== "UserRejectedRequestError") {
+      setError(contractError?.message);
+    } else if (waitError) {
+      setError(waitError?.message);
+    }
+  }, [waitError, contractError]);
 
   return (
     <form className={styles.characterSetupForm}>
@@ -103,22 +113,20 @@ export const AdminInput = () => {
         value={name}
         onChange={({ target: { value } }) => setName(value)}
         className={styles.input}
-        disabled={pending}
+        disabled={status === "pending"}
       />
       <span className={styles.error}>{nameError ?? " "}</span>
       <label htmlFor="character-description">Character Description</label>
-      <Textarea text={text} onChange={handleChange} disabled={pending}/>
+      <Textarea text={text} onChange={handleChange} disabled={pending} />
       <span className={styles.error}>{textError ?? " "}</span>
       <Button
         type="submit"
-        onClick={upload}
+        onClick={handleSubmit}
         text={"Add character"}
-        pending={pending}
-        disabled={pending || !!textError || !!nameError}
+        pending={status === "pending"}
+        disabled={status === "pending" || !!textError || !!nameError}
       />
-      <span className={styles.error}>
-        {contractError ? contractError?.message : " "}
-      </span>
+      <span className={styles.error}>{error ?? " "}</span>
     </form>
   );
 };

@@ -14,6 +14,7 @@ export function useContract({
   functionName,
   args,
   enabled = false,
+  mode = "prepared",
 }: UseContractProps) {
   const [status, setStatus] = useState<ContractWriteStatus>("idle");
 
@@ -50,6 +51,7 @@ export function useContract({
     reset,
   } = useContractWrite({
     ...config,
+    mode,
   });
   const { data: res, status: waitStatus } = useWaitForTransaction({
     hash: txRes?.hash,
