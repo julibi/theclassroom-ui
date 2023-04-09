@@ -1,0 +1,53 @@
+.slider {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+.slideIn {
+  animation: slideIn 0.5s forwards;
+}
+
+.slideOut {
+  animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); 
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    transform: translateX(0%);
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0%); 
+    backdrop-filter: blur(10px);
+  }
+  100% {
+    transform: translateX(100%); 
+    backdrop-filter: blur(0px);
+  }
+}
+
+.content {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 80%;
+  max-width: 500px;
+  background-color: #13293d;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}

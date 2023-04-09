@@ -25,23 +25,26 @@ export const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <ul>
+      <ul className={styles.list}>
         {routes?.map((route) => (
-          <li key={route.name}>
+          <li key={route.name} className={styles.listItem}>
             <Link href={route.path} passHref>
               {route.name}
             </Link>
           </li>
         ))}
+
         {!!isAdmin && (
-          <li key="admin">
+          <li key="admin" className={styles.listItem}>
             <Link href={"/admin"} passHref>
               {"admin"}
             </Link>
           </li>
         )}
+        <li key="walletconnection" className={styles.listItem}>
+          <WalletConnection />
+        </li>
       </ul>
-      <WalletConnection />
     </div>
   );
 };
