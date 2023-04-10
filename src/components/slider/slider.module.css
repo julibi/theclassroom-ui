@@ -44,6 +44,9 @@
   width: 80%;
   max-width: 500px;
   background-color: #13293d;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .closeButton {
