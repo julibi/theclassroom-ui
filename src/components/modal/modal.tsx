@@ -6,8 +6,8 @@ import styles from "./modal.module.css";
 // TODO: on outside click
 export const Modal = ({ children, onClose }: ModalProps) => {
   return (
-    <FocusOn onEscapeKey={onClose}>
-      <div className={styles.modal}>
+    <div className={styles.modal}>
+      <FocusOn onEscapeKey={onClose} onClickOutside={onClose}>
         <div className={styles.content}>
           {onClose && (
             <Button className={styles.closeButton} onClick={onClose}>
@@ -16,7 +16,7 @@ export const Modal = ({ children, onClose }: ModalProps) => {
           )}
           {children}
         </div>
-      </div>
-    </FocusOn>
+      </FocusOn>
+    </div>
   );
 };
