@@ -54,3 +54,22 @@
   top: 12px;
   right: 12px;
 }
+
+.nftList {
+  height: 100%;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: #fff;
+  margin-block-end: 24px;
+}
+
+.nft {
+  border: 1px solid #fff;
+  width: 200px;
+  padding: 12px;
+  margin-block-end: 12px;
+}

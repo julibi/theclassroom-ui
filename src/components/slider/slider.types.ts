@@ -5,5 +5,15 @@ export type Call = {
   address: Address;
   abi: Abi;
   functionName: string;
-  args: number[];
+  args: [Address, number];
+};
+
+export type Edition = {
+  current: BigInt;
+  currentEdLastTokenId: BigInt;
+  currentTokenId: BigInt;
+  endTokenId: BigInt;
+  lastGenEdTokenId: BigInt;
+  mintPrice: BigInt;
+  startTokenId: BigInt;
 };
