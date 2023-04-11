@@ -1,14 +1,13 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Modal } from "@/components/modal/modal";
-import { WalletConnectionModal } from "@/components/wallet-connection-modal/wallet-connection-modal";
-import { Slider } from "@/components/slider";
-import { useSlider } from "@/hooks/use-slider";
+import { useCharacters } from "@/hooks/use-characters";
+import { CharacterCard } from "@/components/character-card";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { characters, fetchCharacters } = useCharacters();
   return (
     <div>
       {/* <Head>
@@ -19,6 +18,13 @@ export default function Home() {
       </Head> */}
       <main>
         <div>THIS IS HOME</div>
+        <ul>
+          {characters?.map((character, idx) => (
+            <li key={idx}>
+              <CharacterCard character={character} />
+            </li>
+          ))}
+        </ul>
       </main>
     </div>
   );

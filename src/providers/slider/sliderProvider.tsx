@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { SliderApi, SliderProviderProps } from "./sliderProvider.types";
 
 const defaultContext: SliderApi = {
