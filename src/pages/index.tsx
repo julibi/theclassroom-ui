@@ -2,12 +2,13 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useCharacters } from "@/hooks/use-characters";
-import { CharacterCard } from "@/components/character-card";
+import { Carousel } from "@/components/carousel";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { characters, fetchCharacters } = useCharacters();
+
   return (
     <div>
       {/* <Head>
@@ -18,13 +19,14 @@ export default function Home() {
       </Head> */}
       <main>
         <div>THIS IS HOME</div>
-        <ul>
-          {characters?.map((character, idx) => (
-            <li key={idx}>
-              <CharacterCard character={character} />
-            </li>
-          ))}
-        </ul>
+        <Carousel characters={characters} />
+        {/* {characters?.map((character, idx) => (
+          <CharacterCard
+            key={idx}
+            character={character}
+            className={styles.characterCard}
+          />
+        ))} */}
       </main>
     </div>
   );

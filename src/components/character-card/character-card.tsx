@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
+import cx from "classnames";
 import styles from "./character-card.module.css";
 import { CharacterCardProps } from "./character-card.types";
 import { Title } from "../title";
 
-export const CharacterCard = ({ character }: CharacterCardProps) => {
+export const CharacterCard = ({ character, className }: CharacterCardProps) => {
   const [text, setText] = useState<null | string>();
   const [pending, setPending] = useState<boolean>(false);
   const fetchText = useCallback(async () => {
@@ -28,7 +29,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
   }, [fetchText]);
 
   return (
-    <div className={styles.characterCard}>
+    <div className={cx(styles.characterCard, className)}>
       <Title size={3} className={styles.title}>
         {character.name}
       </Title>

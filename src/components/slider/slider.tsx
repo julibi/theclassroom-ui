@@ -83,7 +83,7 @@ export const Slider = () => {
             Your NFTs
           </Title>
           {ids?.map((id) => (
-            <Button className={styles.nft}>{`# ${id}`}</Button>
+            <Button className={styles.nft} key={id}>{`# ${id}`}</Button>
           ))}
         </div>
       </div>

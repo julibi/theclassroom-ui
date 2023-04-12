@@ -1,0 +1,40 @@
+.carouselWrapper {
+  height: fit-content;
+  position: relative;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.inner {
+  white-space: nowrap;
+  transition: transform 0.3s;
+}
+
+.carouselItem {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.carouselItemInner {
+  width: 80%;
+  height: 100%;
+}
+
+.buttons {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding-inline: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.previousButton,.nextButton  {
+  height: 100%;
+}
