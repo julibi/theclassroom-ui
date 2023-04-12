@@ -18,15 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
       <main>
-        <div>THIS IS HOME</div>
         <Carousel characters={characters} />
-        {/* {characters?.map((character, idx) => (
-          <CharacterCard
-            key={idx}
-            character={character}
-            className={styles.characterCard}
-          />
-        ))} */}
       </main>
     </div>
   );

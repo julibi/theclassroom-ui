@@ -13,7 +13,6 @@ export const SliderProvider = ({ children }: SliderProviderProps) => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
 
   const openSlider = () => {
-    console.log("first");
     setIsSliderOpen(true);
   };
   const closeSlider = () => {

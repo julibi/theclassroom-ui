@@ -7,7 +7,6 @@ import { useCharacters } from "@/hooks/use-characters";
 
 const Admin = () => {
   const { characters, fetchCharacters } = useCharacters();
-
   return (
     <div className={styles.admin}>
       <Title size={1} className={styles.title}>
@@ -20,7 +19,7 @@ const Admin = () => {
           </li>
         ))}
       </ul>
-      {typeof characters?.length == "number" && characters?.length < 10 && (
+      {characters?.length !== 10 && (
         <>
           <Title size={1} className={styles.title}>
             Create New Character

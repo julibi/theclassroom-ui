@@ -25,10 +25,13 @@
   height: 100%;
 }
 
+.character {
+  width: 100% !important;
+}
+
 .buttons {
   position: absolute;
   top: 0;
-  height: 100%;
   width: 100%;
   padding-inline: 12px;
   display: flex;
@@ -36,5 +39,10 @@
 }
 
 .previousButton,.nextButton  {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 12px;
   height: 100%;
 }

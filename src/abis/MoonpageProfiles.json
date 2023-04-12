@@ -41,6 +41,25 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "discord",
+        "type": "string"
+      }
+    ],
+    "name": "DiscordConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint8",
         "name": "version",
         "type": "uint8"
@@ -55,11 +74,99 @@
       {
         "indexed": false,
         "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "instagram",
+        "type": "string"
+      }
+    ],
+    "name": "InstagramConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "paragraphxyz",
+        "type": "string"
+      }
+    ],
+    "name": "ParagraphxyzConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "account",
         "type": "address"
       }
     ],
     "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "imageIPFSHash",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "descriptionIPFSHash",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "website",
+        "type": "string"
+      }
+    ],
+    "name": "ProfileConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      }
+    ],
+    "name": "ProfileReset",
     "type": "event"
   },
   {
@@ -143,6 +250,93 @@
       {
         "indexed": false,
         "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "discord",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "instagram",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "paragraphxyz",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "substack",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "twitter",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "youtube",
+        "type": "string"
+      }
+    ],
+    "name": "SocialsConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "substack",
+        "type": "string"
+      }
+    ],
+    "name": "SubstackConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "twitter",
+        "type": "string"
+      }
+    ],
+    "name": "TwitterConfigured",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "account",
         "type": "address"
       }
@@ -164,17 +358,42 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "CREATOR_ROLE",
-    "outputs": [
+    "anonymous": false,
+    "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isVerified",
+        "type": "bool"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "name": "VerificationSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "youtube",
+        "type": "string"
+      }
+    ],
+    "name": "YoutubeConfigured",
+    "type": "event"
   },
   {
     "inputs": [],
@@ -218,97 +437,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "admins",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "characterIndex",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "characterOfToken",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "characters",
-    "outputs": [
-      {
         "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "textIPFSHash",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "imageIPFSHash",
+        "name": "_discord",
         "type": "string"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "_addresses",
-        "type": "address[]"
-      },
-      {
-        "internalType": "bool[]",
-        "name": "_bools",
-        "type": "bool[]"
-      }
-    ],
-    "name": "configureAdmins",
+    "name": "configureDiscord",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -316,22 +450,130 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_index",
-        "type": "uint256"
-      },
+        "internalType": "string",
+        "name": "_instagram",
+        "type": "string"
+      }
+    ],
+    "name": "configureInstagram",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "string",
-        "name": "_textIPFSHash",
+        "name": "_paragraphxyz",
+        "type": "string"
+      }
+    ],
+    "name": "configureParagraphxyz",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
         "type": "string"
       },
       {
         "internalType": "string",
         "name": "_imageIPFSHash",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_descriptionIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_website",
+        "type": "string"
       }
     ],
-    "name": "configureCharacter",
+    "name": "configureProfile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_discord",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_instagram",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_paragraphxyz",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_substack",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_twitter",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_youtube",
+        "type": "string"
+      }
+    ],
+    "name": "configureSocials",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_substack",
+        "type": "string"
+      }
+    ],
+    "name": "configureSubstack",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_twitter",
+        "type": "string"
+      }
+    ],
+    "name": "configureTwitter",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_youtube",
+        "type": "string"
+      }
+    ],
+    "name": "configureYoutube",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -399,64 +641,9 @@
   },
   {
     "inputs": [],
-    "name": "index",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_collection",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_manager",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_projectId",
-        "type": "uint256"
-      }
-    ],
     "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "moonpageCollection",
-    "outputs": [
-      {
-        "internalType": "contract IMoonpageCollection",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "moonpageManager",
-    "outputs": [
-      {
-        "internalType": "contract IMoonpageManager",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -473,13 +660,69 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "projectId",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "profiles",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "imageIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "descriptionIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "website",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "discord",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "instagram",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "paragraphxyz",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "substack",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "twitter",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "youtube",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "isVerified",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -517,6 +760,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "resetProfile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes32",
@@ -537,119 +787,19 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
+        "internalType": "address[]",
+        "name": "_userAddresses",
+        "type": "address[]"
       },
       {
-        "internalType": "string",
-        "name": "_textIPFSHash",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_imageIPFSHash",
-        "type": "string"
+        "internalType": "bool[]",
+        "name": "_isVerified",
+        "type": "bool[]"
       }
     ],
-    "name": "setupCharacter",
+    "name": "setIsVerified",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "snippets",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "writer",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "textIPFSHash",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "writtenAt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "written",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "character",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_characterId",
-        "type": "uint256"
-      }
-    ],
-    "name": "snippetsOfCharacter",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "writer",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "textIPFSHash",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "writtenAt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "written",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "character",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct TCR.Snippet[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -705,19 +855,18 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_textIPFSHash",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "_to",
+        "type": "address"
       }
     ],
-    "name": "write",
+    "name": "withdraw",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   }
 ]

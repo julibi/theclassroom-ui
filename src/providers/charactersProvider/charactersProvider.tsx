@@ -77,15 +77,17 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
       ],
     });
 
-    const definedCharacters: CharacterItem[] = data
-      .filter((item: any) => !!item[0].length && !!item[1].length)
-      .map((item: any) => ({
-        name: item.name,
-        textIpfsHash: item.textIPFSHash,
-        imageIpfsHash: item.imageIpfsHash,
-      }));
+    if (data.length && data[0]) {
+      const definedCharacters: CharacterItem[] = data
+        .filter((item: any) => !!item[0].length && !!item[1].length)
+        .map((item: any) => ({
+          name: item.name,
+          textIpfsHash: item.textIPFSHash,
+          imageIpfsHash: item.imageIpfsHash,
+        }));
 
-    definedCharacters?.length && setCharacters(definedCharacters);
+      definedCharacters?.length && setCharacters(definedCharacters);
+    }
   }, []);
 
   useEffect(() => {

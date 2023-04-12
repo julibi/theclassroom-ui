@@ -1,11 +1,17 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import styles from "./carousel.module.css";
 import { CarouselProps } from "./carousel.types";
 import { Button } from "../button";
 import { CharacterItem } from "@/providers/charactersProvider/charactersProvider.types";
+import { CharacterCard } from "../character-card";
+import { CharacterSnippets } from "../character-snippets";
 
 export const Carousel = ({ characters }: CarouselProps) => {
+  const totalIndex = useMemo(() => {
+    return characters?.length || 9;
+  }, [characters]);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
@@ -14,8 +20,8 @@ export const Carousel = ({ characters }: CarouselProps) => {
   const updateIndex = useCallback(
     (newIndex: number) => {
       if (newIndex < 0) {
-        newIndex = 0;
-      } else if (newIndex >= 4) {
+        newIndex = totalIndex;
+      } else if (newIndex >= totalIndex) {
         newIndex = 0;
       }
       setActiveIndex(newIndex);
@@ -36,7 +42,11 @@ export const Carousel = ({ characters }: CarouselProps) => {
               style={{ width: "100%" }}
             >
               <div className={styles.carouselItemInner}>
-                <div>{character?.name}</div>
+                <CharacterCard
+                  character={character}
+                  className={styles.character}
+                />
+                <CharacterSnippets characterId={idx + 1} />
               </div>
             </div>
           ))}

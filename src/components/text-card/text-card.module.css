@@ -1,0 +1,24 @@
+.textCard {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  display: inline-block;
+}
+
+.tokenId {
+  display: inline-block;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.writtenAt {
+  display: inline-block;
+}

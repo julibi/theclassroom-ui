@@ -33,7 +33,7 @@ export const CharacterCard = ({ character, className }: CharacterCardProps) => {
       <Title size={3} className={styles.title}>
         {character.name}
       </Title>
-      <span>{text}</span>
+      <span className={styles.text}>{text}</span>
     </div>
   );
 };
