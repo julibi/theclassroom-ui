@@ -1,0 +1,8 @@
+.input {
+  margin-block-end: 6px;
+}
+
+.descriptionField {
+  resize: none;
+  /* min-height: 300px; */
+}

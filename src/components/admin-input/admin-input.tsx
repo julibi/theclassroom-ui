@@ -11,6 +11,7 @@ import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
 import { useSetupCharacter } from "@/hooks/use-setup-character";
 import styles from "./admin-input.module.css";
 import { Button } from "../button";
+import { Textarea } from "../textarea";
 
 export const AdminInput = () => {
   const [text, setText] = useState("");
@@ -50,6 +51,10 @@ export const AdminInput = () => {
     () => ["confirming", "waiting", "fetching"].includes(status),
     [status]
   );
+  
+  const handleChange = (value: string) => {
+    setText(value);
+  };
 
   const upload = useCallback(
     async (evt: React.ChangeEvent) => {
@@ -102,13 +107,7 @@ export const AdminInput = () => {
       />
       <span className={styles.error}>{nameError ?? " "}</span>
       <label htmlFor="character-description">Character Description</label>
-      <textarea
-        className={cx(styles.descriptionField, styles.input)}
-        id="character-description"
-        value={text}
-        onChange={({ target: { value } }) => setText(value)}
-        disabled={pending}
-      />
+      <Textarea text={text} onChange={handleChange} disabled={pending}/>
       <span className={styles.error}>{textError ?? " "}</span>
       <Button
         type="submit"
