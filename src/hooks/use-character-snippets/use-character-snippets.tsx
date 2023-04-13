@@ -8,7 +8,7 @@ import { UseCharacterSnippetsProps } from "./use-character-snippets.types";
 export const useCharacterSnippets = ({
   characterId,
 }: UseCharacterSnippetsProps) => {
-  const { data } = useContractRead({
+  const { data, refetch: refetchSnippetsOfCharacter } = useContractRead({
     address: TCR_DEV,
     abi: ABI,
     functionName: "snippetsOfCharacter",
@@ -32,5 +32,5 @@ export const useCharacterSnippets = ({
       return [];
     }
   }, [data]);
-  return characterSnippets;
+  return { characterSnippets, refetchSnippetsOfCharacter };
 };

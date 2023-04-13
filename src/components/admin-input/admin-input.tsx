@@ -54,11 +54,6 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
     }
   }, [text]);
 
-  const pending = useMemo(
-    () => ["confirming", "waiting", "fetching"].includes(status),
-    [status]
-  );
-
   const handleChange = (value: string) => {
     setText(value);
   };
@@ -117,7 +112,11 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
       />
       <span className={styles.error}>{nameError ?? " "}</span>
       <label htmlFor="character-description">Character Description</label>
-      <Textarea text={text} onChange={handleChange} disabled={pending} />
+      <Textarea
+        text={text}
+        onChange={handleChange}
+        disabled={status === "pending"}
+      />
       <span className={styles.error}>{textError ?? " "}</span>
       <Button
         type="submit"

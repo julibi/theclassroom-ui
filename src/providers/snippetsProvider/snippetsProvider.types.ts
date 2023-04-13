@@ -10,6 +10,7 @@ export type SnippetsProviderProps = {
 export type SnippetsApi = {
   snippetsIndex?: number | unknown;
   allSnippets: Snippet[];
+  refetchAllSnippets: () => void;
 };
 
 export type SnippetCall = {

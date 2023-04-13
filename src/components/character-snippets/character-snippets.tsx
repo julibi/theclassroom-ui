@@ -4,12 +4,12 @@ import { TextCard } from "../text-card";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 
 export const CharacterSnippets = ({ characterId }: CharacterSnippetsProps) => {
-  const characterSnippets = useCharacterSnippets({ characterId });
+  const { characterSnippets } = useCharacterSnippets({ characterId });
 
   return (
     <div>
       {characterSnippets?.map((snippet, idx) => (
-        <TextCard snippet={snippet} key={idx} />
+        <TextCard snippet={snippet} key={idx} id={snippet.tokenId} />
       ))}
     </div>
   );

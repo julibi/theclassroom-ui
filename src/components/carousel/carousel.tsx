@@ -6,6 +6,7 @@ import { Button } from "../button";
 import { CharacterItem } from "@/providers/charactersProvider/charactersProvider.types";
 import { CharacterCard } from "../character-card";
 import { CharacterSnippets } from "../character-snippets";
+import { WritingBox } from "../writing-box";
 
 export const Carousel = ({ characters }: CarouselProps) => {
   const totalIndex = useMemo(() => {
@@ -47,6 +48,7 @@ export const Carousel = ({ characters }: CarouselProps) => {
                   className={styles.character}
                 />
                 <CharacterSnippets characterId={idx + 1} />
+                <WritingBox characterId={idx + 1} />
               </div>
             </div>
           ))}

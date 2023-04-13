@@ -78,7 +78,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     });
 
     setNFTs(filteredNFTs);
-  }, [address, balanceOfAddress, edition]);
+  }, [address, allSnippets, balanceOfAddress, edition]);
 
   useEffect(() => {
     fetchNFTs();
