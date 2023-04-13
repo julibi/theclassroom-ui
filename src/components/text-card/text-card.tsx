@@ -3,14 +3,39 @@ import styles from "./text-card.module.css";
 import { TextCardProps } from "./text-card.types";
 import { ProfileLink } from "../profile-link";
 import { Button } from "../button";
+import { useContractRead } from "wagmi";
+import {
+  MOONPAGE_COLLECTION_ADDRESS_DEV,
+  MOONPAGE_COLLECTION_ADDRESS_PROD,
+} from "@/constants";
+import ABI from "../../abis/MoonpageCollection.json";
 
 export const TextCard = ({ snippet }: TextCardProps) => {
   const [text, setText] = useState<null | string>();
   const [pending, setPending] = useState<boolean>(false);
+  const { data: tokenOwner } = useContractRead({
+    address: MOONPAGE_COLLECTION_ADDRESS_DEV,
+    abi: ABI,
+    functionName: "ownerOf",
+    args: [snippet.tokenId],
+  });
+
   const created = useMemo(
     () =>
       new Date(Number(snippet?.writtenAt) * 1000).toLocaleDateString("en-US"),
     [snippet?.writtenAt]
+  );
+  const isProd = process.env.ENVIRONMENT == "PROD";
+  const OpenseaLink = useMemo(
+    () =>
+      `https://${isProd ? "" : "testnets."}opensea.io/assets/${
+        isProd ? "matic" : "mumbai"
+      }/${
+        isProd
+          ? MOONPAGE_COLLECTION_ADDRESS_PROD
+          : MOONPAGE_COLLECTION_ADDRESS_DEV
+      }/${snippet.tokenId}`,
+    [snippet?.tokenId]
   );
   const fetchText = useCallback(async () => {
     setPending(true);
@@ -36,10 +61,23 @@ export const TextCard = ({ snippet }: TextCardProps) => {
   return (
     <div className={styles.textCard}>
       <span className={styles.text}>{text}</span>
-      <span className={styles.tokenId}>{`# ${snippet.tokenId}`}</span>
+      <span className={styles.tokenId}>
+        <a
+          href={OpenseaLink}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.link}
+        >
+          {`# ${snippet.tokenId}`}
+        </a>
+      </span>
       <div className={styles.meta}>
-        <ProfileLink address={snippet?.writer} />
-        <span className={styles.writtenAt}>{`Written: ${created}`}</span>
+        <div className={styles.flex}>
+          <div className={styles.by}>By </div>
+          <ProfileLink address={snippet?.writer} />
+        </div>
+
+        <span className={styles.writtenAt}>{`Written At: ${created}`}</span>
       </div>
     </div>
   );

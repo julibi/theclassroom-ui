@@ -18,6 +18,7 @@ export const SliderProvider = ({ children }: SliderProviderProps) => {
   const closeSlider = () => {
     setIsSliderOpen(false);
   };
+
   const api = useMemo(
     () => ({
       isSliderOpen,

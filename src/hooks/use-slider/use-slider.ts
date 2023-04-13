@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SliderContext } from "../../providers/slider/sliderProvider";
+import { SliderContext } from "../../providers/sliderProvider/sliderProvider";
 
 export const useSlider = () => {
   const api = useContext(SliderContext);

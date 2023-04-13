@@ -8,3 +8,11 @@ export const MOONPAGE_PROFILES_ADDRESS_DEV =
 export const connectors = ["MetaMask", "Coinbase", "WalletConnect"] as const;
 export const projectId = 37; // Title: "Profiles are coming"
 export const IPFS_BASE_URI = "https://ipfs.io/ipfs/";
+
+export const TCR_PROD = "";
+export const MOONPAGE_COLLECTION_ADDRESS_PROD =
+  "0x0eC473B1BD821D386cd7209203Ba6826Fd653B96";
+export const MOONPAGE_MANAGER_ADDRESS_PROD =
+  "0xb506F8587cdb61CE205FA88BdCCcfBd90c588A6e";
+export const MOONPAGE_PROFILES_ADDRESS_PROD =
+  "0x9daC041339ed137F3d28DB6279CB405A05d4c401";

@@ -60,6 +60,7 @@
   padding: 36px;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .title {
