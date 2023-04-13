@@ -10,25 +10,21 @@ import { WritingBox } from "../writing-box";
 
 export const Carousel = ({ characters }: CarouselProps) => {
   const totalIndex = useMemo(() => {
-    return characters?.length || 9;
+    return characters?.length ? characters?.length - 1 : 10;
   }, [characters]);
-
   const [activeIndex, setActiveIndex] = useState(0);
   const handlers = useSwipeable({
-    onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex - 1),
+    onSwipedLeft: () =>
+      activeIndex < totalIndex && updateIndex(activeIndex + 1),
+    onSwipedRight: () => activeIndex > 1 && updateIndex(activeIndex - 1),
   });
   const updateIndex = useCallback(
     (newIndex: number) => {
-      if (newIndex < 0) {
-        newIndex = totalIndex;
-      } else if (newIndex >= totalIndex) {
-        newIndex = 0;
-      }
       setActiveIndex(newIndex);
     },
     [activeIndex]
   );
+
   return (
     <div className={styles.carouselWrapper}>
       <div className={styles.carousel} {...handlers}>
@@ -58,12 +54,14 @@ export const Carousel = ({ characters }: CarouselProps) => {
         <Button
           className={styles.previousButton}
           onClick={() => updateIndex(activeIndex - 1)}
+          disabled={activeIndex === 0}
         >
           {"<"}
         </Button>
         <Button
           className={styles.nextButton}
           onClick={() => updateIndex(activeIndex + 1)}
+          disabled={activeIndex === totalIndex}
         >
           {">"}
         </Button>

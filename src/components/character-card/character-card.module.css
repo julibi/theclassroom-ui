@@ -13,6 +13,7 @@
 
 .text {
   display: inline-block;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
 }

@@ -53,8 +53,8 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const error = useMemo(() => {
     if (text.trim().length < 30) {
       return "At least 50 characters.";
-    } else if (text.trim().length > 1000) {
-      return "Max 1000 characters.";
+    } else if (text.trim().length > 2000) {
+      return "Max 2000 characters.";
     } else {
       return null;
     }
