@@ -1,0 +1,12 @@
+.dropdownWrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin-block-end: 12px;
+}
+
+
+.block {
+  display: block;
+  margin-block-start: 12px;
+}

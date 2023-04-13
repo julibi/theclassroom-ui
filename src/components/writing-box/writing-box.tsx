@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Textarea } from "../textarea";
 import styles from "./writing-box.module.css";
 import { Title } from "../title";
@@ -11,6 +17,8 @@ import { TCR_DEV } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
+import { Tooltip } from "../tooltip";
+import { SelectDropdown } from "../select-dropdown";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
@@ -52,6 +60,12 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     }
   }, [text]);
 
+  const handleSelect = (e: SyntheticEvent<HTMLSelectElement, Event>) => {
+    console.log({ e });
+    // @ts-ignore
+    setWritingToken(e.target.value);
+  };
+
   const reset = () => {
     setText("");
   };
@@ -84,18 +98,28 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     }
   }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
 
-  if (NFTsForWriting?.length === 0) {
+  if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
     return null;
   }
   return (
     <div className={styles.writingBoxWrapper}>
-      <Title size={3}>Continue the story</Title>
+      <Title size={2}>Continue the story</Title>
+
+      {NFTsForWriting?.length > 1 && (
+        <SelectDropdown
+          options={NFTsForWriting?.map((nft) => nft.id)}
+          onSelect={handleSelect}
+          disabled={pending}
+        />
+      )}
+      <Title size={3}>{`#${writingToken}`}</Title>
       <Textarea
         className={styles.writingBox}
         text={text}
         onChange={(value) => setText(value)}
         disabled={pending}
       />
+
       <span className={styles.error}>{error ?? ""}</span>
       <Button
         onClick={onSubmit}
