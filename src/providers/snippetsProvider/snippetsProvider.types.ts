@@ -1,3 +1,4 @@
+import { Snippet } from "@/components/character-snippets/character-snippets.types";
 import { Abi } from "abitype";
 import { ReactNode } from "react";
 import { Address } from "wagmi";
@@ -8,6 +9,7 @@ export type SnippetsProviderProps = {
 
 export type SnippetsApi = {
   snippetsIndex?: number | unknown;
+  allSnippets: Snippet[];
 };
 
 export type SnippetCall = {

@@ -17,18 +17,21 @@ import { multicall } from "@wagmi/core";
 import { Call } from "@/components/slider/slider.types";
 import COLLECTION_ABI from "../../abis/MoonpageCollection.json";
 import MANAGER_ABI from "../../abis/MoonpageManager.json";
-import { UserApi, UserProviderProps } from "./userProvider.types";
+import { NFT, UserApi, UserProviderProps } from "./userProvider.types";
+import { useSnippets } from "@/hooks/use-snippets";
 
 const defaultContext: UserApi = {
   fetchNFTs: () => undefined,
-  ids: null,
+  NFTs: null,
 };
 
 export const UserContext = createContext(defaultContext);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const { address } = useAccount();
-  const [ids, setIds] = useState<null | Number[]>(null);
+  const { allSnippets } = useSnippets();
+
+  const [NFTs, setNFTs] = useState<null | NFT[]>(null);
   const { data: balanceOfAddress } = useContractRead({
     address: MOONPAGE_COLLECTION_ADDRESS_DEV,
     abi: COLLECTION_ABI,
@@ -63,13 +66,24 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const IdsOfProject = Ids.filter(
       (id) => id >= startTokenId && currentTokenId >= id
     );
-    setIds(IdsOfProject);
+
+    const filteredNFTs = IdsOfProject.map((id) => {
+      const unshiftedCharacterId = id % 10;
+      const characterId = unshiftedCharacterId == 0 ? 10 : unshiftedCharacterId;
+      return {
+        id,
+        characterId,
+        written: !!allSnippets.find((snippet) => snippet.tokenId === id),
+      };
+    });
+
+    setNFTs(filteredNFTs);
   }, [address, balanceOfAddress, edition]);
 
   useEffect(() => {
     fetchNFTs();
   }, [fetchNFTs]);
 
-  const api = useMemo(() => ({ fetchNFTs, ids }), [fetchNFTs, ids]);
+  const api = useMemo(() => ({ fetchNFTs, NFTs }), [fetchNFTs, NFTs]);
   return <UserContext.Provider value={api}>{children}</UserContext.Provider>;
 };

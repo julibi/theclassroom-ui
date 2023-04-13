@@ -1,5 +1,5 @@
 import { AdminInput } from "@/components/admin-input";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "../styles/Admin.module.css";
 import { Title } from "@/components/title";
 import { CharacterCard } from "@/components/character-card";

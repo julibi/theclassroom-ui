@@ -92,7 +92,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
 
   useEffect(() => {
     fetchCharacters();
-  }, []);
+  }, [fetchCharacters]);
 
   const api = useMemo(
     () => ({

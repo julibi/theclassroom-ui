@@ -5,10 +5,12 @@ import { useSlider } from "@/hooks/use-slider";
 import { Button } from "../button";
 import { Title } from "../title";
 import { useUser } from "@/hooks/use-user";
+import { useCharacters } from "@/hooks/use-characters";
 
 export const Slider = () => {
   const { isSliderOpen, openSlider, closeSlider } = useSlider();
-  const { ids } = useUser();
+  const { NFTs } = useUser();
+  const { characters } = useCharacters();
 
   const toggleSlider = useCallback(() => {
     isSliderOpen ? closeSlider() : openSlider();
@@ -30,9 +32,28 @@ export const Slider = () => {
           <Title size={3} className={styles.title}>
             Your NFTs
           </Title>
-          {ids?.map((id, idx) => (
-            <Button className={styles.nft} key={idx}>{`# ${id}`}</Button>
-          ))}
+          <div>
+            {NFTs?.map(({ id, characterId, written }) => {
+              const characterName = characters
+                ? characters[characterId - 1]?.name
+                : null;
+
+              return (
+                <Button
+                  className={cx(styles.nft, written && styles.grey)}
+                  key={id}
+                >
+                  <span className={styles.blockSpan}>{`# ${id}`}</span>
+                  <span
+                    className={styles.blockSpan}
+                  >{`Character: ${characterName}`}</span>
+                  <span className={styles.blockSpan}>
+                    {written ? "Written" : "Unwritten"}
+                  </span>
+                </Button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
