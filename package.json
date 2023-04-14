@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.3",
     "@metamask/jazzicon": "^2.0.0",
     "@tippyjs/react": "^4.2.6",
     "@types/node": "18.15.11",

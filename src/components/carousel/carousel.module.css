@@ -20,15 +20,6 @@
   height: fit-content;
 }
 
-.carouselItemInner {
-  width: 80%;
-  height: 100%;
-}
-
-.character {
-  width: 100% !important;
-}
-
 .buttons {
   position: absolute;
   top: 0;

@@ -1,0 +1,22 @@
+.carouselItemInner {
+  width: 80%;
+  height: 100%;
+}
+
+.character {
+  width: 100% !important;
+  height: fit-content !important;
+}
+
+.scrollToLastButton {
+  width: 100%;
+  margin-block: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrollToLastText {
+  display: inline-block;
+  margin: 0 12px 0 6px;
+}

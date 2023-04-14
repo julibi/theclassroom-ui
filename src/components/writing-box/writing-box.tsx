@@ -17,7 +17,6 @@ import { TCR_DEV } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
-import { Tooltip } from "../tooltip";
 import { SelectDropdown } from "../select-dropdown";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {

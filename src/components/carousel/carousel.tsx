@@ -1,5 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  createRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useSwipeable } from "react-swipeable";
+import { ArrowBack, ArrowForward } from "@material-ui/icons";
+
 import styles from "./carousel.module.css";
 import { CarouselProps } from "./carousel.types";
 import { Button } from "../button";
@@ -7,8 +15,10 @@ import { CharacterItem } from "@/providers/charactersProvider/charactersProvider
 import { CharacterCard } from "../character-card";
 import { CharacterSnippets } from "../character-snippets";
 import { WritingBox } from "../writing-box";
+import { CarouselSlide } from "../carousel-slide";
 
 export const Carousel = ({ characters }: CarouselProps) => {
+  let elementsRef = useRef(characters?.map(() => createRef()));
   const totalIndex = useMemo(() => {
     return characters?.length ? characters?.length - 1 : 10;
   }, [characters]);
@@ -38,14 +48,7 @@ export const Carousel = ({ characters }: CarouselProps) => {
               className={styles.carouselItem}
               style={{ width: "100%" }}
             >
-              <div className={styles.carouselItemInner}>
-                <CharacterCard
-                  character={character}
-                  className={styles.character}
-                />
-                <CharacterSnippets characterId={idx + 1} />
-                <WritingBox characterId={idx + 1} />
-              </div>
+              <CarouselSlide character={character} characterId={idx + 1} />
             </div>
           ))}
         </div>
@@ -56,14 +59,14 @@ export const Carousel = ({ characters }: CarouselProps) => {
           onClick={() => updateIndex(activeIndex - 1)}
           disabled={activeIndex === 0}
         >
-          {"<"}
+          <ArrowBack />
         </Button>
         <Button
           className={styles.nextButton}
           onClick={() => updateIndex(activeIndex + 1)}
           disabled={activeIndex === totalIndex}
         >
-          {">"}
+          <ArrowForward />
         </Button>
       </div>
     </div>

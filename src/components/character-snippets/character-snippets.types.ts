@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react";
 import { Address } from "wagmi";
 
 export type CharacterSnippetsProps = {

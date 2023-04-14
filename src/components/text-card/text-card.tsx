@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./text-card.module.css";
 import { TextCardProps } from "./text-card.types";
 import { ProfileLink } from "../profile-link";
-import { Button } from "../button";
 import { useContractRead } from "wagmi";
 import {
   MOONPAGE_COLLECTION_ADDRESS_DEV,
