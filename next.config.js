@@ -4,11 +4,12 @@ const nextConfig = {
     domains: ["ipfs.io", "moonpage.mypinata.cloud"],
   },
   reactStrictMode: true,
-  webpack: (config) => {
-    config.experiments = {
-      topLevelAwait: true,
-    };
-    return config;
+  webpack: {
+    configure: {
+      experiments: {
+        topLevelAwait: true,
+      },
+    },
   },
 };
 
