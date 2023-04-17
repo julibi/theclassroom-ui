@@ -5,7 +5,7 @@ import style from "./wallet-connection.module.css";
 import { truncateAddress } from "@/utils/truncateAddress";
 import { WalletConnectionModal } from "../wallet-connection-modal/wallet-connection-modal";
 import { Button } from "../button";
-import { useSlider } from "@/hooks/use-slider/use-slider";
+import { useUI } from "@/hooks/use-ui/use-ui";
 
 export const WalletConnection = () => {
   const { address, isConnected } = useAccount();
@@ -13,7 +13,7 @@ export const WalletConnection = () => {
   const { data: ensName, error: ensError } = useEnsName({
     address,
   });
-  const { openSlider } = useSlider();
+  const { openSlider } = useUI();
   const [isModalOpen, setIsOpenModal] = useState(false);
 
   // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
@@ -33,7 +33,7 @@ export const WalletConnection = () => {
   return (
     <div className={style.walletConnection}>
       {name ? (
-        <Button onClick={openSlider}>My NFTs</Button>
+        <Button onClick={openSlider}>NFTs</Button>
       ) : (
         <Button onClick={() => setIsOpenModal(true)}>Connect</Button>
       )}

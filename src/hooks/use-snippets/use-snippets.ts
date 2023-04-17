@@ -4,7 +4,7 @@ import { SnippetsContext } from "../../providers/snippetsProvider/snippetsProvid
 export const useSnippets = () => {
   const api = useContext(SnippetsContext);
   if (!api) {
-    throw new Error("useSlider must be used within a SliderProvider");
+    throw new Error("useSnippet must be used within a SnippetsProvider");
   }
 
   return api;

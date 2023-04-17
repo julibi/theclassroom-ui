@@ -3,6 +3,8 @@ import styles from "./text-card.module.css";
 import { TextCardProps } from "./text-card.types";
 import { ProfileLink } from "../profile-link";
 import { useContractRead } from "wagmi";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import {
   MOONPAGE_COLLECTION_ADDRESS_DEV,
   MOONPAGE_COLLECTION_ADDRESS_PROD,
@@ -59,7 +61,9 @@ export const TextCard = ({ snippet }: TextCardProps) => {
 
   return (
     <div className={styles.textCard}>
-      <span className={styles.text}>{text}</span>
+      <span className={styles.text}>
+        {text?.length ? text : <Skeleton count={3} />}
+      </span>
       <span className={styles.tokenId}>
         <a
           href={OpenseaLink}

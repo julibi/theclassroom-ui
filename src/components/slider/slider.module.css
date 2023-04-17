@@ -5,6 +5,7 @@
   bottom: 0;
   right: 0;
   width: 100%;
+  display: flex;
 }
 
 .slideIn {
@@ -35,6 +36,11 @@
     transform: translateX(100%); 
     backdrop-filter: blur(0px);
   }
+}
+
+.outsideClickCatcher {
+  height: 100%;
+  width: fill;
 }
 
 .content {

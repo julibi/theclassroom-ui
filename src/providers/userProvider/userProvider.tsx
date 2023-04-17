@@ -37,6 +37,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
+    watch: true,
   });
   const { data: edition } = useContractRead({
     address: MOONPAGE_MANAGER_ADDRESS_DEV,
@@ -82,7 +83,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     fetchNFTs();
-  }, [fetchNFTs]);
+  }, [fetchNFTs, balanceOfAddress]);
 
   const api = useMemo(() => ({ fetchNFTs, NFTs }), [fetchNFTs, NFTs]);
   return <UserContext.Provider value={api}>{children}</UserContext.Provider>;

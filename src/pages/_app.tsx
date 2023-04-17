@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout";
 import { Slider } from "@/components/slider";
 import { CharactersProvider } from "@/providers/charactersProvider/charactersProvider";
 import { MoonpageProvider } from "@/providers/moonpageProvider/moonpageProvider";
-import { SliderProvider } from "@/providers/sliderProvider/sliderProvider";
+import { UIProvider } from "@/providers/uiProvider/uiProvider";
 import { SnippetsProvider } from "@/providers/snippetsProvider/snippetsProvider";
 import { UserProvider } from "@/providers/userProvider/userProvider";
 import { WagmiProvider } from "@/providers/wagmiProvider/wagmiProvider";
@@ -16,12 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <CharactersProvider>
           <SnippetsProvider>
             <UserProvider>
-              <SliderProvider>
+              <UIProvider>
                 <Layout>
                   <Component {...pageProps} />
                 </Layout>
                 <Slider />
-              </SliderProvider>
+              </UIProvider>
             </UserProvider>
           </SnippetsProvider>
         </CharactersProvider>

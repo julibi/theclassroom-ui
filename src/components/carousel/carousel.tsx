@@ -1,39 +1,23 @@
-import React, {
-  createRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useMemo } from "react";
 import { useSwipeable } from "react-swipeable";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
-
+import { useUI } from "@/hooks/use-ui";
+import { Button } from "../button";
+import { CarouselSlide } from "../carousel-slide";
+import { CharacterItem } from "@/providers/charactersProvider/charactersProvider.types";
 import styles from "./carousel.module.css";
 import { CarouselProps } from "./carousel.types";
-import { Button } from "../button";
-import { CharacterItem } from "@/providers/charactersProvider/charactersProvider.types";
-import { CharacterCard } from "../character-card";
-import { CharacterSnippets } from "../character-snippets";
-import { WritingBox } from "../writing-box";
-import { CarouselSlide } from "../carousel-slide";
 
 export const Carousel = ({ characters }: CarouselProps) => {
-  let elementsRef = useRef(characters?.map(() => createRef()));
+  const { activeIndex, updateIndex } = useUI();
   const totalIndex = useMemo(() => {
     return characters?.length ? characters?.length - 1 : 10;
   }, [characters]);
-  const [activeIndex, setActiveIndex] = useState(0);
   const handlers = useSwipeable({
     onSwipedLeft: () =>
       activeIndex < totalIndex && updateIndex(activeIndex + 1),
     onSwipedRight: () => activeIndex > 1 && updateIndex(activeIndex - 1),
   });
-  const updateIndex = useCallback(
-    (newIndex: number) => {
-      setActiveIndex(newIndex);
-    },
-    [activeIndex]
-  );
 
   return (
     <div className={styles.carouselWrapper}>

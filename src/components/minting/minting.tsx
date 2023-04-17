@@ -41,6 +41,11 @@ export const Minting = ({}: MintingProps) => {
     [editionCalcs]
   );
 
+  const pending = useMemo(
+    () => ["confirming", "fetching"].includes(status),
+    [status, data]
+  );
+
   const handleDecrement = useCallback(() => {
     setAmount(amount - 1);
   }, [amount]);
@@ -51,10 +56,6 @@ export const Minting = ({}: MintingProps) => {
   const handleMint = async () => {
     writeAsync();
   };
-
-  // useEffect(() => {
-  //   console.log({ status, error, data });
-  // }, [status, error, data]);
 
   // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
   useEffect(() => {
@@ -82,28 +83,49 @@ export const Minting = ({}: MintingProps) => {
 
   return (
     <div className={styles.mintingSection}>
-      <Title size={2}>Minting</Title>
-      <Button disabled={isSoldOut || amount === 1} onClick={handleDecrement}>
-        -
-      </Button>
-      <span>{amount}</span>
+      <Title size={2} className={styles.title}>
+        Mint
+      </Title>
+      <div className={styles.stats}>
+        {Number(editionCalcs.maxSupply) && Number(editionCalcs.totalSupply) && (
+          <span className={styles.stat}>{`${Number(
+            editionCalcs.totalSupply
+          )}/${Number(editionCalcs.maxSupply)}`}</span>
+        )}
+        {Number(editionCalcs.price) && (
+          <span className={styles.stat}>{`Price: ${formatEther(
+            editionCalcs.price
+          )} MATIC`}</span>
+        )}
+      </div>
+      <div className={styles.controls}>
+        <Button
+          className={styles.control}
+          disabled={pending || amount === 1}
+          onClick={handleDecrement}
+        >
+          -
+        </Button>
+        <span className={styles.amount}>{amount}</span>
+        <Button
+          className={styles.control}
+          disabled={
+            pending ||
+            isSoldOut ||
+            amount === Number(editionCalcs.leftSupplyTotal)
+          }
+          onClick={handleIncrement}
+        >
+          +
+        </Button>
+      </div>
       <Button
-        disabled={isSoldOut || amount === Number(editionCalcs.leftSupplyTotal)}
-        onClick={handleIncrement}
+        className={styles.mintButton}
+        disabled={isSoldOut || pending}
+        onClick={handleMint}
       >
-        +
+        {pending ? "..." : "MINT"}
       </Button>
-      <Button disabled={isSoldOut} onClick={handleMint}>
-        MINT
-      </Button>
-      {Number(editionCalcs.maxSupply) && Number(editionCalcs.totalSupply) && (
-        <span>{`${Number(editionCalcs.maxSupply)}/${Number(
-          editionCalcs.totalSupply
-        )}`}</span>
-      )}
-      {Number(editionCalcs.price) && (
-        <span>{`Price: ${formatEther(editionCalcs.price)} MATIC`}</span>
-      )}
     </div>
   );
 };
