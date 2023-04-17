@@ -1,0 +1,21 @@
+.characterCard {
+  margin: 12px 0;
+  padding: 12px;
+  height: 300px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-block-end: 12px;
+}
+
+.text {
+  display: inline-block;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+}

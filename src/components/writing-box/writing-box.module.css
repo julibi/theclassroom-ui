@@ -1,0 +1,23 @@
+.writingBoxWrapper {
+  border-radius: 5px;
+  border: 1px solid #000;
+  margin-block: 12px;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.writingBox {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 5px;
+  padding: 12px;
+  margin-block: 12px;
+}
+
+.error {
+  color: red;
+  margin:  0 0 12px 6px;
+  
+}

@@ -10,8 +10,8 @@ export const Layout = ({ children }: LayoutProps) => {
       <Navbar />
 
       {children}
-      
-      <Footer />
+
+      {/* <Footer /> */}
     </div>
   );
 };

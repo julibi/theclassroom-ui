@@ -1,7 +1,7 @@
 .characterSetupForm {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   margin: 24px;
 }

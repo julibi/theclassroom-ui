@@ -1,12 +1,12 @@
 .content {
   margin-block-start: 48px;
   width: 300px;
-  height: fit-content;
+  height: 200px;
 }
 
 .connector {
   border-radius: 5px;
-  border: 1.5px solid #13293d;
+  border: 1.5px solid #000;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,0 +1,92 @@
+.slider {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+}
+
+.slideIn {
+  animation: slideIn 0.5s forwards;
+}
+
+.slideOut {
+  animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); 
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    transform: translateX(0%);
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0%); 
+    backdrop-filter: blur(10px);
+  }
+  100% {
+    transform: translateX(100%); 
+    backdrop-filter: blur(0px);
+  }
+}
+
+.outsideClickCatcher {
+  height: 100%;
+  width: fill;
+}
+
+.content {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 80%;
+  max-width: 500px;
+  background-color: #000;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.nftList {
+  height: 100%;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.title {
+  color: #fff;
+  margin-block-end: 24px;
+}
+
+.nft {
+  border: 1px solid #fff;
+  width: 200px;
+  padding: 12px;
+  margin-block-end: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.blockSpan {
+  display: inline-block;
+}
+
+.grey {
+  color: grey;
+}

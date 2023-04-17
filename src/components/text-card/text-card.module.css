@@ -1,0 +1,43 @@
+.textCard {
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-block-end: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  display: inline-block;
+  margin-block-end: 24px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+}
+
+.tokenId {
+  display: inline-block;
+  margin-block-end: 12px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.writtenAt {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.by {
+  margin-inline-end: 12px;
+}
+
+.link {
+  text-decoration: underline;
+}

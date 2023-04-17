@@ -29,4 +29,6 @@ export interface UseContractProps {
   functionName: string;
   args?: ContractArgs[];
   enabled?: boolean;
+  overrides?: CallOverrides;
+  mode?: "prepared" | "recklesslyUnprepared";
 }
