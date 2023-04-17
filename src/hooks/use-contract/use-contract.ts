@@ -23,6 +23,7 @@ export function useContract({
     abi,
     functionName,
     args,
+    // @ts-ignore
     overrides,
     multiplier: 30,
     isEnabled: enabled,
@@ -38,6 +39,7 @@ export function useContract({
     functionName,
     args,
     enabled,
+    // @ts-ignore
     overrides: {
       ...overrides,
       gasLimit: estimatedGas ?? BigNumber.from("500000"),
@@ -53,7 +55,9 @@ export function useContract({
     reset,
   } = useContractWrite({
     ...config,
+    // @ts-ignore
     overrides,
+    // @ts-ignore
     mode,
   });
 
