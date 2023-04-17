@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useSwipeable } from "react-swipeable";
-import { ArrowBack, ArrowForward } from "@material-ui/icons";
 import { useUI } from "@/hooks/use-ui";
 import { Button } from "../button";
 import { CarouselSlide } from "../carousel-slide";
@@ -43,14 +42,14 @@ export const Carousel = ({ characters }: CarouselProps) => {
           onClick={() => updateIndex(activeIndex - 1)}
           disabled={activeIndex === 0}
         >
-          <ArrowBack />
+          {"<"}
         </Button>
         <Button
           className={styles.nextButton}
           onClick={() => updateIndex(activeIndex + 1)}
           disabled={activeIndex === totalIndex}
         >
-          <ArrowForward />
+          {">"}
         </Button>
       </div>
     </div>

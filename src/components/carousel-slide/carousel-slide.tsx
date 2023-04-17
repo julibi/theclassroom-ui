@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useUI } from "@/hooks/use-ui";
-import { ArrowDownward } from "@material-ui/icons";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { CarouselSlideProps } from "./carousel-slide.types";
 import { CharacterCard } from "../character-card";
@@ -36,9 +35,6 @@ export const CarouselSlide = ({
       {characterSnippets?.length > 1 ? (
         <Button className={styles.scrollToLastButton} onClick={executeScroll}>
           <span className={styles.scrollToLastText}>Scroll to last text</span>
-          <div>
-            <ArrowDownward />
-          </div>
         </Button>
       ) : (
         ""
