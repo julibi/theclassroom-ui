@@ -25,7 +25,7 @@ loop(ADMIN_ADDRESSES.length, (i: number) => {
   contracts.push({ ...call, args: [ADMIN_ADDRESSES[i] as Address] });
 });
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   let data = await multicall({ contracts });
   // @ts-ignore
   data = data?.map((x, idx) => ({ ...x, address: ADMIN_ADDRESSES[idx] }));
