@@ -18,6 +18,7 @@ export const Button = ({
         (pending || disabled) && styles.disabled,
         className
       )}
+      // @ts-ignore
       onClick={onClick}
       disabled={disabled}
     >

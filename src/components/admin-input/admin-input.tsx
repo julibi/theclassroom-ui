@@ -120,6 +120,7 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
       <span className={styles.error}>{textError ?? " "}</span>
       <Button
         type="submit"
+        // @ts-ignore
         onClick={handleSubmit}
         text={"Add character"}
         pending={status === "pending"}
