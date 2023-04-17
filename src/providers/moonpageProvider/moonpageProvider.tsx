@@ -1,21 +1,6 @@
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useMemo } from "react";
 import { useContractRead } from "wagmi";
-import {
-  MOONPAGE_COLLECTION_ADDRESS_DEV,
-  MOONPAGE_MANAGER_ADDRESS_DEV,
-  projectId,
-} from "@/constants";
-
-import { Abi } from "abitype";
-import { multicall } from "@wagmi/core";
-import { Call } from "@/components/slider/slider.types";
-import COLLECTION_ABI from "../../abis/MoonpageCollection.json";
+import { MOONPAGE_MANAGER_ADDRESS_DEV, projectId } from "@/constants";
 import MANAGER_ABI from "../../abis/MoonpageManager.json";
 import {
   EditionReadResult,

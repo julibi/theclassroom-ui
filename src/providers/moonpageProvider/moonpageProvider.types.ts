@@ -12,7 +12,7 @@ export type Edition = {
 };
 export type MoonpageProviderProps = { children: ReactNode };
 export type MoonpageApi = {
-  edition: Edition;
+  edition?: Edition;
   refetch: () => void;
 };
 
