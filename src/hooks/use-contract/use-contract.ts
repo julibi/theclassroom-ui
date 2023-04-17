@@ -15,14 +15,15 @@ export function useContract({
   args,
   enabled = false,
   mode = "prepared",
+  overrides,
 }: UseContractProps) {
   const [status, setStatus] = useState<ContractWriteStatus>("idle");
-
   const { estimatedGas } = useGasEstimation({
     address,
     abi,
     functionName,
     args,
+    overrides,
     multiplier: 30,
     isEnabled: enabled,
   });
@@ -38,6 +39,7 @@ export function useContract({
     args,
     enabled,
     overrides: {
+      ...overrides,
       gasLimit: estimatedGas ?? BigNumber.from("500000"),
     },
   });
@@ -51,8 +53,10 @@ export function useContract({
     reset,
   } = useContractWrite({
     ...config,
+    overrides,
     mode,
   });
+
   const { data: res, status: waitStatus } = useWaitForTransaction({
     hash: txRes?.hash,
   });

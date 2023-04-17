@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Slider } from "@/components/slider";
 import { CharactersProvider } from "@/providers/charactersProvider/charactersProvider";
+import { MoonpageProvider } from "@/providers/moonpageProvider/moonpageProvider";
 import { SliderProvider } from "@/providers/sliderProvider/sliderProvider";
 import { SnippetsProvider } from "@/providers/snippetsProvider/snippetsProvider";
 import { UserProvider } from "@/providers/userProvider/userProvider";
@@ -11,18 +12,20 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiProvider>
-      <CharactersProvider>
-        <SnippetsProvider>
-          <UserProvider>
-            <SliderProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-              <Slider />
-            </SliderProvider>
-          </UserProvider>
-        </SnippetsProvider>
-      </CharactersProvider>
+      <MoonpageProvider>
+        <CharactersProvider>
+          <SnippetsProvider>
+            <UserProvider>
+              <SliderProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+                <Slider />
+              </SliderProvider>
+            </UserProvider>
+          </SnippetsProvider>
+        </CharactersProvider>
+      </MoonpageProvider>
     </WagmiProvider>
   );
 }

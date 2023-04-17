@@ -60,7 +60,6 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   }, [text]);
 
   const handleSelect = (e: SyntheticEvent<HTMLSelectElement, Event>) => {
-    console.log({ e });
     // @ts-ignore
     setWritingToken(e.target.value);
   };
