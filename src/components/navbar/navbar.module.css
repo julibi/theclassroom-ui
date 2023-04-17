@@ -1,8 +1,8 @@
 .navbar {
-  background-color: #13293d;
-  color: #fff;
+  background-color: transparent;
   width: 100%;
   height: fit-content;
+  padding: 12px;
 }
 
 .list {

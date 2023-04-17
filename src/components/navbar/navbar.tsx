@@ -1,3 +1,4 @@
+import cx from "classnames";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useContractRead } from "wagmi";
@@ -7,8 +8,9 @@ import { routes } from "./routes";
 import { WalletConnection } from "../wallet-connection";
 import ABI from "../../abis/TCR.json";
 import styles from "./navbar.module.css";
+import { NavbarProps } from "./navbar.types";
 
-export const Navbar = () => {
+export const Navbar = ({ className }: NavbarProps) => {
   const { address } = getAccount();
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const { data: readData } = useContractRead({
@@ -24,7 +26,7 @@ export const Navbar = () => {
   }, [readData]);
 
   return (
-    <div className={styles.navbar}>
+    <div className={cx(styles.navbar, className)}>
       <ul className={styles.list}>
         {routes?.map((route) => (
           <li key={route.name} className={styles.listItem}>

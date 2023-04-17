@@ -5,7 +5,7 @@ export type Call = {
   address: Address;
   abi: Abi;
   functionName: string;
-  args: [Address, number];
+  args: [Address, number] | [Address];
 };
 
 export type Edition = {

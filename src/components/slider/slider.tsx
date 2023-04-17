@@ -21,6 +21,8 @@ export const Slider = () => {
   const handleClickNFT = useCallback(
     async (characterId: number) => {
       if (characters?.[characterId - 1] === undefined) return;
+
+      // TODO: if not on home, navigate to home
       updateIndex(characterId - 1);
       closeSlider();
       await delay(500);

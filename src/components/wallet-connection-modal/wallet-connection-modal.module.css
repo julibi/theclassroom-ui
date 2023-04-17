@@ -6,7 +6,7 @@
 
 .connector {
   border-radius: 5px;
-  border: 1.5px solid #13293d;
+  border: 1.5px solid #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
