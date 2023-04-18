@@ -12,7 +12,6 @@ import {
 } from "./wallet-connection-modal.types";
 import { Button } from "../button";
 import {
-  metaMaskConnector,
   injectedConnector,
   coinbaseConnector,
   walletConnectConnector,
@@ -38,19 +37,13 @@ export const WalletConnectionModal = ({
         selectedConnector = walletConnectConnector;
       }
       if (connector === "MetaMask") {
-        if (isMobile) {
-          console.log("isMobile", metaMaskConnector);
-          selectedConnector = metaMaskConnector;
-        } else {
-          selectedConnector = injectedConnector;
-        }
+        selectedConnector = injectedConnector;
       }
       if (!selectedConnector) {
         setConnectError("Connector is undefined.");
         return;
       }
       try {
-        console.log({ selectedConnector });
         const result = await connect({
           connector: selectedConnector,
         });
@@ -78,6 +71,7 @@ export const WalletConnectionModal = ({
             key={connector}
             className={styles.connector}
             onClick={() => handleConnect(connector)}
+            disabled={connector === "MetaMask" && isMobile}
           >
             <Image
               src={`/${connector}.png`}

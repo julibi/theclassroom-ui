@@ -32,7 +32,9 @@ export const coinbaseConnector = new CoinbaseWalletConnector({
 });
 
 export const injectedConnector = new InjectedConnector({ chains });
-export const metaMaskConnector = new MetaMaskConnector({ chains });
+export const metaMaskConnector = new MetaMaskConnector({
+  chains,
+});
 export const walletConnectConnector = new WalletConnectConnector({
   chains,
   options: {
