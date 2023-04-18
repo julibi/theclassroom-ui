@@ -4,6 +4,7 @@ import { polygon, polygonMumbai, mainnet } from "@wagmi/core/chains";
 import { publicProvider } from "@wagmi/core/providers/public";
 import { infuraProvider } from "@wagmi/core/providers/infura";
 import { InjectedConnector } from "@wagmi/core/connectors/injected";
+import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask";
 import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect";
 import { CoinbaseWalletConnector } from "@wagmi/core/connectors/coinbaseWallet";
 import { WagmiProviderTypes } from "./wagmiProvider.types";
@@ -31,7 +32,7 @@ export const coinbaseConnector = new CoinbaseWalletConnector({
 });
 
 export const injectedConnector = new InjectedConnector({ chains });
-
+export const metaMaskConnector = new MetaMaskConnector({ chains });
 export const walletConnectConnector = new WalletConnectConnector({
   chains,
   options: {
@@ -41,7 +42,12 @@ export const walletConnectConnector = new WalletConnectConnector({
 
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: [injectedConnector, coinbaseConnector, walletConnectConnector],
+  connectors: [
+    injectedConnector,
+    coinbaseConnector,
+    walletConnectConnector,
+    metaMaskConnector,
+  ],
   provider,
 });
 

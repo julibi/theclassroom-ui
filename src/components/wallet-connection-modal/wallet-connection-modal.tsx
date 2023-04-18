@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useSwitchNetwork } from "wagmi";
 import { utils } from "ethers";
 import { connect } from "@wagmi/core";
+import { isMobile } from "react-device-detect";
 import { Modal } from "../modal/modal";
 import styles from "./wallet-connection-modal.module.css";
 import {
@@ -11,6 +12,7 @@ import {
 } from "./wallet-connection-modal.types";
 import { Button } from "../button";
 import {
+  metaMaskConnector,
   injectedConnector,
   coinbaseConnector,
   walletConnectConnector,
@@ -36,7 +38,11 @@ export const WalletConnectionModal = ({
         selectedConnector = walletConnectConnector;
       }
       if (connector === "MetaMask") {
-        selectedConnector = injectedConnector;
+        if (isMobile) {
+          selectedConnector = metaMaskConnector;
+        } else {
+          selectedConnector = injectedConnector;
+        }
       }
       if (!selectedConnector) {
         setConnectError("Connector is undefined.");
