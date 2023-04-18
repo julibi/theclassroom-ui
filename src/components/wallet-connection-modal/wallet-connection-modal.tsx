@@ -39,6 +39,7 @@ export const WalletConnectionModal = ({
       }
       if (connector === "MetaMask") {
         if (isMobile) {
+          console.log("isMobile", metaMaskConnector);
           selectedConnector = metaMaskConnector;
         } else {
           selectedConnector = injectedConnector;
@@ -49,6 +50,7 @@ export const WalletConnectionModal = ({
         return;
       }
       try {
+        console.log({ selectedConnector });
         const result = await connect({
           connector: selectedConnector,
         });
