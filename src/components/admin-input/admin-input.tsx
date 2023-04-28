@@ -47,8 +47,8 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
   const textError = useMemo(() => {
     if (text?.trim().length < 10) {
       return "Too short.";
-    } else if (text?.trim().length > 400) {
-      return "Too long. Max 400 characters.";
+    } else if (text?.trim().length > 1000) {
+      return "Too long. Max 1000 characters.";
     } else {
       return null;
     }
