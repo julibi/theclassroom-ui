@@ -41,7 +41,7 @@ export async function getServerSideProps(context: any) {
 const About = ({ profiles }: any) => {
   return (
     <div className={cx(styles.about, inter.variable)}>
-      <div className={cx(styles.first, styles.block)}>
+      <div className={cx(styles.first, styles.block, styles.withMarquee)}>
         <div className={cx(styles.card, styles.logoWrapper)}>
           <Image
             src={"Logo.svg"}
@@ -62,6 +62,7 @@ const About = ({ profiles }: any) => {
             A high-end space sanatorial retreat program to upgrade your inner
             self. 3 months in a space capsule rotating around planet earth.
           </span>
+          <p className={styles.nextLaunchInfo}> Next Launch: 1st June.</p>
         </div>
       </div>
       <div className={cx(styles.third, styles.block)}>
@@ -69,6 +70,10 @@ const About = ({ profiles }: any) => {
           <Title size={1} className={cx(styles.aboutTitle, styles.vision)}>
             How does it work?
           </Title>
+          <p className={cx(styles.nextLaunchInfo, styles.centerAlign)}>
+            {" "}
+            Next Launch: 1st June.
+          </p>
           <div className={styles.cardWrapper}>
             <Card>
               <Title size={3} className={styles.cardTitle}>
@@ -133,8 +138,12 @@ const About = ({ profiles }: any) => {
       <div className={cx(styles.fifth, styles.block)}>
         <div className={styles.card}>
           <Title size={1} className={cx(styles.aboutTitle, styles.vision)}>
-            Stop the BS, what is this, really?
+            Cut the BS, what is this, really?
           </Title>
+          <p className={cx(styles.nextLaunchInfo, styles.centerAlign)}>
+            {" "}
+            NFT Launch: 1st June.
+          </p>
           <div className={styles.cardWrapper}>
             <Card>
               <Title size={3} className={styles.cardTitle}>
@@ -163,7 +172,7 @@ const About = ({ profiles }: any) => {
                 Which character of the 10 it is, depends on the NFT you minted.
                 No traits and rarity scores, meaning no NFT or character is
                 rarer that the other. You can only write with an NFT once. If
-                you want to continue writing, you have to mint an NFT.
+                you want to continue writing, you have to mint another NFT.
               </span>
             </Card>
             <Card>
@@ -171,17 +180,32 @@ const About = ({ profiles }: any) => {
                 4.
               </Title>
               <span className={styles.cardText}>
-                The story is writing collectively, you contribute to the
-                collective piece of literature.
+                The story is being written collectively, you contribute to the
+                piece of literature with the NFT.
               </span>
             </Card>
           </div>
         </div>
       </div>
       <div className={cx(styles.sixth, styles.block)}>
-        <Title size={1} className={styles.aboutTitle}>
-          About us
-        </Title>
+        <div className={styles.card}>
+          <Title size={1} className={styles.aboutTitle}>
+            About us
+          </Title>
+          <span className={styles.text}>
+            We are Creative Writing students from the University of Hildesheim
+            experimenting with literary NFTs in collaboration with{" "}
+            <a
+              href="https://moonpage.io"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.link}
+            >
+              Moonpage
+            </a>
+            .
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -1,15 +1,17 @@
 .about {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 .block {
-  height: 100vh;
+  min-height: 800px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .first, .fourth {
@@ -50,14 +52,15 @@
 }
 
 .cardText {
-  
-  
   color: #fff;
   line-height: 1.8rem;
 }
 
 .card {
   max-width: 1200px;
+  @media (max-width: 900px) {
+    margin-inline: 24px;
+  }
 }
 
 .text {
@@ -67,8 +70,25 @@
   line-height: 1.8rem;
 }
 
+.nextLaunchInfo {
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.8rem;
+  font-family: var(--inter-font);
+  text-decoration: underline;
+}
+
+.centerAlign {
+  text-align: center;
+}
+
 .cardWrapper {
   display: flex;
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .vision {
@@ -78,4 +98,8 @@
 .profiles {
   display: flex;
   flex-wrap: wrap;
+}
+
+.link {
+  text-decoration: underline;
 }
