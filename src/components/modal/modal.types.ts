@@ -1,6 +1,9 @@
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 
 export type ModalProps = {
   onClose?: () => void;
-  children: ReactChild;
+  children: ReactNode;
+  className?: string;
+  contentClassName?: string;
+  focusClassName?: string;
 };

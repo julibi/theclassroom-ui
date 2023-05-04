@@ -1,0 +1,129 @@
+.background {
+  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+}
+
+.space {
+  height: 48px;
+}
+
+.topSection {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.titleWrapper {
+  position: relative;
+  padding: 48px;
+}
+
+.title{
+  color: #61e8e8;
+  text-shadow: 4px 2px 0 #C563C2;
+  font-size: 72px;
+  font-family: var(--inter-font);
+
+  @media (max-width: 900px) {
+    font-size: 60px;
+  }
+}
+
+.westernTitle {
+  position: absolute;
+  bottom: 50px;
+}
+
+.skewingAnimation {
+  transform: skew(-15deg);
+	animation: three 5s infinite ease-in-out alternate;
+
+}
+
+.asianTitle {
+  font-size: 240px;
+  opacity: 0.3;
+  padding: 0;
+  @media (max-width: 900px) {
+    font-size: 120px;
+  }
+}
+
+.subtitle {
+  color: #61e8e8;
+  text-shadow: 2px 2px 0 #C563C2;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+@keyframes three {
+	100% {
+		text-shadow: -5px 5px var(--c), -10px 10px var(--c), -15px 15px var(--c), -20px 20px var(--c), -40px 40px 15px var(--c);
+	transform: skew(15deg);
+	}
+}
+
+.redCircle {
+  background-color: #ea175a;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  opacity: 0.3;
+  @media (max-width: 900px) {
+    margin: 24px;
+  }
+}
+
+
+.section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.titlesWrapper {
+  position: relative;
+  max-width: 800px;
+}
+
+.firstPhrase {
+  max-width: 800px;
+  font-size: 48px;
+  margin-block-end: 18px;
+}
+
+.joinButton {
+  width: 200px;
+  background-color: #ea175a;
+  border-radius: 0;
+  margin-block-start: 48px;
+  box-shadow: 4px 2px 0 #61e8e8;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight:600;
+}
+
+.joinButton:hover {
+  background-color: #940f4b;
+  box-shadow: 7px 4px 0 #61e8e8;
+}
+
+.statsInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat {
+  border-bottom: 1px solid #ea175a;
+}
+
+.statPercentage {
+  color: #ea175a;
+  font-size: 84px;
+  font-family: var(--inter-font);
+}

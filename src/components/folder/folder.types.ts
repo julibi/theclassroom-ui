@@ -4,4 +4,5 @@ export type FolderProps = {
   birthDate: string;
   birthPlace: string;
   checkIn: string;
+  text: string;
 };
