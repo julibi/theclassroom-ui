@@ -3,7 +3,7 @@
 }
 
 .section {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -21,7 +21,7 @@
   padding: 48px;
 }
 
-.title{
+.title {
   color: #61e8e8;
   text-shadow: 4px 2px 0 #C563C2;
   font-size: 72px;
@@ -29,6 +29,12 @@
 
   @media (max-width: 900px) {
     font-size: 60px;
+  }
+}
+
+.sectionTitle {
+  @media (max-width: 900px) {
+    padding: 24px;
   }
 }
 
@@ -45,7 +51,7 @@
 
 .asianTitle {
   font-size: 240px;
-  opacity: 0.3;
+  opacity: 0.2;
   padding: 0;
   @media (max-width: 900px) {
     font-size: 120px;
@@ -53,8 +59,9 @@
 }
 
 .subtitle {
+  max-width: 700px;
   color: #61e8e8;
-  text-shadow: 2px 2px 0 #C563C2;
+  text-shadow: 1px 1px 0 #C563C2;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -73,6 +80,7 @@
   opacity: 0.3;
   @media (max-width: 900px) {
     margin: 24px;
+    display: none;
   }
 }
 
@@ -95,18 +103,8 @@
 
 .joinButton {
   width: 200px;
-  background-color: #ea175a;
-  border-radius: 0;
-  margin-block-start: 48px;
-  box-shadow: 4px 2px 0 #61e8e8;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight:600;
 }
 
-.joinButton:hover {
-  background-color: #940f4b;
-  box-shadow: 7px 4px 0 #61e8e8;
-}
 
 .statsInfo {
   display: flex;
@@ -121,4 +119,262 @@
   color: #ea175a;
   font-size: 84px;
   font-family: var(--inter-font);
+}
+
+.explanationSection {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explanationTitle {
+  margin-block-end: 24px;
+}
+
+.howitworks {
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  color:  #C563C2;
+}
+
+.cardText {
+  font-style: bold;
+}
+
+/* ---------- Container for the orbiting circles animation ---------- */
+.orbitContainer {
+  position: relative;
+  top: 25px;
+  left: 25px;
+  height: 300px;
+  width: 300px;
+}
+
+/* ---------- Inner orbit - This is the circles closest to the central point ---------- */
+.innerOrbit {
+  position: absolute;
+  top: 75px;
+  left: 75px;
+  width: 150px;
+  height: 150px;
+  border: 2px #4A437F solid;
+  border-radius: 100%;
+  -webkit-animation: spin-right 10s linear infinite;
+  animation: spin-right 10s linear infinite;
+}
+
+/* ---------- Repeating styles for the inner orbiting circles ---------- */
+.innerOrbitCirlces {
+  position: absolute;
+  top: 62px;
+  left: -6px;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+}
+
+/* ---------- Outer orbit - This is the circles furthest away from the central point ---------- */
+.outerOrbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 294px;
+  height: 294px;
+  border: 3px #61e8e8 solid;
+  border-radius: 100%;
+  -webkit-animation: spin-right 12s cubic-bezier(0.25, 0.1, 0.25, 1.0) infinite;
+  animation: spin-right 12s  cubic-bezier(0.25, 0.1, 0.25, 1.0) infinite;
+}
+
+/* ---------- Repeating styles for the outer orbiting circles ---------- */
+.outerOrbitCirlces {
+  position: absolute;
+  top: -17px;
+  left: 125px;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-color: #ea175a;
+  box-shadow: 
+  0px 0px 6px 20px rgba(234,23,90,0.15);
+  
+}
+
+/* ---------- Animation ---------- */
+@keyframes spin-right {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.guruImageWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.redFilter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #ea175a;
+  opacity: 0.5;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+.redFilter::after {
+  content:  '';
+  position: absolute;
+  top: 0px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  z-index: 4;
+  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+}
+
+.guruImage {
+  border-radius: 50%;
+}
+
+.glitchLayers {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.glitchLayer {
+	position: absolute;
+  border-radius: 50%;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-image: url("/characters/guru.jpeg");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.glitchLayer:nth-child(1) {
+	transform: translateX(-5%);
+	animation: glitch-anim-1 2s infinite linear alternate;
+}
+
+.glitchLayer:nth-child(2) {
+	transform: translateX(3%) translateY(3%);
+	animation: glitch-anim-2 2.3s -.8s infinite linear alternate;
+}
+
+.glitchLayer:nth-child(3) {
+	transform: translateX(5%);
+	animation: glitch-anim-flash 1s infinite linear;
+}
+
+.glitchLayer:nth-child(4) {
+	transform: translateX(-3%);
+	animation: glitch-anim-2 3s infinite linear;
+}
+
+@keyframes glitch-anim-1 {
+	0% {
+		clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%);
+	}
+	10% {
+		clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+	}
+	20% {
+		clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+	}
+	30% {
+		clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+	}
+	40% {
+		clip-path: polygon(0 35%, 100% 35%, 100% 35%, 0 35%);
+	}
+	50% {
+		clip-path: polygon(0 45%, 100% 45%, 100% 46%, 0 46%);
+	}
+	60% {
+		clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%);
+	}
+	70% {
+		clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+	}
+	80% {
+		clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+	}
+	90% {
+		clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+	}
+	100% {
+		clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%);
+	}
+}
+@keyframes glitch-anim-2 {
+	0% {
+		clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%);
+	}
+	15% {
+		clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%);
+	}
+	25% {
+		clip-path: polygon(0 8%, 100% 8%, 100% 20%, 0 20%);
+	}
+	30% {
+		clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%);
+	}
+	45% {
+		clip-path: polygon(0 45%, 100% 45%, 100% 45%, 0 45%);
+	}
+	50% {
+		clip-path: polygon(0 50%, 100% 50%, 100% 57%, 0 57%);
+	}
+	65% {
+		clip-path: polygon(0 60%, 100% 60%, 100% 60%, 0 60%);
+	}
+	75% {
+		clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+	}
+	80% {
+		clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+	}
+	95% {
+		clip-path: polygon(0 45%, 100% 45%, 100% 60%, 0 60%);
+	}
+	100% {
+		clip-path: polygon(0 11%, 100% 11%, 100% 15%, 0 15%);
+	}
+}
+@keyframes glitch-anim-flash {
+	0% {
+		opacity: .2;
+	}
+	30%, 100% {
+		opacity: 0;
+	}
+}
+
+.folders {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.folders::-webkit-scrollbar{
+  display: none;
 }

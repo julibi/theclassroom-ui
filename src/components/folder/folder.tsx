@@ -14,6 +14,8 @@ export const Folder = ({
   birthPlace,
   checkIn,
   text,
+  withPic = false,
+  withButton = false,
 }: FolderProps) => {
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
@@ -23,16 +25,18 @@ export const Folder = ({
     <>
       <div className={styles.folderWrapper}>
         <div className={styles.folder}>
-          <div className={styles.imageWrapper}>
-            <Image
-              className={styles.image}
-              height={150}
-              width={120}
-              src={`/characters/${name}.jpeg`}
-              alt={`Image of ${name}`}
-              priority
-            />
-          </div>
+          {withPic && (
+            <div className={styles.imageWrapper}>
+              <Image
+                className={styles.image}
+                height={150}
+                width={120}
+                src={`/characters/${name}.jpeg`}
+                alt={`Image of ${name}`}
+                priority
+              />
+            </div>
+          )}
           <div className={styles.info}>
             <div>
               <span
@@ -57,7 +61,9 @@ export const Folder = ({
                 className={styles.infoLine}
               >{`Check In Type: ${checkIn}`}</span>
             </div>
-            <Button onClick={openFile} text={`Read File #${id}`} />
+            {withButton && (
+              <Button onClick={openFile} text={`Read File #${id}`} />
+            )}
           </div>
         </div>
       </div>

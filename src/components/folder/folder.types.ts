@@ -5,4 +5,6 @@ export type FolderProps = {
   birthPlace: string;
   checkIn: string;
   text: string;
+  withPic?: boolean;
+  withButton?: boolean;
 };

@@ -1,14 +1,19 @@
 .button {
-  background-color: #000;
-  border-radius: 10px;
-  color: #fff;
-  border: none;
   padding: 12px;
-  font-family: serif;
+  width: fit-content;
+  background-color: #ea175a;
+  border: none;
+  border-radius: 0;
+  margin-block-start: 48px;
+  box-shadow: 4px 2px 0 #61e8e8;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight:600;
 }
 
 .button:hover {
   cursor: pointer;
+  background-color: #940f4b;
+  box-shadow: 7px 4px 0 #61e8e8;
 }
 
 .button:disabled {

@@ -10,11 +10,14 @@
 .folder {
   width: 420px;
   height: 310px;
-  border-radius: 5px 25px 25px 25px;
-  filter: drop-shadow(0 0 0.75rem #003049);
-  background-color: #fdf0d5;
+  border: 3px solid #C563C2;
+  color: #61e8e8;
+  background-color: transparent;
   position: relative;
   display: flex; 
+  box-shadow: 
+  inset 0px 0px 10px 10px rgba(234,23,90,0.4),
+  0px 0px 10px 10px rgba(234,23,90,0.4);
 
 
   @media (max-width: 900px) {
@@ -26,12 +29,18 @@
 .folder::before {
     content:  '';
     position: absolute;
-    top: -18px;
+    top: -32px;
+    left: -3px;
     width: 200px;
     height: 25px;
-    background-color: #fdf0d5;
-    border-radius: 25px 0 0 0;
-    clip-path: path('M 0 0 L 160 0 C 185 2, 175 16, 200 18 L 0 50 z');
+    background-color: transparent;
+    border: 3px solid #C563C2;
+    background-color: transparent;
+    box-shadow: 
+    inset 0px 0px 10px 10px rgba(234,23,90,0.4),
+    0px 0px 10px 10px rgba(234,23,90,0.4);
+    /* border-radius: 25px 0 0 0; */
+    /* clip-path: path('M 0 0 L 160 0 C 185 2, 175 16, 200 18 L 0 50 z'); */
 }
 
 .imageWrapper {
@@ -71,7 +80,7 @@
   max-height: none !important;
   border: none !important;
   border-radius: 0 !important;
-  background-color: #fdf0d5 !important;
+  background-color: transparent !important;
   font-family: 'Courier New', Courier, monospace;
 }
 
