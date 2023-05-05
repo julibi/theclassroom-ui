@@ -21,3 +21,81 @@ export const ADMIN_ADDRESSES = [
   "0xc5F490B1629f6D6580F33bF53CEe23eF52cEF89C",
   "0xF41eec0A18747d0E0737Fba72F6C70B6c3d1FB83",
 ];
+
+const loremipsum =
+  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer";
+
+export const CHARACTERS = [
+  {
+    name: "Ari",
+    id: 1,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Eiche63",
+    id: 2,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "King",
+    id: 3,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "Lotti",
+    id: 4,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "Ludgard",
+    id: 5,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "Malin",
+    id: 6,
+    birthDate: "",
+    birthPlace: "San Diego",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "Moraine",
+    id: 7,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Neela",
+    id: 8,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Xänder",
+    id: 9,
+    birthDate: "tomorrow",
+    birthPlace: "San Diego",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+];
