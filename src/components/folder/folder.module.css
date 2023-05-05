@@ -10,7 +10,7 @@
 .folder {
   width: 420px;
   height: 310px;
-  border: 3px solid #C563C2;
+  border: 3px solid #ea175a;
   color: #61e8e8;
   background-color: transparent;
   position: relative;
@@ -34,59 +34,9 @@
     width: 200px;
     height: 25px;
     background-color: transparent;
-    border: 3px solid #C563C2;
+    border: 3px solid #ea175a;
     background-color: transparent;
     box-shadow: 
     inset 0px 0px 10px 10px rgba(234,23,90,0.4),
     0px 0px 10px 10px rgba(234,23,90,0.4);
-    /* border-radius: 25px 0 0 0; */
-    /* clip-path: path('M 0 0 L 160 0 C 185 2, 175 16, 200 18 L 0 50 z'); */
-}
-
-.imageWrapper {
-  padding: 24px;
-}
-
-.info {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.infoLine {
-  display: inline-block;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.marginBottom {
-  margin-block-end: 12px;
-}
-
-.focusClass {
-  height: 100%;
-  width: 100%;
-}
-
-.contentClass {
-  height: 100%;
-  width: 100%;
-  overflow-y: auto !important;
-  max-width: none !important;
-  max-height: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  background-color: transparent !important;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-
-.flexColumn {
-  display: flex;
-  flex-direction: column;
-  margin-block-end: 24px;
 }

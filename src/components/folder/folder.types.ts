@@ -1,10 +1,6 @@
+import { ReactNode } from "react";
+
 export type FolderProps = {
-  name: string;
-  id: number;
-  birthDate: string;
-  birthPlace: string;
-  checkIn: string;
-  text: string;
-  withPic?: boolean;
-  withButton?: boolean;
+  children: ReactNode;
+  className?: string;
 };

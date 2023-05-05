@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Folder } from "@/components/folder";
 import { CHARACTERS } from "../constants";
 import styles from "../styles/Characters.module.css";
-import { FolderProps } from "@/components/folder/folder.types";
+import { PatientRecord } from "@/components/patient-record";
+import { PatientRecordProps } from "@/components/patient-record/patient-record.types";
 
 const Characters = () => {
   const [shuffledCharacters, setShuffledCharacters] = useState<
-    FolderProps[] | null
+    PatientRecordProps[] | null
   >(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Characters = () => {
       <div className={styles.folders}>
         {CHARACTERS.map(
           ({ id, name, birthDate, birthPlace, checkIn, text }) => (
-            <Folder
+            <PatientRecord
               key={id}
               name={name}
               id={id}
@@ -26,6 +26,8 @@ const Characters = () => {
               birthPlace={birthPlace}
               checkIn={checkIn}
               text={text}
+              withPic
+              withButton
             />
           )
         )}

@@ -1,0 +1,32 @@
+
+.emblem {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+  font-weight: bold;
+  margin: -36px 0 0 -24px;
+  border: 2px solid #ea175a;
+  box-shadow: 
+  inset 0px 0px 6px 20px rgba(234,23,90,0.15),
+  0px 0px 6px 20px rgba(234,23,90,0.15);
+	color:  #fff;
+	animation: spinZ 20s linear infinite;
+	text-align: center;
+}
+
+@keyframes spinZ {
+  0% {
+    transform: rotateZ(360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+.star {
+  display: block;
+  color: #ccff15;
+  position: absolute;
+}
+
