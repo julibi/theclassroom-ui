@@ -8,7 +8,7 @@
 }
 
 .background {
-  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+  /* background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px); */
 }
 
 .section {
@@ -121,6 +121,7 @@
 
 .joinButton {
   width: 200px;
+  margin-block-start: 48px;
 }
 
 
@@ -405,5 +406,7 @@
   display: block;
   color: #ccff15;
   margin-inline-end: 6px;
+  width: 20px;
+  height: 20px;
 }
 
