@@ -1,6 +1,35 @@
 .imageWrapper {
-  padding: 24px;
+  position: relative;
+  margin: 24px;
 }
+
+.redFilter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #ea175a;
+  opacity: 0.5;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.redFilter::after {
+  content:  '';
+  position: absolute;
+  top: 0px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  z-index: 4;
+  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+}
+
+.image {
+  border-radius: 50%;
+}
+
 
 .info {
   padding: 24px;
@@ -8,6 +37,7 @@
   flex-direction: column;
   justify-content: space-between;
   font-family: 'Courier New', Courier, monospace;
+  overflow-y: auto;
 }
 
 .infoLine {
@@ -16,6 +46,10 @@
 
 .bold {
   font-weight: 600;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .marginBottom {
@@ -30,18 +64,25 @@
 .contentClass {
   height: 100%;
   width: 100%;
-  overflow-y: auto !important;
   max-width: none !important;
   max-height: none !important;
   border: none !important;
   border-radius: 0 !important;
-  background-color: transparent !important;
+  background: linear-gradient(#070934,#501872) !important;
+  color: #61e8e8 !important;
   font-family: 'Courier New', Courier, monospace;
 }
 
+.recordContent {
+  height: 100%;
+}
 
 .flexColumn {
   display: flex;
   flex-direction: column;
   margin-block-end: 24px;
+}
+
+.openFileButton {
+  margin-block-start: 24px;
 }

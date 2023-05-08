@@ -27,20 +27,26 @@ export const PatientRecord = ({
       <Folder>
         {withPic && (
           <div className={styles.imageWrapper}>
+            <div className={styles.redFilter} />
             <Image
               className={styles.image}
-              height={150}
-              width={120}
               src={`/characters/${name}.jpeg`}
               alt={`Image of ${name}`}
               priority
+              height={120}
+              width={120}
             />
           </div>
         )}
         <div className={styles.info}>
           <div>
             <span
-              className={cx(styles.infoLine, styles.bold, styles.marginBottom)}
+              className={cx(
+                styles.infoLine,
+                styles.bold,
+                styles.underline,
+                styles.marginBottom
+              )}
             >
               {name}
             </span>
@@ -56,7 +62,11 @@ export const PatientRecord = ({
             >{`Check In Type: ${checkIn}`}</span>
           </div>
           {withButton && (
-            <Button onClick={openFile} text={`Read File #${id}`} />
+            <Button
+              onClick={openFile}
+              text={`Read File #${id}`}
+              className={styles.openFileButton}
+            />
           )}
         </div>
       </Folder>
@@ -66,7 +76,7 @@ export const PatientRecord = ({
           focusClassName={styles.focusClass}
           contentClassName={styles.contentClass}
         >
-          <div>
+          <div className={styles.recordContent}>
             <Title
               size={2}
               className={cx(styles.infoLine, styles.bold, styles.marginBottom)}
