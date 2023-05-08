@@ -17,6 +17,7 @@ import {
   walletConnectConnector,
 } from "@/providers/wagmiProvider/wagmiProvider";
 import { connectors } from "@/constants";
+import { Title } from "../title";
 
 export const WalletConnectionModal = ({
   onClose,
@@ -63,9 +64,11 @@ export const WalletConnectionModal = ({
   );
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} contentClassName={styles.contentClassName}>
       <div className={styles.content}>
-        <h2>Connect Wallet</h2>
+        <Title size={3} className={styles.title}>
+          Connect Wallet
+        </Title>
         {connectors?.map((connector) => (
           <Button
             key={connector}

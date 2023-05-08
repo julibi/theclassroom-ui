@@ -1,9 +1,11 @@
 .navbar {
   background: transparent;
-  color: #fff;
+  color: #61e8e8;
   width: 100%;
   height: fit-content;
   padding: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
 .list {

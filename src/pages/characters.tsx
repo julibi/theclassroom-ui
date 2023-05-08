@@ -14,7 +14,7 @@ const Characters = () => {
     setShuffledCharacters(array);
   }, []);
   return (
-    <div className={styles.characters}>
+    <div>
       <div className={styles.folders}>
         {CHARACTERS.map(
           ({ id, name, birthDate, birthPlace, checkIn, text }) => (

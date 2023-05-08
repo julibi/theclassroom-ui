@@ -62,7 +62,11 @@ export const TextCard = ({ snippet }: TextCardProps) => {
   return (
     <div className={styles.textCard}>
       <span className={styles.text}>
-        {text?.length ? text : <Skeleton count={3} />}
+        {text?.length ? (
+          text
+        ) : (
+          <Skeleton count={3} className={styles.skeleton} />
+        )}
       </span>
       <span className={styles.tokenId}>
         <a
@@ -75,12 +79,11 @@ export const TextCard = ({ snippet }: TextCardProps) => {
         </a>
       </span>
       <div className={styles.meta}>
+        <span className={styles.writtenAt}>{`Written At: ${created}`}</span>
         <div className={styles.flex}>
           <div className={styles.by}>By </div>
           <ProfileLink address={snippet?.writer} />
         </div>
-
-        <span className={styles.writtenAt}>{`Written At: ${created}`}</span>
       </div>
     </div>
   );

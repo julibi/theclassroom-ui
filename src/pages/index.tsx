@@ -24,7 +24,7 @@ const StarRating = () => (
 
 const Home = () => {
   return (
-    <div className={cx(styles.background, inter.className)}>
+    <div className={inter.className}>
       <div className={cx(styles.foreground, inter.className)}>
         <div className={styles.section}>
           <div className={styles.control}>

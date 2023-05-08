@@ -1,5 +1,6 @@
 import cx from "classnames";
 import React, { useCallback } from "react";
+import { inter } from "@/utils/fonts";
 import styles from "./slider.module.css";
 import { useUI } from "@/hooks/use-ui";
 import { Button } from "../button";
@@ -37,7 +38,7 @@ export const Slider = () => {
 
   return (
     <div
-      className={cx(styles.slider, {
+      className={cx(styles.slider, inter.className, {
         [styles.slideIn]: isSliderOpen,
         [styles.slideOut]: !isSliderOpen,
       })}
@@ -48,11 +49,11 @@ export const Slider = () => {
           x
         </Button>
         <div className={styles.nftList}>
-          <Title size={3} className={styles.title}>
+          <Title size={1} className={styles.title}>
             Mint to participate in writing!
           </Title>
           <Minting />
-          <Title size={3} className={styles.title}>
+          <Title size={1} className={styles.title}>
             NFTs
           </Title>
           <div>
