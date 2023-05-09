@@ -84,9 +84,7 @@ export const PatientRecord = ({
               {name}
             </Title>
             <div className={styles.flexColumn}>
-              <span
-                className={styles.infoLine}
-              >{`Reference number: ${id}`}</span>
+              <span className={styles.infoLine}>{`Reference: #${id}`}</span>
               <span
                 className={styles.infoLine}
               >{`Birth date: ${birthDate}`}</span>
