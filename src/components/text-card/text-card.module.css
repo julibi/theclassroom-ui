@@ -9,11 +9,15 @@
 }
 
 .text {
-  display: inline-block;
-  margin-block-end: 24px;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
   white-space: pre-line;
+  margin-block-end: 24px;
+}
+
+.expanded {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .skeleton {
@@ -21,6 +25,15 @@
   border: none !important;
   background-color: #61e8e8 !important;
 }
+
+.readMoreLink {
+  margin-block-end: 24px;
+  text-decoration: underline;
+}
+
+.readMoreLink:hover {
+  cursor: pointer;
+} 
 
 .tokenId {
   display: inline-block;

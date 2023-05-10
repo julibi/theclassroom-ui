@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import cx from "classnames";
 import styles from "../styles/Home.module.css";
 import { Title } from "@/components/title";

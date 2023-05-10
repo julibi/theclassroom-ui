@@ -41,7 +41,7 @@
 }
 
 .infoLine {
-  display: inline-block;
+  display: block;
 }
 
 .bold {
@@ -54,6 +54,10 @@
 
 .marginBottom {
   margin-block-end: 12px;
+}
+
+.linkish:hover {
+  cursor: pointer;
 }
 
 .focusClass {

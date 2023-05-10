@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 import { Button } from "../button";
@@ -7,6 +7,8 @@ import { Title } from "../title";
 import { Folder } from "../folder";
 import { PatientRecordProps } from "./patient-record.types";
 import styles from "./patient-record.module.css";
+import { useRouter } from "next/router";
+import { useUI } from "@/hooks/use-ui";
 
 export const PatientRecord = ({
   name,
@@ -18,10 +20,18 @@ export const PatientRecord = ({
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
+  const router = useRouter();
+  const { updateIndex } = useUI();
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
     setShowFile(true);
   };
+
+  const toApp = useCallback(() => {
+    router?.push("writingapp");
+    updateIndex(id);
+  }, [router, id]);
+
   return (
     <>
       <Folder>
@@ -41,16 +51,18 @@ export const PatientRecord = ({
         <div className={styles.info}>
           <div>
             <span
+              onClick={toApp}
               className={cx(
                 styles.infoLine,
                 styles.bold,
                 styles.underline,
-                styles.marginBottom
+                styles.marginBottom,
+                styles.linkish
               )}
             >
               {name}
             </span>
-            <span className={styles.infoLine}>{`Reference number: ${id}`}</span>
+            <span className={styles.infoLine}>{`Reference: #${id}`}</span>
             <span
               className={styles.infoLine}
             >{`Birth date: ${birthDate}`}</span>

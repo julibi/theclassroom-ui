@@ -8,8 +8,10 @@ import { Title } from "../title";
 import { useUser } from "@/hooks/use-user";
 import { useCharacters } from "@/hooks/use-characters";
 import { Minting } from "../minting";
+import { useRouter } from "next/router";
 
 export const Slider = () => {
+  const router = useRouter();
   const { isSliderOpen, openSlider, closeSlider, updateIndex, updateScrollId } =
     useUI();
   const { NFTs } = useUser();
@@ -18,11 +20,16 @@ export const Slider = () => {
   const toggleSlider = useCallback(() => {
     isSliderOpen ? closeSlider() : openSlider();
   }, [isSliderOpen, closeSlider, openSlider]);
+
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
   const handleClickNFT = useCallback(
     async (characterId: number) => {
       if (characters?.[characterId - 1] === undefined) return;
-      // TODO: if not on home, navigate to home
+
+      if (router?.route !== "writingapp") {
+        router.push("writingapp");
+      }
       updateIndex(characterId - 1);
       closeSlider();
       await delay(500);

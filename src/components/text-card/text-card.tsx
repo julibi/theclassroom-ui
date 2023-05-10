@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import cx from "classnames";
 import styles from "./text-card.module.css";
 import { TextCardProps } from "./text-card.types";
 import { ProfileLink } from "../profile-link";
@@ -12,7 +19,8 @@ import {
 import ABI from "../../abis/MoonpageCollection.json";
 
 export const TextCard = ({ snippet }: TextCardProps) => {
-  const [text, setText] = useState<null | string>();
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [text, setText] = useState<null | string>(null);
   const [pending, setPending] = useState<boolean>(false);
   const { data: tokenOwner } = useContractRead({
     address: MOONPAGE_COLLECTION_ADDRESS_DEV,
@@ -20,7 +28,6 @@ export const TextCard = ({ snippet }: TextCardProps) => {
     functionName: "ownerOf",
     args: [snippet.tokenId],
   });
-
   const created = useMemo(
     () =>
       new Date(Number(snippet?.writtenAt) * 1000).toLocaleDateString("en-US"),
@@ -61,12 +68,19 @@ export const TextCard = ({ snippet }: TextCardProps) => {
 
   return (
     <div className={styles.textCard}>
-      <span className={styles.text}>
+      <span className={cx(styles.text, !isExpanded && styles.expanded)}>
         {text?.length ? (
           text
         ) : (
           <Skeleton count={3} className={styles.skeleton} />
         )}
+      </span>
+
+      <span
+        onClick={() => setIsExpanded(isExpanded ? false : true)}
+        className={styles.readMoreLink}
+      >
+        {isExpanded ? "Read Less" : "Read All"}
       </span>
       <span className={styles.tokenId}>
         <a

@@ -10,13 +10,78 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
+.mainData {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+}
+
 .title {
   margin-block-end: 12px;
 }
 
+.imageWrapper {
+  position: relative;
+  margin: 24px;
+}
+
+.redFilter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #ea175a;
+  opacity: 0.5;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.redFilter::after {
+  content:  '';
+  position: absolute;
+  top: 0px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  z-index: 4;
+  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+}
+
+.image {
+  border-radius: 50%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoLine {
+  display: block;
+}
+
 .text {
   display: inline-block;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: pre-line;
+  width: 100%;
 }
+
+.collapsed {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expanded {
+  white-space: normal;
+}
+
+.readMoreLink {
+  margin-block-start: 12px;
+  text-decoration: underline;
+}
+
+.readMoreLink:hover {
+  cursor: pointer;
+} 
