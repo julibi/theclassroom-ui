@@ -49,7 +49,7 @@
   height: 100%;
   width: 80%;
   max-width: 500px;
-  background-color: #000;
+  background: linear-gradient(#070934,#501872);
 
   display: flex;
   flex-direction: column;
@@ -70,7 +70,8 @@
 }
 
 .title {
-  color: #fff;
+  color: #61e8e8;
+  text-shadow: 1px 1px 0 #C563C2;
   margin-block-end: 24px;
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { CHARACTERS } from "../constants";
 import styles from "../styles/Characters.module.css";
 import { PatientRecord } from "@/components/patient-record";
@@ -14,7 +15,7 @@ const Characters = () => {
     setShuffledCharacters(array);
   }, []);
   return (
-    <div className={styles.characters}>
+    <div>
       <div className={styles.folders}>
         {CHARACTERS.map(
           ({ id, name, birthDate, birthPlace, checkIn, text }) => (

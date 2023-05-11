@@ -1,9 +1,9 @@
 .writingBoxWrapper {
-  border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid #61e8e8;
   margin-block: 12px;
   padding: 12px;
-
+  color: #61e8e8;
+  font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
 }
@@ -11,13 +11,14 @@
 .writingBox {
   width: 100%;
   min-height: 200px;
-  border-radius: 5px;
+  border: 1px solid #61e8e8;
+  background-color: transparent;
+  color: #61e8e8;
   padding: 12px;
   margin-block: 12px;
 }
 
 .error {
-  color: red;
+  color: #ea175a;
   margin:  0 0 12px 6px;
-  
 }

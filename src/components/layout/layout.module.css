@@ -1,4 +1,8 @@
-.navbar {
+.layout {
+  position: relative;
+  background: repeating-linear-gradient(transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px);
+}
+.navbar { 
   position: fixed;
   top: 0;
   z-index: 1;

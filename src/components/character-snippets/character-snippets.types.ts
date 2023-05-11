@@ -8,6 +8,7 @@ export type CharacterSnippetsProps = {
 export type Snippet = {
   character: number;
   textIPFSHash: string;
+  translationIPFSHash: string;
   tokenId: number;
   writer: Address;
   written: boolean;

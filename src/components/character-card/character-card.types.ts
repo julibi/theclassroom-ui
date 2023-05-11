@@ -3,4 +3,5 @@ import { CharacterItem } from "../../providers/charactersProvider/charactersProv
 export type CharacterCardProps = {
   character: CharacterItem;
   className?: string;
+  characterId: number;
 };

@@ -36,13 +36,13 @@ export const Navbar = ({ className }: NavbarProps) => {
           </li>
         ))}
 
-        {!!isAdmin && (
+        {/* {!!isAdmin && (
           <li key="admin" className={styles.listItem}>
             <Link href={"/admin"} passHref>
               {"admin"}
             </Link>
           </li>
-        )}
+        )} */}
         <li key="walletconnection" className={styles.listItem}>
           <WalletConnection />
         </li>

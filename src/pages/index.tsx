@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import cx from "classnames";
 import styles from "../styles/Home.module.css";
 import { Title } from "@/components/title";
@@ -24,11 +24,19 @@ const StarRating = () => (
 
 const Home = () => {
   return (
-    <div className={cx(styles.background, inter.className)}>
+    <div className={inter.className}>
       <div className={cx(styles.foreground, inter.className)}>
         <div className={styles.section}>
           <div className={styles.control}>
-            <div className={styles.redCircle}></div>
+            <div className={styles.redCircle}>
+              <Image
+                height={300}
+                width={300}
+                src={"/Logo.svg"}
+                alt="bla"
+                priority
+              />
+            </div>
             <div className={styles.titleWrapper}>
               <Title
                 size={1}

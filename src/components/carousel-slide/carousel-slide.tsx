@@ -31,7 +31,11 @@ export const CarouselSlide = ({
 
   return (
     <div className={styles.carouselItemInner}>
-      <CharacterCard character={character} className={styles.character} />
+      <CharacterCard
+        characterId={characterId}
+        character={character}
+        className={styles.character}
+      />
       {characterSnippets?.length > 1 ? (
         <Button className={styles.scrollToLastButton} onClick={executeScroll}>
           <span className={styles.scrollToLastText}>Scroll to last text</span>

@@ -1,19 +1,39 @@
 .textCard {
-  border: 1px solid #000;
-  border-radius: 5px;
+  border: 1px solid #61e8e8;
+  color: #61e8e8;
   margin-block-end: 12px;
   padding: 12px;
   display: flex;
   flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .text {
-  display: inline-block;
-  margin-block-end: 24px;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
   white-space: pre-line;
+  margin-block-end: 24px;
 }
+
+.expanded {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.skeleton {
+  border-radius: 0 !important;
+  border: none !important;
+  background-color: #61e8e8 !important;
+}
+
+.readMoreLink {
+  margin-block-end: 24px;
+  text-decoration: underline;
+}
+
+.readMoreLink:hover {
+  cursor: pointer;
+} 
 
 .tokenId {
   display: inline-block;
@@ -22,7 +42,7 @@
 
 .meta {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .writtenAt {
@@ -40,4 +60,8 @@
 
 .link {
   text-decoration: underline;
+}
+
+.languageToggle {
+  margin-block: 12px;
 }

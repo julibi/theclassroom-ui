@@ -18,6 +18,8 @@ import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
 import { SelectDropdown } from "../select-dropdown";
+import { detectLanguage } from "@/utils/detectLanguage";
+import { translateWithDeepl } from "@/utils/translateWithDeepl";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
@@ -71,7 +73,17 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const onSubmit = useCallback(async () => {
     try {
       const textCID = await uploadText(text);
-      write?.({ recklesslySetUnpreparedArgs: [textCID, writingToken] });
+      const language = detectLanguage(text);
+      let translation;
+      let translationCID = "";
+      if (language !== "english") {
+        translation = await translateWithDeepl(text, "EN");
+        translationCID = translation ? await uploadText(translation) : "";
+      }
+
+      write?.({
+        recklesslySetUnpreparedArgs: [textCID, translationCID, writingToken],
+      });
     } catch (e) {
       console.log({ e });
     }

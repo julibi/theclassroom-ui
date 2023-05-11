@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 import { Button } from "../button";
@@ -7,6 +7,8 @@ import { Title } from "../title";
 import { Folder } from "../folder";
 import { PatientRecordProps } from "./patient-record.types";
 import styles from "./patient-record.module.css";
+import { useRouter } from "next/router";
+import { useUI } from "@/hooks/use-ui";
 
 export const PatientRecord = ({
   name,
@@ -18,33 +20,49 @@ export const PatientRecord = ({
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
+  const router = useRouter();
+  const { updateIndex } = useUI();
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
     setShowFile(true);
   };
+
+  const toApp = useCallback(() => {
+    router?.push("writingapp");
+    updateIndex(id);
+  }, [router, id]);
+
   return (
     <>
       <Folder>
         {withPic && (
           <div className={styles.imageWrapper}>
+            <div className={styles.redFilter} />
             <Image
               className={styles.image}
-              height={150}
-              width={120}
               src={`/characters/${name}.jpeg`}
               alt={`Image of ${name}`}
               priority
+              height={120}
+              width={120}
             />
           </div>
         )}
         <div className={styles.info}>
           <div>
             <span
-              className={cx(styles.infoLine, styles.bold, styles.marginBottom)}
+              onClick={toApp}
+              className={cx(
+                styles.infoLine,
+                styles.bold,
+                styles.underline,
+                styles.marginBottom,
+                styles.linkish
+              )}
             >
               {name}
             </span>
-            <span className={styles.infoLine}>{`Reference number: ${id}`}</span>
+            <span className={styles.infoLine}>{`Reference: #${id}`}</span>
             <span
               className={styles.infoLine}
             >{`Birth date: ${birthDate}`}</span>
@@ -56,7 +74,11 @@ export const PatientRecord = ({
             >{`Check In Type: ${checkIn}`}</span>
           </div>
           {withButton && (
-            <Button onClick={openFile} text={`Read File #${id}`} />
+            <Button
+              onClick={openFile}
+              text={`Read File #${id}`}
+              className={styles.openFileButton}
+            />
           )}
         </div>
       </Folder>
@@ -66,7 +88,7 @@ export const PatientRecord = ({
           focusClassName={styles.focusClass}
           contentClassName={styles.contentClass}
         >
-          <div>
+          <div className={styles.recordContent}>
             <Title
               size={2}
               className={cx(styles.infoLine, styles.bold, styles.marginBottom)}
@@ -74,9 +96,7 @@ export const PatientRecord = ({
               {name}
             </Title>
             <div className={styles.flexColumn}>
-              <span
-                className={styles.infoLine}
-              >{`Reference number: ${id}`}</span>
+              <span className={styles.infoLine}>{`Reference: #${id}`}</span>
               <span
                 className={styles.infoLine}
               >{`Birth date: ${birthDate}`}</span>

@@ -1,5 +1,6 @@
 import cx from "classnames";
 import React, { useCallback } from "react";
+import { inter } from "@/utils/fonts";
 import styles from "./slider.module.css";
 import { useUI } from "@/hooks/use-ui";
 import { Button } from "../button";
@@ -7,8 +8,10 @@ import { Title } from "../title";
 import { useUser } from "@/hooks/use-user";
 import { useCharacters } from "@/hooks/use-characters";
 import { Minting } from "../minting";
+import { useRouter } from "next/router";
 
 export const Slider = () => {
+  const router = useRouter();
   const { isSliderOpen, openSlider, closeSlider, updateIndex, updateScrollId } =
     useUI();
   const { NFTs } = useUser();
@@ -17,11 +20,16 @@ export const Slider = () => {
   const toggleSlider = useCallback(() => {
     isSliderOpen ? closeSlider() : openSlider();
   }, [isSliderOpen, closeSlider, openSlider]);
+
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
   const handleClickNFT = useCallback(
     async (characterId: number) => {
       if (characters?.[characterId - 1] === undefined) return;
-      // TODO: if not on home, navigate to home
+
+      if (router?.route !== "writingapp") {
+        router.push("writingapp");
+      }
       updateIndex(characterId - 1);
       closeSlider();
       await delay(500);
@@ -37,7 +45,7 @@ export const Slider = () => {
 
   return (
     <div
-      className={cx(styles.slider, {
+      className={cx(styles.slider, inter.className, {
         [styles.slideIn]: isSliderOpen,
         [styles.slideOut]: !isSliderOpen,
       })}
@@ -48,11 +56,11 @@ export const Slider = () => {
           x
         </Button>
         <div className={styles.nftList}>
-          <Title size={3} className={styles.title}>
+          <Title size={1} className={styles.title}>
             Mint to participate in writing!
           </Title>
           <Minting />
-          <Title size={3} className={styles.title}>
+          <Title size={1} className={styles.title}>
             NFTs
           </Title>
           <div>
