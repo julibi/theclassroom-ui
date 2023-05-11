@@ -11,10 +11,8 @@ export const CharacterCard = ({
   character,
   className,
 }: CharacterCardProps) => {
-  const [text, setText] = useState<null | string>();
-  const [translation, setTranslation] = useState<null | string>();
+  const [text, setText] = useState<null | string>(null);
   const [textPending, setTextPending] = useState<boolean>(false);
-  const [translationPending, setTranslationPending] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const fetchText = useCallback(async () => {
     setTextPending(true);
@@ -33,30 +31,9 @@ export const CharacterCard = ({
     }
   }, [character]);
 
-  const fetchTranslation = useCallback(async () => {
-    // translation does not always exist
-    if (character?.translationIpfsHash?.length === 0) return;
-
-    setTranslationPending(true);
-    try {
-      // TODO: first try to fetch from my pinata gate?
-      const response = await fetch(
-        `https://ipfs.io/ipfs/${character?.translationIpfsHash}`
-      );
-      if (response.ok) {
-        const fetchedText = await response.text();
-        setTranslation(fetchedText);
-        setTranslationPending(false);
-      }
-    } catch (e: unknown) {
-      setTranslationPending(false);
-    }
-  }, [character]);
-
   useEffect(() => {
     fetchText();
-    fetchTranslation();
-  }, [fetchText, fetchTranslation]);
+  }, [fetchText]);
 
   const characterData = useMemo(
     () => CHARACTERS.find((c) => c.id == characterId),

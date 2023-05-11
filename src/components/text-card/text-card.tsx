@@ -17,11 +17,16 @@ import {
   MOONPAGE_COLLECTION_ADDRESS_PROD,
 } from "@/constants";
 import ABI from "../../abis/MoonpageCollection.json";
+import { Toggle } from "../toggle";
+import { detectLanguage } from "@/utils/detectLanguage";
 
 export const TextCard = ({ snippet }: TextCardProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [text, setText] = useState<null | string>(null);
-  const [pending, setPending] = useState<boolean>(false);
+  const [textPending, setTextPending] = useState<boolean>(false);
+  const [translation, setTranslation] = useState<null | string>(null);
+  const [showTranslation, setShowTranslation] = useState<boolean>(false);
+  const [translationPending, setTranslationPending] = useState<boolean>(false);
   const { data: tokenOwner } = useContractRead({
     address: MOONPAGE_COLLECTION_ADDRESS_DEV,
     abi: ABI,
@@ -46,7 +51,7 @@ export const TextCard = ({ snippet }: TextCardProps) => {
     [snippet?.tokenId]
   );
   const fetchText = useCallback(async () => {
-    setPending(true);
+    setTextPending(true);
     try {
       // TODO: first try to fetch from my pinata gate?
       const response = await fetch(
@@ -55,26 +60,56 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       if (response.ok) {
         const fetchedText = await response.text();
         setText(fetchedText);
-        setPending(false);
+        setTextPending(false);
       }
     } catch (e: unknown) {
-      setPending(false);
+      setTextPending(false);
     }
   }, [snippet?.textIPFSHash]);
 
+  const fetchTranslation = useCallback(async () => {
+    // translation does not always exist
+    if (snippet?.translationIPFSHash?.length === 0) return;
+    setTranslationPending(true);
+    try {
+      // TODO: first try to fetch from my pinata gate?
+      const response = await fetch(
+        `https://ipfs.io/ipfs/${snippet?.translationIPFSHash}`
+      );
+      if (response.ok) {
+        const fetchedText = await response.text();
+        setTranslation(fetchedText);
+        setTranslationPending(false);
+      }
+    } catch (e: unknown) {
+      setTranslationPending(false);
+    }
+  }, [snippet]);
+
   useEffect(() => {
     fetchText();
-  }, [fetchText]);
-
+    fetchTranslation();
+  }, [fetchText, fetchTranslation]);
+  console.log({ showTranslation, translation });
   return (
     <div className={styles.textCard}>
-      <span className={cx(styles.text, !isExpanded && styles.expanded)}>
-        {text?.length ? (
-          text
-        ) : (
-          <Skeleton count={3} className={styles.skeleton} />
-        )}
-      </span>
+      {showTranslation ? (
+        <span className={cx(styles.text, !isExpanded && styles.expanded)}>
+          {translation ? (
+            translation
+          ) : (
+            <Skeleton count={3} className={styles.skeleton} />
+          )}
+        </span>
+      ) : (
+        <span className={cx(styles.text, !isExpanded && styles.expanded)}>
+          {text?.length ? (
+            text
+          ) : (
+            <Skeleton count={3} className={styles.skeleton} />
+          )}
+        </span>
+      )}
 
       <span
         onClick={() => setIsExpanded(isExpanded ? false : true)}
@@ -82,6 +117,17 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       >
         {isExpanded ? "Read Less" : "Read All"}
       </span>
+      <span className={styles.origLang}>{`Orig. language: ${
+        text ? detectLanguage(text) : "unknown"
+      }`}</span>
+      {snippet?.translationIPFSHash && (
+        <Toggle
+          className={styles.languageToggle}
+          onChange={() => setShowTranslation(!showTranslation)}
+          label="Translate"
+          isChecked={showTranslation}
+        />
+      )}
       <span className={styles.tokenId}>
         <a
           href={OpenseaLink}

@@ -85,3 +85,7 @@
 .readMoreLink:hover {
   cursor: pointer;
 } 
+
+.origLang {
+  text-transform: capitalize;
+}
