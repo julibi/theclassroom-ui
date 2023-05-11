@@ -39,6 +39,9 @@ export const TextCard = ({ snippet }: TextCardProps) => {
     [snippet?.writtenAt]
   );
   const isProd = process.env.ENVIRONMENT == "PROD";
+  const hasTranslation = useMemo(() => {
+    return snippet?.translationIPFSHash.length > 0;
+  }, [snippet?.translationIPFSHash]);
   const OpenseaLink = useMemo(
     () =>
       `https://${isProd ? "" : "testnets."}opensea.io/assets/${
@@ -90,10 +93,10 @@ export const TextCard = ({ snippet }: TextCardProps) => {
     fetchText();
     fetchTranslation();
   }, [fetchText, fetchTranslation]);
-  console.log({ showTranslation, translation });
+
   return (
     <div className={styles.textCard}>
-      {showTranslation ? (
+      {showTranslation && hasTranslation ? (
         <span className={cx(styles.text, !isExpanded && styles.expanded)}>
           {translation ? (
             translation
@@ -120,7 +123,7 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       <span className={styles.origLang}>{`Orig. language: ${
         text ? detectLanguage(text) : "unknown"
       }`}</span>
-      {snippet?.translationIPFSHash && (
+      {hasTranslation && (
         <Toggle
           className={styles.languageToggle}
           onChange={() => setShowTranslation(!showTranslation)}
