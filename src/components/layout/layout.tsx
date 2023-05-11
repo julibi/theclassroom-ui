@@ -7,7 +7,7 @@ import { LayoutProps } from "./layout.types";
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className={styles.layout}>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {children}
 
