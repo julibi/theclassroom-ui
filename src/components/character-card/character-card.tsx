@@ -12,10 +12,12 @@ export const CharacterCard = ({
   className,
 }: CharacterCardProps) => {
   const [text, setText] = useState<null | string>();
-  const [pending, setPending] = useState<boolean>(false);
+  const [translation, setTranslation] = useState<null | string>();
+  const [textPending, setTextPending] = useState<boolean>(false);
+  const [translationPending, setTranslationPending] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const fetchText = useCallback(async () => {
-    setPending(true);
+    setTextPending(true);
     try {
       // TODO: first try to fetch from my pinata gate?
       const response = await fetch(
@@ -24,16 +26,37 @@ export const CharacterCard = ({
       if (response.ok) {
         const fetchedText = await response.text();
         setText(fetchedText);
-        setPending(false);
+        setTextPending(false);
       }
     } catch (e: unknown) {
-      setPending(false);
+      setTextPending(false);
+    }
+  }, [character]);
+
+  const fetchTranslation = useCallback(async () => {
+    // translation does not always exist
+    if (character?.translationIpfsHash?.length === 0) return;
+
+    setTranslationPending(true);
+    try {
+      // TODO: first try to fetch from my pinata gate?
+      const response = await fetch(
+        `https://ipfs.io/ipfs/${character?.translationIpfsHash}`
+      );
+      if (response.ok) {
+        const fetchedText = await response.text();
+        setTranslation(fetchedText);
+        setTranslationPending(false);
+      }
+    } catch (e: unknown) {
+      setTranslationPending(false);
     }
   }, [character]);
 
   useEffect(() => {
     fetchText();
-  }, [fetchText]);
+    fetchTranslation();
+  }, [fetchText, fetchTranslation]);
 
   const characterData = useMemo(
     () => CHARACTERS.find((c) => c.id == characterId),
@@ -72,7 +95,6 @@ export const CharacterCard = ({
           >{`Check In Type: ${characterData?.checkIn}`}</span>
         </div>
       </div>
-      {/* <span className={styles.text}>{text}</span> */}
 
       <span
         className={cx(
@@ -80,7 +102,7 @@ export const CharacterCard = ({
           isExpanded ? styles.expanded : styles.collapsed
         )}
       >
-        {characterData?.text}
+        {text}
       </span>
       <span
         onClick={() => setIsExpanded(isExpanded ? false : true)}

@@ -1,4 +1,4 @@
-export const TCR_DEV = "0x5e3f3Df0AF40E7625470c4dE693E06F2d249b903";
+export const TCR_DEV = "0xEbC143fcBF8F886369882F815c7e6b396e34BFF2";
 export const MOONPAGE_COLLECTION_ADDRESS_DEV =
   "0xa5A234AA62C9411A717D349D4229CaF577Fa7d19";
 export const MOONPAGE_MANAGER_ADDRESS_DEV =
@@ -27,16 +27,48 @@ const loremipsum =
 
 export const CHARACTERS = [
   {
-    name: "Ari Hz",
+    name: "SadGhuru2001",
     id: 1,
-    birthDate: "1039,07",
-    birthPlace: "Sedimont (Lutzrig), ?",
-    checkIn: "Lottery",
+    birthDate: "2023",
+    birthPlace: "Silicon Valley, USA, Earth",
+    checkIn: "---",
+    text: loremipsum,
+  },
+  {
+    name: "Malin Ekström",
+    id: 2,
+    birthDate: "1989",
+    birthPlace: "Stockholm, Sweden, Earth",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Xänder Vargas",
+    id: 3,
+    birthDate: "unknown",
+    birthPlace: "unknown, Oblong System",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Ludgard Buschweg",
+    id: 4,
+    birthDate: "1962",
+    birthPlace: "München, Germany, Earth",
+    checkIn: "Paid Premium",
+    text: loremipsum,
+  },
+  {
+    name: "Moraine C. Williams",
+    id: 5,
+    birthDate: "2100",
+    birthPlace: "Austin, Texas, USA, Earth",
+    checkIn: "Paid Premium",
     text: loremipsum,
   },
   {
     name: "Rotten Oak",
-    id: 2,
+    id: 6,
     birthDate: "unknown",
     birthPlace: "workshop, unknown",
     checkIn: "Lottery",
@@ -44,42 +76,10 @@ export const CHARACTERS = [
   },
   {
     name: "King",
-    id: 3,
+    id: 7,
     birthDate: "2020",
     birthPlace: "Berlin, Germany, Earth",
     checkIn: "Lottery",
-    text: loremipsum,
-  },
-  {
-    name: "Lotti Schmidt",
-    id: 4,
-    birthDate: "1949?",
-    birthPlace: "Amusement Park, Earth",
-    checkIn: "Lottery",
-    text: loremipsum,
-  },
-  {
-    name: "Ludgard Buschweg",
-    id: 5,
-    birthDate: "1962",
-    birthPlace: "München, Germany, Earth",
-    checkIn: "Paid Premium",
-    text: loremipsum,
-  },
-  {
-    name: "Malin Ekström",
-    id: 6,
-    birthDate: "1989",
-    birthPlace: "Stockholm, Sweden, Earth",
-    checkIn: "Paid Premium",
-    text: loremipsum,
-  },
-  {
-    name: "Moraine C. Williams",
-    id: 7,
-    birthDate: "2100",
-    birthPlace: "Austin, Texas, USA, Earth",
-    checkIn: "Paid Premium",
     text: loremipsum,
   },
   {
@@ -91,11 +91,19 @@ export const CHARACTERS = [
     text: loremipsum,
   },
   {
-    name: "Xänder Vargas",
+    name: "Lotti Schmidt",
     id: 9,
-    birthDate: "unknown",
-    birthPlace: "unknown, Oblong System",
-    checkIn: "Paid Premium",
+    birthDate: "1949?",
+    birthPlace: "Amusement Park, Earth",
+    checkIn: "Lottery",
+    text: loremipsum,
+  },
+  {
+    name: "Ari Hz",
+    id: 10,
+    birthDate: "1039,07",
+    birthPlace: "Sedimont (Lutzrig), ?",
+    checkIn: "Lottery",
     text: loremipsum,
   },
 ];

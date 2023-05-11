@@ -8,10 +8,13 @@ import { useContractWrite, useWaitForTransaction } from "wagmi";
 import ABI from "../../abis/TCR.json";
 import { TCR_DEV } from "@/constants";
 import { AdminInputProps } from "./admin-input.types";
+import { detectLanguage } from "@/utils/detectLanguage";
+import { translateWithDeepl } from "@/utils/translateWithDeepl";
 
 export const AdminInput = ({ refetch }: AdminInputProps) => {
   const [text, setText] = useState("");
   const [textIPFSHash, setTextIPFSHash] = useState("");
+  const [translationIPFSHash, setTranslationIPFSHash] = useState("");
   const [name, setName] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState<string | null>(null);
@@ -47,9 +50,11 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
   const textError = useMemo(() => {
     if (text?.trim().length < 10) {
       return "Too short.";
-    } else if (text?.trim().length > 1000) {
-      return "Too long. Max 1000 characters.";
-    } else {
+    }
+    // else if (text?.trim().length > 1000) {
+    //   return "Too long. Max 1000 characters.";
+    // } else
+    {
       return null;
     }
   }, [text]);
@@ -64,7 +69,19 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
 
       try {
         const textCID = await uploadText(text);
-        write?.({ recklesslySetUnpreparedArgs: [name, textCID, ""] });
+        const language = detectLanguage(text);
+
+        let translation;
+        let translationCID = "";
+        if (language !== "english") {
+          translation = await translateWithDeepl(text, "EN");
+          translationCID = translation ? await uploadText(translation) : "";
+          console.log({ language });
+        }
+
+        write?.({
+          recklesslySetUnpreparedArgs: [name, textCID, translationCID, ""],
+        });
       } catch (e) {
         console.log({ e });
       }
@@ -75,6 +92,7 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
   const reset = () => {
     setText("");
     setTextIPFSHash("");
+    setTranslationIPFSHash("");
     setName("");
   };
 

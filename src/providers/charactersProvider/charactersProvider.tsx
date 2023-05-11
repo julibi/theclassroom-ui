@@ -83,6 +83,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
         .map((item: any) => ({
           name: item.name,
           textIpfsHash: item.textIPFSHash,
+          translationIpfsHash: item.translationIPFSHash,
           imageIpfsHash: item.imageIpfsHash,
         }));
 

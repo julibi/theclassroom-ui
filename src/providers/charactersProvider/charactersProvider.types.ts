@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 export type CharacterItem = {
   name: string;
   textIpfsHash: string;
+  translationIpfsHash: string;
   imageIpfsHash: string;
 };
 

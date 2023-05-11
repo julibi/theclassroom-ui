@@ -288,6 +288,11 @@
       },
       {
         "internalType": "string",
+        "name": "translationIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "imageIPFSHash",
         "type": "string"
       }
@@ -323,6 +328,11 @@
       {
         "internalType": "string",
         "name": "_textIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_translationIPFSHash",
         "type": "string"
       },
       {
@@ -548,6 +558,11 @@
       },
       {
         "internalType": "string",
+        "name": "_translationIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "_imageIPFSHash",
         "type": "string"
       }
@@ -575,6 +590,11 @@
       {
         "internalType": "string",
         "name": "textIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "translationIPFSHash",
         "type": "string"
       },
       {
@@ -624,6 +644,11 @@
             "type": "string"
           },
           {
+            "internalType": "string",
+            "name": "translationIPFSHash",
+            "type": "string"
+          },
+          {
             "internalType": "uint256",
             "name": "writtenAt",
             "type": "uint256"
@@ -644,7 +669,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct TCR.Snippet[]",
+        "internalType": "struct TheRetreat.Snippet[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -705,8 +730,32 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "usedNFTs",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "string",
         "name": "_textIPFSHash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_translationIPFSHash",
         "type": "string"
       },
       {

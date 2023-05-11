@@ -74,11 +74,16 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     try {
       const textCID = await uploadText(text);
       const language = detectLanguage(text);
-      const translation =
-        language !== "english" && (await translateWithDeepl(text, "EN"));
-      console.log({ translation });
-      // TODO: do the translation!
-      write?.({ recklesslySetUnpreparedArgs: [textCID, writingToken] });
+      let translation;
+      let translationCID = "";
+      if (language !== "english") {
+        translation = await translateWithDeepl(text, "EN");
+        translationCID = translation ? await uploadText(translation) : "";
+      }
+
+      write?.({
+        recklesslySetUnpreparedArgs: [textCID, translationCID, writingToken],
+      });
     } catch (e) {
       console.log({ e });
     }
