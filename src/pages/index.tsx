@@ -28,7 +28,15 @@ const Home = () => {
       <div className={cx(styles.foreground, inter.className)}>
         <div className={styles.section}>
           <div className={styles.control}>
-            <div className={styles.redCircle}></div>
+            <div className={styles.redCircle}>
+              <Image
+                height={300}
+                width={300}
+                src={"/Logo.svg"}
+                alt="bla"
+                priority
+              />
+            </div>
             <div className={styles.titleWrapper}>
               <Title
                 size={1}
