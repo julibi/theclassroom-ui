@@ -28,6 +28,7 @@ const loremipsum =
 export const CHARACTERS = [
   {
     name: "SadGhuru2001",
+    img: "SadGhuru2001",
     id: 1,
     birthDate: "2023",
     birthPlace: "Silicon Valley, USA, Earth",
@@ -36,6 +37,7 @@ export const CHARACTERS = [
   },
   {
     name: "Malin Ekström",
+    img: "Malin",
     id: 2,
     birthDate: "1989",
     birthPlace: "Stockholm, Sweden, Earth",
@@ -44,6 +46,7 @@ export const CHARACTERS = [
   },
   {
     name: "Xänder Vargas",
+    img: "Xänder",
     id: 3,
     birthDate: "unknown",
     birthPlace: "unknown, Oblong System",
@@ -52,6 +55,7 @@ export const CHARACTERS = [
   },
   {
     name: "Ludgard Buschweg",
+    img: "Ludgard",
     id: 4,
     birthDate: "1962",
     birthPlace: "München, Germany, Earth",
@@ -60,6 +64,7 @@ export const CHARACTERS = [
   },
   {
     name: "Moraine C. Williams",
+    img: "Moraine",
     id: 5,
     birthDate: "2100",
     birthPlace: "Austin, Texas, USA, Earth",
@@ -68,6 +73,7 @@ export const CHARACTERS = [
   },
   {
     name: "Rotten Oak",
+    img: "Rotten",
     id: 6,
     birthDate: "unknown",
     birthPlace: "workshop, unknown",
@@ -76,6 +82,7 @@ export const CHARACTERS = [
   },
   {
     name: "King",
+    img: "King",
     id: 7,
     birthDate: "2020",
     birthPlace: "Berlin, Germany, Earth",
@@ -84,6 +91,7 @@ export const CHARACTERS = [
   },
   {
     name: "Neela Viskah",
+    img: "Neela",
     id: 8,
     birthDate: "2000",
     birthPlace: "San Diego",
@@ -92,6 +100,7 @@ export const CHARACTERS = [
   },
   {
     name: "Lotti Schmidt",
+    img: "Lotti",
     id: 9,
     birthDate: "1949?",
     birthPlace: "Amusement Park, Earth",
@@ -100,6 +109,7 @@ export const CHARACTERS = [
   },
   {
     name: "Ari Hz",
+    img: "Ari",
     id: 10,
     birthDate: "1039,07",
     birthPlace: "Sedimont (Lutzrig), ?",
