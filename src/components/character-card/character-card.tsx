@@ -47,7 +47,7 @@ export const CharacterCard = ({
           <div className={styles.redFilter} />
           <Image
             className={styles.image}
-            src={`/characters/${characterData?.name}.jpeg`}
+            src={`/characters/${characterData?.img}.jpeg`}
             alt={`Image of ${character.name}`}
             priority
             height={120}
