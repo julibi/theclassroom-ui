@@ -4,6 +4,7 @@ export type PatientRecordProps = {
   birthDate: string;
   birthPlace: string;
   checkIn: string;
+  img: string;
   text: string;
   withPic?: boolean;
   withButton?: boolean;

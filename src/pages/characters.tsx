@@ -14,14 +14,16 @@ const Characters = () => {
     const array = CHARACTERS.sort((a, b) => 0.5 - Math.random());
     setShuffledCharacters(array);
   }, []);
+
   return (
     <div>
       <div className={styles.folders}>
         {CHARACTERS.map(
-          ({ id, name, birthDate, birthPlace, checkIn, text }) => (
+          ({ id, name, birthDate, birthPlace, checkIn, img, text }) => (
             <PatientRecord
               key={id}
               name={name}
+              img={img}
               id={id}
               birthDate={birthDate}
               birthPlace={birthPlace}

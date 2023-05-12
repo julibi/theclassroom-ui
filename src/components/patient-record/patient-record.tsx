@@ -16,6 +16,7 @@ export const PatientRecord = ({
   birthDate,
   birthPlace,
   checkIn,
+  img,
   text,
   withPic = false,
   withButton = false,
@@ -40,7 +41,7 @@ export const PatientRecord = ({
             <div className={styles.redFilter} />
             <Image
               className={styles.image}
-              src={`/characters/${name}.jpeg`}
+              src={`/characters/${img}.jpeg`}
               alt={`Image of ${name}`}
               priority
               height={120}
