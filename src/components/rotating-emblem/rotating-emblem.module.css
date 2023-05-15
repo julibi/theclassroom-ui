@@ -11,11 +11,14 @@
   inset 0px 0px 6px 20px rgba(234,23,90,0.15),
   0px 0px 6px 20px rgba(234,23,90,0.15);
 	color:  #fff;
+  /* color: #61e8e8;
+  text-shadow: 1px 1px 0 #C563C2; */
 	animation: spinZ 20s linear infinite;
 	text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 @keyframes spinZ {

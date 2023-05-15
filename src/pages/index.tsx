@@ -63,6 +63,9 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* <div className={styles.test}>
+          <RotatingEmblem txt="the retreat*orbitretreat.xyz*" />
+        </div> */}
         <div className={styles.section}>
           <div className={styles.textInfo}>
             <div className={styles.titlesWrapper}>
@@ -215,7 +218,7 @@ const Home = () => {
             <Image
               height={300}
               width={300}
-              src="/characters/guru.jpeg"
+              src="/characters/SadGhuru2001.jpeg"
               alt={`Placeholder Image`}
               priority
               className={styles.guruImage}
@@ -338,9 +341,32 @@ const Home = () => {
               FAQ
             </Title>
             <div className={styles.faqWrapper}>
-              {FAQTopics.map(({ answer, question }) => (
-                <FAQ question={question} answer={<div>{answer}</div>} />
-              ))}
+              {FAQTopics.map(({ answer, question }, idx) => {
+                const showVideo = idx === 3;
+                return (
+                  <FAQ
+                    question={question}
+                    answer={
+                      <div>
+                        {answer}
+                        {showVideo && (
+                          <div className={styles.videoResponsive}>
+                            <iframe
+                              width="853"
+                              height="480"
+                              src="https://www.youtube.com/embed/mwo9N8t4G7s"
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              title="Embedded youtube"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    }
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

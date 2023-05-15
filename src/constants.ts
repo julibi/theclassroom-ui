@@ -122,12 +122,12 @@ export const FAQTopics = [
   {
     question: "What do I need to participate?",
     answer:
-      "You need a MetaMask wallet, at least one TheRetreat NFT in that wallet and a little bit of Matic to pay for gas fees.",
+      "You need a crypto wallet (MetaMask), at least one TheRetreat NFT in that wallet and a little bit of Matic to pay for gas fees.",
   },
   {
     question: "I don't have a crypto wallet.",
     answer:
-      "No worries, we show you how to get one. It is free and super easy to do.",
+      "No worries, we show you how to get one. It is free and super easy to do. Check out the 'Wallet Creation' section 0:31-6:20 of the video below.",
   },
   {
     question: "I have a wallet, but no MATIC.",

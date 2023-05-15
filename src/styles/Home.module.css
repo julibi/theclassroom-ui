@@ -419,3 +419,24 @@
   display: flex;
   flex-direction: column;
 }
+
+.test {
+  margin: 500px;
+}
+
+
+.videoResponsive {
+  margin-block-start: 24px;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+  
+.videoResponsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
