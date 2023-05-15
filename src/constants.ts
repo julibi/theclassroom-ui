@@ -107,3 +107,60 @@ export const CHARACTERS = [
     text: loremipsum,
   },
 ];
+
+export const FAQTopics = [
+  {
+    question: "What is this now?",
+    answer:
+      "This is a literary role play project, where you use NFTs to contribute to the story. The story frame is given: we are in the future and an AI led company called TheRetreat conducts space retreats for patients. There are 10 characters (some human and some not) and depending on which NFT you have, you can continue the story form their perspective. You can use an NFT to write only once.",
+  },
+  {
+    question: "What can I do with this NFT?",
+    answer:
+      "You mint to write in a collaborative literature project. That means: you can use the NFT to continue the story as a certain character and write a text from their perspective. There is a total of 1000 NFTs and each NFT can be used once to write. If you log in to the app with your browser wallet, you will see for which characters you can write with your NFTs. E.G. you have TheRetreat NFT #1234, you will be able to write for the character with the ID #4. If you have #1235, you will be able to write for the character with the ID #5. The 10 characters will be released soon.",
+  },
+  {
+    question: "What do I need to participate?",
+    answer:
+      "You need a MetaMask wallet, at least one TheRetreat NFT in that wallet and a little bit of Matic to pay for gas fees.",
+  },
+  {
+    question: "I don't have a crypto wallet.",
+    answer:
+      "No worries, we show you how to get one. It is free and super easy to do.",
+  },
+  {
+    question: "I have a wallet, but no MATIC.",
+    answer:
+      "What is MATIC? Matic is the currency of Polygon, the Blockchain TheRetreat is operating on. It is a cryptocurrency like Bitcoin and Ethereum.",
+  },
+  {
+    question: "Where can I mint the NFT?",
+    answer:
+      "You will be able to mint on this page, starting 1st June 2023. Alternatively, you will be able to mint on https://www.moonpage.io/projects/37.",
+  },
+  {
+    question: "What Blockchain is TheRetreat on?",
+    answer:
+      "It is on the Polygon Blockchain, which is known for being carbon neutral and cheap for users.",
+  },
+  {
+    question: "When is the launch?",
+    answer: "1st June 2023, 20:00 CET.",
+  },
+  {
+    question: "Who is behind this",
+    answer:
+      "Us, the students of Hildesheim University in Germany! We are doing this in co-operation with Moonpage.io, in the context of a workshop, where we are learning about Web3 Publishing.",
+  },
+  {
+    question: "How is this related to Moonpage?",
+    answer:
+      "Moonpage.io is in charge of the tech and pitched the whole idea to us. We did the writing and world building of TheRetreat.",
+  },
+  {
+    question: "Where can I check out the community?",
+    answer:
+      "Join our Telegram channel - a subchannel in the official Moonpage channel: https://t.me/moonpagedao/1836.",
+  },
+];

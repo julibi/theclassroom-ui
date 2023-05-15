@@ -1,0 +1,24 @@
+.faq {
+  border: 2px solid #ea175a;
+  padding: 24px;
+  margin: 24px;
+  width: 100%;
+}
+
+.questionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between ;
+}
+
+.question {
+  color: #61e8e8;
+  text-shadow: 4px 2px 0 #C563C2;
+  font-family: var(--inter-font);
+}
+
+.answer {
+  font-family: 'Courier New', Courier, monospace;
+  color: #61e8e8;
+  font-weight: bold;
+}

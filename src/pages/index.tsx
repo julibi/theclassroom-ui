@@ -11,6 +11,9 @@ import Marquee from "react-fast-marquee";
 import { Folder } from "@/components/folder";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Countdown } from "@/components/countdown";
+import { FAQ } from "@/components/faq";
+import { FAQTopics } from "../constants";
 
 const StarRating = () => (
   <div className={styles.starRating}>
@@ -54,7 +57,7 @@ const Home = () => {
                   THE RETREAT
                 </Title>
                 <Title size={3} className={styles.subtitle}>
-                  The one retreat you need.
+                  The one retreat you read.
                 </Title>
               </div>
             </div>
@@ -119,6 +122,14 @@ const Home = () => {
               self. 3 months in a space capsule rotating around planet earth.
               Next Launch: 1st June.
             </Title>
+          </div>
+        </div>
+        <div className={styles.section}>
+          <div>
+            <Title size={1} className={styles.title}>
+              Next retreat launching in
+            </Title>
+            <Countdown endTime={1685642400} />
           </div>
         </div>
         <div className={cx(styles.section, styles.explanationSection)}>
@@ -319,6 +330,18 @@ const Home = () => {
               We are Creative Writing students from the University of Hildesheim
               experimenting with literary NFTs in collaboration with Moonpage.
             </Title>
+          </div>
+        </div>
+        <div className={styles.section}>
+          <div className={styles.flexWrapper}>
+            <Title size={1} className={styles.title}>
+              FAQ
+            </Title>
+            <div className={styles.faqWrapper}>
+              {FAQTopics.map(({ answer, question }) => (
+                <FAQ question={question} answer={<div>{answer}</div>} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
