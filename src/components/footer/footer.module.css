@@ -1,8 +1,32 @@
 .footer {
-  background-color: #000;
-  color: #fff;
+  background-color: #070934;
   width: 100%;
-  height: 80px;
-  text-align: center;
-  display: block;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #61e8e8;
+  text-shadow: 2px 1px 0 #C563C2;
+  padding: 24px;
+  margin-block-start: 48px;
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  margin: 24px;
+}
+
+.copyright {
+  margin: 24px;
+}
+
+.impressum {
+  margin: 24px;
 }

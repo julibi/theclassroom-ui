@@ -1,0 +1,20 @@
+.impressum {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh;
+  margin: 24px;
+}
+
+.impressumTitle {
+  color: #ea175a;
+  font-family: var(--inter-font);
+}
+
+.impressumItem {
+  font-family: 'Courier New', Courier, monospace;
+  display: inline-block;
+  color: #61e8e8;
+  text-shadow: 1px 1px 0 #C563C2;
+  font-weight: bold;
+}
+
