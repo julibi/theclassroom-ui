@@ -7,7 +7,7 @@
   width: 200px;
   margin-block-end: 12px;
   padding: 12px;
-  border: 1px solid #fff;
+  border: 1px solid #61e8e8;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -50,8 +50,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-  border: 1px solid #fff;
 }
 
 
+.caution {
+  color: #ea175a;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  white-space: normal;
+}
+
+.exclamationIcon {
+  width: 20px;
+  height: 20px;
+  margin: 12px;
+}

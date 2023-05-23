@@ -1,6 +1,8 @@
 import { BigNumber } from "ethers";
 
-export type MintingProps = {};
+export type MintingProps = {
+  className?: string;
+};
 
 export type EditionCalcsType = {
   totalSupply: BigNumber;

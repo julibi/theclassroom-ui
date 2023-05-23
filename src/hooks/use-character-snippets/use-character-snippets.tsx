@@ -14,6 +14,7 @@ export const useCharacterSnippets = ({
     functionName: "snippetsOfCharacter",
     args: [characterId],
   });
+
   const characterSnippets: Snippet[] = useMemo(() => {
     // @ts-ignore
     if (data && typeof data.length == "number") {
@@ -27,6 +28,7 @@ export const useCharacterSnippets = ({
             characterId: Number(data.characterId),
             writtenAt: Number(data.writtenAt),
           }))
+          .sort((a: Snippet, b: Snippet) => b.writtenAt - a.writtenAt)
       );
     } else {
       return [];

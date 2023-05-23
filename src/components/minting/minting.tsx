@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import cx from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./minting.module.css";
 import { EditionCalcsType, MintingProps } from "./minting.types";
 import { Title } from "../title";
@@ -13,7 +16,7 @@ import { BigNumber } from "ethers";
 import { useMoonpage } from "@/hooks/use-moonpage";
 import { formatEther } from "ethers/lib/utils.js";
 
-export const Minting = ({}: MintingProps) => {
+export const Minting = ({ className }: MintingProps) => {
   const BigZero = BigNumber.from("0");
   const { address } = useAccount();
   const { edition } = useMoonpage();
@@ -82,7 +85,7 @@ export const Minting = ({}: MintingProps) => {
   }, [edition, amount]);
 
   return (
-    <div className={styles.mintingSection}>
+    <div className={cx(styles.mintingSection, className)}>
       <Title size={2} className={styles.title}>
         Mint
       </Title>
@@ -98,6 +101,18 @@ export const Minting = ({}: MintingProps) => {
           )} MATIC`}</span>
         )}
       </div>
+      <span className={styles.caution}>
+        <FontAwesomeIcon
+          icon={faExclamationCircle}
+          size="xs"
+          className={styles.exclamationIcon}
+        />
+        <span>
+          {
+            "Caution: The NFT you mint will not necessarily be for this character, but a random one."
+          }
+        </span>
+      </span>
       <div className={styles.controls}>
         <Button
           className={styles.control}

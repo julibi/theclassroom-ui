@@ -36,16 +36,17 @@ export const CarouselSlide = ({
         character={character}
         className={styles.character}
       />
+
       {characterSnippets?.length > 1 ? (
         <Button className={styles.scrollToLastButton} onClick={executeScroll}>
-          <span className={styles.scrollToLastText}>Scroll to last text</span>
+          <span className={styles.scrollToLastText}>Scroll to first text</span>
         </Button>
       ) : (
         ""
       )}
+      <WritingBox characterId={characterId} />
       <CharacterSnippets characterId={characterId} />
       <div ref={lastTextRef} />
-      <WritingBox characterId={characterId} />
     </div>
   );
 };

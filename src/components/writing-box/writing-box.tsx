@@ -20,8 +20,9 @@ import { useSnippets } from "@/hooks/use-snippets";
 import { SelectDropdown } from "../select-dropdown";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
+import { Minting } from "../minting";
 
-export const WritingBox = ({ characterId }: WritingBoxProps) => {
+export const WritingBox = ({ characterId, className }: WritingBoxProps) => {
   const [text, setText] = useState("");
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
@@ -109,12 +110,11 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
 
   if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
-    return null;
+    return <Minting className={styles.e} />;
   }
   return (
     <div className={styles.writingBoxWrapper}>
       <Title size={2}>Continue the story</Title>
-
       {NFTsForWriting?.length > 1 && (
         <SelectDropdown
           options={NFTsForWriting?.map((nft) => nft.id)}
