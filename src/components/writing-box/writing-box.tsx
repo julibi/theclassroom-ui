@@ -21,8 +21,9 @@ import { SelectDropdown } from "../select-dropdown";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
 import { Minting } from "../minting";
+import pinToPinata from "@/utils/pinToPinata";
 
-export const WritingBox = ({ characterId, className }: WritingBoxProps) => {
+export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
@@ -80,8 +81,9 @@ export const WritingBox = ({ characterId, className }: WritingBoxProps) => {
       if (language !== "english") {
         translation = await translateWithDeepl(text, "EN");
         translationCID = translation ? await uploadText(translation) : "";
+        await pinToPinata(writingToken as number, translationCID, true);
       }
-
+      await pinToPinata(writingToken as number, textCID);
       write?.({
         recklesslySetUnpreparedArgs: [textCID, translationCID, writingToken],
       });
@@ -110,7 +112,7 @@ export const WritingBox = ({ characterId, className }: WritingBoxProps) => {
   }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
 
   if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
-    return <Minting className={styles.e} />;
+    return <Minting className={styles.mintingBox} />;
   }
   return (
     <div className={styles.writingBoxWrapper}>
