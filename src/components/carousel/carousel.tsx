@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSwipeable } from "react-swipeable";
 import { useUI } from "@/hooks/use-ui";
 import { Button } from "../button";
@@ -8,6 +8,9 @@ import styles from "./carousel.module.css";
 import { CarouselProps } from "./carousel.types";
 
 export const Carousel = ({ characters }: CarouselProps) => {
+  const getRandomArbitrary = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
   const { activeIndex, updateIndex } = useUI();
   const totalIndex = useMemo(() => {
     return characters?.length ? characters?.length - 1 : 10;
@@ -17,6 +20,11 @@ export const Carousel = ({ characters }: CarouselProps) => {
       activeIndex < totalIndex && updateIndex(activeIndex + 1),
     onSwipedRight: () => activeIndex > 1 && updateIndex(activeIndex - 1),
   });
+
+  useEffect(() => {
+    const randomCharacterToShow = getRandomArbitrary(0, totalIndex);
+    updateIndex(randomCharacterToShow);
+  }, []);
 
   return (
     <div className={styles.carouselWrapper}>
