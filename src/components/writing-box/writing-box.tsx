@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   SyntheticEvent,
   useCallback,
   useEffect,
@@ -22,9 +23,14 @@ import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
 import { Minting } from "../minting";
 import pinToPinata from "@/utils/pinToPinata";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
+  const [storedValue, setValue] = useLocalStorage(
+    `TheRetreat-Character-${characterId.toString()}`,
+    text
+  );
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
   const { NFTs } = useUser();
@@ -70,6 +76,12 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
 
   const reset = () => {
     setText("");
+    setValue("");
+  };
+
+  const handleChange = (val: string) => {
+    setText(val);
+    setValue(val);
   };
 
   const onSubmit = useCallback(async () => {
@@ -111,6 +123,12 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     }
   }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
 
+  useEffect(() => {
+    if (storedValue) {
+      setText(storedValue);
+    }
+  }, []);
+
   if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
     return <Minting className={styles.mintingBox} />;
   }
@@ -128,7 +146,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
       <Textarea
         className={styles.writingBox}
         text={text}
-        onChange={(value) => setText(value)}
+        onChange={handleChange}
         disabled={pending}
       />
 
