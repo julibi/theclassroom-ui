@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "../styles/Home.module.css";
 import { Title } from "@/components/title";
@@ -73,8 +73,8 @@ const Home = () => {
                 Self-discovery, healing and renewal.
               </Title>
               <Title size={3} className={styles.subtitle}>
-                "Because you must make yourself fantastic in order to do
-                fantastic things." – SadGhuru2001
+                {`"Because you must make yourself fantastic in order to do
+                fantastic things." – SadGhuru2001`}
               </Title>
             </div>
             <Button className={styles.joinButton}>Yes, please</Button>
@@ -235,8 +235,8 @@ const Home = () => {
                 <Title size={3}>Geno Feno</Title>
                 <br />
                 <span>
-                  Two great decisions I've made in my life. Doing TheRetreat and
-                  getting a divorce. I bought my new husband a platinum ticket.
+                  {`Two great decisions I've made in my life. Doing TheRetreat and
+                  getting a divorce. I bought my new husband a platinum ticket.`}
                 </span>
                 <StarRating />
               </div>
@@ -345,6 +345,7 @@ const Home = () => {
                 const showVideo = idx === 3;
                 return (
                   <FAQ
+                    key={idx}
                     question={question}
                     answer={
                       <div>

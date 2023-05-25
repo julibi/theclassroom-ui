@@ -14,6 +14,7 @@ const unpinFromPinata = async (hash: string) => {
     },
   };
   try {
+    // @ts-ignore
     const res = await axios(config);
     return res.data;
   } catch (e) {
