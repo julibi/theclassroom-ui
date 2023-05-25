@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import TelegramBot from "node-telegram-bot-api";
 import ABI from "../../src/abis/TCR.json";
 import { TCR_DEV } from "../../src/constants";
-import { truncateAddress } from "@/utils/truncateAddress";
+import { truncateAddress } from "../../src/utils/truncateAddress";
 
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD";
 const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
