@@ -26,6 +26,7 @@ export const RotatingEmblem = ({ txt, className }: RotatingEmblemProps) => {
       {/* <Image height={110} width={110} src={"/Logo.svg"} alt="bla" priority /> */}
       {circularText.map((transformStyle, idx) => (
         <span
+          key={idx}
           style={{
             transform: transformStyle,
             display: "block",
