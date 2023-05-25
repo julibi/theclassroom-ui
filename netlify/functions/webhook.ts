@@ -22,6 +22,16 @@ const handler = async (event: HandlerEvent, context: HandlerEvent) => {
       alchemyWebSockets as string
     );
     const contract = new ethers.Contract(contractAddress, ABI, provider);
+    console.log({
+      provider,
+      contract,
+      contractAddress,
+      ABI,
+      alchemyWebSockets,
+      bot,
+      CHATID,
+      TELEGRAM_BOT_TOKEN,
+    });
     contract.on("Written", (account, tokenId, character, index) => {
       console.log({ account, tokenId, character, index });
       bot.sendMessage(
