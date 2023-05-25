@@ -1,3 +1,4 @@
+export const TCR_PROD = "0x4D4243567413C47665e33b4EafFf58b934D23e41";
 export const TCR_DEV = "0x8F8F4e3cfcd89Dc2020E8d2615d96C8d19383F22";
 export const MOONPAGE_COLLECTION_ADDRESS_DEV =
   "0xa5A234AA62C9411A717D349D4229CaF577Fa7d19";
@@ -9,7 +10,6 @@ export const connectors = ["MetaMask", "Coinbase", "WalletConnect"] as const;
 export const projectId = 37; // Title: "Profiles are coming"
 export const IPFS_BASE_URI = "https://ipfs.io/ipfs/";
 export const PINATA_GATE_URI = "https://moonpage.mypinata.cloud/ipfs/";
-export const TCR_PROD = "";
 export const MOONPAGE_COLLECTION_ADDRESS_PROD =
   "0x0eC473B1BD821D386cd7209203Ba6826Fd653B96";
 export const MOONPAGE_MANAGER_ADDRESS_PROD =
