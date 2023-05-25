@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "netlify/functions/webhook.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "netlify/functions/webhook.js"],
   "exclude": ["node_modules"]
 }
