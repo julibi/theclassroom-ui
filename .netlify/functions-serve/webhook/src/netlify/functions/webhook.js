@@ -96134,8 +96134,8 @@ var isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD";
 var TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
 var CHATID = process.env.NEXT_PUBLIC_CHATID;
 var bot = new import_node_telegram_bot_api.default(TELEGRAM_BOT_TOKEN, { polling: true });
-var contractAddress = isProd ? "" : TCR_DEV;
-var alchemyWebSockets = isProd ? process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_PROD_URL : process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
+var contractAddress = TCR_DEV;
+var alchemyWebSockets = process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
 var handler = async (event, context) => {
   try {
     const provider = new import_ethers.ethers.providers.WebSocketProvider(alchemyWebSockets);

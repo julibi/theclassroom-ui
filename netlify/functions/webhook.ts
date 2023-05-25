@@ -13,7 +13,6 @@ const bot = new TelegramBot(TELEGRAM_BOT_TOKEN as string, { polling: true });
 // const alchemyWebSockets = isProd
 //   ? process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_PROD_URL
 //   : process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
-console.log({ TCR_DEV });
 const contractAddress = TCR_DEV;
 const alchemyWebSockets = process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
 
