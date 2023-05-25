@@ -40403,10 +40403,10 @@ var require_telegramWebHook = __commonJS({
     var fs = require("fs");
     var bl = require_bl();
     var TelegramBotWebHook = function() {
-      function TelegramBotWebHook2(bot) {
+      function TelegramBotWebHook2(bot2) {
         _classCallCheck(this, TelegramBotWebHook2);
-        this.bot = bot;
-        this.options = typeof bot.options.webHook === "boolean" ? {} : bot.options.webHook;
+        this.bot = bot2;
+        this.options = typeof bot2.options.webHook === "boolean" ? {} : bot2.options.webHook;
         this.options.host = this.options.host || "0.0.0.0";
         this.options.port = this.options.port || 8443;
         this.options.https = this.options.https || {};
@@ -40573,10 +40573,10 @@ var require_telegramPolling = __commonJS({
     var deprecate = require_utils7().deprecate;
     var ANOTHER_WEB_HOOK_USED = 409;
     var TelegramBotPolling = function() {
-      function TelegramBotPolling2(bot) {
+      function TelegramBotPolling2(bot2) {
         _classCallCheck(this, TelegramBotPolling2);
-        this.bot = bot;
-        this.options = typeof bot.options.polling === "boolean" ? {} : bot.options.polling;
+        this.bot = bot2;
+        this.options = typeof bot2.options.polling === "boolean" ? {} : bot2.options.polling;
         this.options.interval = typeof this.options.interval === "number" ? this.options.interval : 300;
         this.options.params = _typeof(this.options.params) === "object" ? this.options.params : {};
         this.options.params.offset = typeof this.options.params.offset === "number" ? this.options.params.offset : 0;
@@ -93849,9 +93849,9 @@ var require_telegramWebHook2 = __commonJS({
     var fs = require("fs");
     var bl = require_bl();
     var TelegramBotWebHook = class {
-      constructor(bot) {
-        this.bot = bot;
-        this.options = typeof bot.options.webHook === "boolean" ? {} : bot.options.webHook;
+      constructor(bot2) {
+        this.bot = bot2;
+        this.options = typeof bot2.options.webHook === "boolean" ? {} : bot2.options.webHook;
         this.options.host = this.options.host || "0.0.0.0";
         this.options.port = this.options.port || 8443;
         this.options.https = this.options.https || {};
@@ -93958,9 +93958,9 @@ var require_telegramPolling2 = __commonJS({
     var deprecate = require_utils6().deprecate;
     var ANOTHER_WEB_HOOK_USED = 409;
     var TelegramBotPolling = class {
-      constructor(bot) {
-        this.bot = bot;
-        this.options = typeof bot.options.polling === "boolean" ? {} : bot.options.polling;
+      constructor(bot2) {
+        this.bot = bot2;
+        this.options = typeof bot2.options.polling === "boolean" ? {} : bot2.options.polling;
         this.options.interval = typeof this.options.interval === "number" ? this.options.interval : 300;
         this.options.params = typeof this.options.params === "object" ? this.options.params : {};
         this.options.params.offset = typeof this.options.params.offset === "number" ? this.options.params.offset : 0;
@@ -95284,8 +95284,8 @@ module.exports = __toCommonJS(webhook_exports);
 var import_ethers = __toESM(require_lib32());
 var import_node_telegram_bot_api = __toESM(require_node_telegram_bot_api());
 
-// src/abis/MoonpageCollection.json
-var MoonpageCollection_default = [
+// src/abis/TCR.json
+var TCR_default = [
   {
     inputs: [],
     stateMutability: "nonpayable",
@@ -95295,25 +95295,19 @@ var MoonpageCollection_default = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
-        name: "owner",
+        name: "previousAdmin",
         type: "address"
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
-        name: "approved",
+        name: "newAdmin",
         type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
       }
     ],
-    name: "Approval",
+    name: "AdminChanged",
     type: "event"
   },
   {
@@ -95322,40 +95316,16 @@ var MoonpageCollection_default = [
       {
         indexed: true,
         internalType: "address",
-        name: "owner",
+        name: "beacon",
         type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "approved",
-        type: "bool"
       }
     ],
-    name: "ApprovalForAll",
+    name: "BeaconUpgraded",
     type: "event"
   },
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "projectId",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "edition",
-        type: "uint256"
-      },
       {
         indexed: false,
         internalType: "address",
@@ -95365,30 +95335,30 @@ var MoonpageCollection_default = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "tokenId",
+        name: "characterId",
         type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "name",
+        type: "string"
       }
     ],
-    name: "Minted",
+    name: "CharacterSet",
     type: "event"
   },
   {
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
+        indexed: false,
+        internalType: "uint8",
+        name: "version",
+        type: "uint8"
       }
     ],
-    name: "OwnershipTransferred",
+    name: "Initialized",
     type: "event"
   },
   {
@@ -95409,24 +95379,74 @@ var MoonpageCollection_default = [
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
       },
       {
         indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address"
+        internalType: "bytes32",
+        name: "previousAdminRole",
+        type: "bytes32"
       },
       {
         indexed: true,
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
+        internalType: "bytes32",
+        name: "newAdminRole",
+        type: "bytes32"
       }
     ],
-    name: "Transfer",
+    name: "RoleAdminChanged",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      }
+    ],
+    name: "RoleGranted",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      }
+    ],
+    name: "RoleRevoked",
     type: "event"
   },
   {
@@ -95443,31 +95463,96 @@ var MoonpageCollection_default = [
     type: "event"
   },
   {
+    anonymous: false,
     inputs: [
       {
+        indexed: true,
         internalType: "address",
-        name: "to",
+        name: "implementation",
+        type: "address"
+      }
+    ],
+    name: "Upgraded",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "account",
         type: "address"
       },
       {
+        indexed: false,
         internalType: "uint256",
         name: "tokenId",
         type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "character",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "index",
+        type: "uint256"
       }
     ],
-    name: "approve",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "Written",
+    type: "event"
+  },
+  {
+    inputs: [],
+    name: "CREATOR_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {
     inputs: [],
-    name: "auctionsManager",
+    name: "DEFAULT_ADMIN_ROLE",
     outputs: [
       {
-        internalType: "contract IAuctionsManager",
+        internalType: "bytes32",
         name: "",
-        type: "address"
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "PAUSER_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UPGRADER_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
       }
     ],
     stateMutability: "view",
@@ -95477,85 +95562,11 @@ var MoonpageCollection_default = [
     inputs: [
       {
         internalType: "address",
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_projectId",
-        type: "uint256"
-      }
-    ],
-    name: "buy",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256"
-      }
-    ],
-    name: "emergencyWithdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "getApproved",
-    outputs: [
-      {
-        internalType: "address",
         name: "",
         type: "address"
       }
     ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "isApprovedForAll",
+    name: "admins",
     outputs: [
       {
         internalType: "bool",
@@ -95568,7 +95579,7 @@ var MoonpageCollection_default = [
   },
   {
     inputs: [],
-    name: "maxMintableCreator",
+    name: "characterIndex",
     outputs: [
       {
         internalType: "uint256",
@@ -95580,11 +95591,207 @@ var MoonpageCollection_default = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "moonpageDev",
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "characterOfToken",
     outputs: [
       {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "characters",
+    outputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "textIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "translationIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "imageIPFSHash",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "_addresses",
+        type: "address[]"
+      },
+      {
+        internalType: "bool[]",
+        name: "_bools",
+        type: "bool[]"
+      }
+    ],
+    name: "configureAdmins",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_index",
+        type: "uint256"
+      },
+      {
+        internalType: "string",
+        name: "_textIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_translationIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_imageIPFSHash",
+        type: "string"
+      }
+    ],
+    name: "configureCharacter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
+      }
+    ],
+    name: "getRoleAdmin",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
+      },
+      {
         internalType: "address",
+        name: "account",
+        type: "address"
+      }
+    ],
+    name: "grantRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address"
+      }
+    ],
+    name: "hasRole",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "index",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_collection",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "_manager",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "_projectId",
+        type: "uint256"
+      }
+    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "moonpageCollection",
+    outputs: [
+      {
+        internalType: "contract IMoonpageCollection",
         name: "",
         type: "address"
       }
@@ -95607,58 +95814,6 @@ var MoonpageCollection_default = [
   },
   {
     inputs: [],
-    name: "name",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "pause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "paused",
     outputs: [
       {
@@ -95671,50 +95826,9 @@ var MoonpageCollection_default = [
     type: "function"
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_projectId",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256"
-      }
-    ],
-    name: "publicMint",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
     inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_tokenId",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "_salePrice",
-        type: "uint256"
-      }
-    ],
-    name: "royaltyInfo",
+    name: "projectId",
     outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      },
       {
         internalType: "uint256",
         name: "",
@@ -95725,149 +95839,185 @@ var MoonpageCollection_default = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "proxiableUUID",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
-        internalType: "address",
-        name: "from",
-        type: "address"
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
       },
       {
         internalType: "address",
-        name: "to",
+        name: "account",
         type: "address"
+      }
+    ],
+    name: "renounceRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32"
       },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address"
+      }
+    ],
+    name: "revokeRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_name",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_textIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_translationIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_imageIPFSHash",
+        type: "string"
+      }
+    ],
+    name: "setupCharacter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "",
         type: "uint256"
       }
     ],
-    name: "safeTransferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
+    name: "snippets",
+    outputs: [
       {
         internalType: "address",
-        name: "from",
+        name: "writer",
         type: "address"
       },
       {
-        internalType: "address",
-        name: "to",
-        type: "address"
+        internalType: "string",
+        name: "textIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "translationIPFSHash",
+        type: "string"
       },
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "writtenAt",
         type: "uint256"
-      },
-      {
-        internalType: "bytes",
-        name: "_data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_mpManager",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "_aManager",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "_mpDev",
-        type: "address"
-      }
-    ],
-    name: "setAddresses",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "operator",
-        type: "address"
       },
       {
         internalType: "bool",
-        name: "approved",
+        name: "written",
         type: "bool"
+      },
+      {
+        internalType: "uint256",
+        name: "character",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
       }
     ],
-    name: "setApprovalForAll",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
     inputs: [
       {
         internalType: "uint256",
-        name: "_maxAmount",
+        name: "_characterId",
         type: "uint256"
       }
     ],
-    name: "setMaxMintableCreator",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
+    name: "snippetsOfCharacter",
+    outputs: [
       {
-        internalType: "uint256",
-        name: "_fraction",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "_bips",
-        type: "uint256"
+        components: [
+          {
+            internalType: "address",
+            name: "writer",
+            type: "address"
+          },
+          {
+            internalType: "string",
+            name: "textIPFSHash",
+            type: "string"
+          },
+          {
+            internalType: "string",
+            name: "translationIPFSHash",
+            type: "string"
+          },
+          {
+            internalType: "uint256",
+            name: "writtenAt",
+            type: "uint256"
+          },
+          {
+            internalType: "bool",
+            name: "written",
+            type: "bool"
+          },
+          {
+            internalType: "uint256",
+            name: "character",
+            type: "uint256"
+          },
+          {
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256"
+          }
+        ],
+        internalType: "struct TheRetreat.Snippet[]",
+        name: "",
+        type: "tuple[]"
       }
     ],
-    name: "setRoyaltyParams",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_projectId",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "_amountForCreator",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "_discountRate",
-        type: "uint256"
-      }
-    ],
-    name: "startAuctions",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -95890,56 +96040,50 @@ var MoonpageCollection_default = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "symbol",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [
       {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256"
+        internalType: "address",
+        name: "newImplementation",
+        type: "address"
       }
     ],
-    name: "tokenByIndex",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
+    name: "upgradeTo",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
     inputs: [
       {
         internalType: "address",
-        name: "owner",
+        name: "newImplementation",
         type: "address"
       },
       {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256"
+        internalType: "bytes",
+        name: "data",
+        type: "bytes"
       }
     ],
-    name: "tokenOfOwnerByIndex",
-    outputs: [
+    name: "upgradeToAndCall",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [
       {
         internalType: "uint256",
         name: "",
         type: "uint256"
+      }
+    ],
+    name: "usedNFTs",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
       }
     ],
     stateMutability: "view",
@@ -95947,113 +96091,67 @@ var MoonpageCollection_default = [
   },
   {
     inputs: [
+      {
+        internalType: "string",
+        name: "_textIPFSHash",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_translationIPFSHash",
+        type: "string"
+      },
       {
         internalType: "uint256",
         name: "_tokenId",
         type: "uint256"
       }
     ],
-    name: "tokenURI",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "totalSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
-      }
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "unpause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256"
-      }
-    ],
-    name: "withdraw",
+    name: "write",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
   }
 ];
 
+// src/constants.ts
+var TCR_DEV = "0x8F8F4e3cfcd89Dc2020E8d2615d96C8d19383F22";
+
+// src/utils/truncateAddress.ts
+var truncateAddress = (address) => {
+  if (address) {
+    const addressStart = address.substring(0, 6);
+    const addressLength = address.length;
+    const cut = addressLength - 5;
+    const addressEnd = address.substring(addressLength, cut);
+    return `${addressStart}...${addressEnd}`;
+  }
+  return;
+};
+
 // netlify/functions/webhook.ts
+var isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD";
+var TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
+var CHATID = process.env.NEXT_PUBLIC_CHATID;
+var bot = new import_node_telegram_bot_api.default(TELEGRAM_BOT_TOKEN, { polling: true });
+var contractAddress = isProd ? "" : TCR_DEV;
+var alchemyWebSockets = isProd ? process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_PROD_URL : process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
 var handler = async (event, context) => {
-  console.log("Yay, webhook was called!");
-  const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-  const CHATID = process.env.NEXT_PUBLIC_CHATID;
-  const bot = new import_node_telegram_bot_api.default(TELEGRAM_BOT_TOKEN, { polling: true });
-  const mpAddress = "0x0eC473B1BD821D386cd7209203Ba6826Fd653B96";
-  const provider = new import_ethers.ethers.providers.WebSocketProvider(process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_URL);
-  const contract = new import_ethers.ethers.Contract(mpAddress, MoonpageCollection_default, provider);
-  contract.on("Minted", (projectId, edition, account, tokenId) => {
-    console.log({ projectId, edition, account, tokenId });
-    bot.sendMessage(CHATID, `Account ${account} minted tokendId ${tokenId} from edition ${edition} of projectId ${projectId}`);
-  });
-  return { statusCode: 200, body: "Great" };
+  try {
+    const provider = new import_ethers.ethers.providers.WebSocketProvider(alchemyWebSockets);
+    const contract = new import_ethers.ethers.Contract(contractAddress, TCR_default, provider);
+    contract.on("Written", (account, tokenId, character, index) => {
+      console.log({ account, tokenId, character, index });
+      bot.sendMessage(CHATID, `Account ${truncateAddress(account)} wrote text for character ${character} with NFT #${tokenId}. It is the ${index}th text of TheRetreat.`);
+    });
+    contract.on("CharacterSet", (account, characterId, name) => {
+      console.log({ account, characterId, name });
+      bot.sendMessage(CHATID, `Account ${truncateAddress(account)} just setup a characterId ${characterId}, name: ${name}.`);
+    });
+    return { statusCode: 200, body: "Great" };
+  } catch (e) {
+    return { statusCode: 500, body: "Something went wrong." };
+  }
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
