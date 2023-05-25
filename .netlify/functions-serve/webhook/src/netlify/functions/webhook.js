@@ -96140,17 +96140,18 @@ var handler = async (event, context) => {
   try {
     const provider = new import_ethers.ethers.providers.WebSocketProvider(alchemyWebSockets);
     const contract = new import_ethers.ethers.Contract(contractAddress, TCR_default, provider);
-    contract.on("Written", (account, tokenId, character, index) => {
-      console.log({ account, tokenId, character, index });
-      bot.sendMessage(CHATID, `Account ${truncateAddress(account)} wrote text for character ${character} with NFT #${tokenId}. It is the ${index}th text of TheRetreat.`);
-    });
-    contract.on("CharacterSet", (account, characterId, name) => {
-      console.log({ account, characterId, name });
-      bot.sendMessage(CHATID, `Account ${truncateAddress(account)} just setup a characterId ${characterId}, name: ${name}.`);
+    provider.once("block", () => {
+      contract.on("Written", (account, tokenId, character, index) => {
+        console.log({ account, tokenId, character, index });
+        bot.sendMessage(CHATID, `Account ${truncateAddress(account)} wrote text for character ${character} with NFT #${tokenId}. It is the ${index}th text of TheRetreat.`);
+      });
+      contract.on("CharacterSet", (account, characterId, name) => {
+        console.log({ account, characterId, name });
+        bot.sendMessage(CHATID, `Account ${truncateAddress(account)} just setup a characterId ${characterId}, name: ${name}.`);
+      });
     });
     return { statusCode: 200, body: "Great" };
   } catch (e) {
-    console.log({ e });
     return { statusCode: 500, body: "Something went wrong." };
   }
 };

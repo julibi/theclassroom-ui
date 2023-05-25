@@ -22,38 +22,30 @@ const handler = async (event: HandlerEvent, context: HandlerEvent) => {
       alchemyWebSockets as string
     );
     const contract = new ethers.Contract(contractAddress, ABI, provider);
-    console.log({
-      provider,
-      contract,
-      contractAddress,
-      ABI,
-      alchemyWebSockets,
-      bot,
-      CHATID,
-      TELEGRAM_BOT_TOKEN,
-    });
-    contract.on("Written", (account, tokenId, character, index) => {
-      console.log({ account, tokenId, character, index });
-      bot.sendMessage(
-        CHATID,
-        `Account ${truncateAddress(
-          account
-        )} wrote text for character ${character} with NFT #${tokenId}. It is the ${index}th text of TheRetreat.`
-      );
-    });
+    provider.once("block", () => {
+      console.log("block?"")
+      contract.on("Written", (account, tokenId, character, index) => {
+        console.log({ account, tokenId, character, index });
+        bot.sendMessage(
+          CHATID,
+          `Account ${truncateAddress(
+            account
+          )} wrote text for character ${character} with NFT #${tokenId}. It is the ${index}th text of TheRetreat.`
+        );
+      });
 
-    contract.on("CharacterSet", (account, characterId, name) => {
-      console.log({ account, characterId, name });
-      bot.sendMessage(
-        CHATID,
-        `Account ${truncateAddress(
-          account
-        )} just setup a characterId ${characterId}, name: ${name}.`
-      );
+      contract.on("CharacterSet", (account, characterId, name) => {
+        console.log({ account, characterId, name });
+        bot.sendMessage(
+          CHATID,
+          `Account ${truncateAddress(
+            account
+          )} just setup a characterId ${characterId}, name: ${name}.`
+        );
+      });
     });
     return { statusCode: 200, body: "Great" };
   } catch (e) {
-    console.log({ e });
     return { statusCode: 500, body: "Something went wrong." };
   }
 };
