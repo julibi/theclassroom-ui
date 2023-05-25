@@ -1,4 +1,4 @@
-import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+// import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
 import { ethers } from "ethers";
 import TelegramBot from "node-telegram-bot-api";
 import ABI from "../../src/abis/TCR.json";
@@ -6,8 +6,8 @@ import { TCR_DEV } from "@/constants";
 import { truncateAddress } from "@/utils/truncateAddress";
 
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD";
-const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN as string;
-const CHATID = process.env.NEXT_PUBLIC_CHATID as string;
+const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
+const CHATID = process.env.NEXT_PUBLIC_CHATID;
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 // const contractAddress = isProd ? "" : TCR_DEV;
 // const alchemyWebSockets = isProd
@@ -16,11 +16,9 @@ const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 const contractAddress = TCR_DEV;
 const alchemyWebSockets = process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
 
-const handler = async (event: HandlerEvent, context: HandlerContext) => {
+const handler = async (event, context) => {
   try {
-    const provider = new ethers.providers.WebSocketProvider(
-      alchemyWebSockets as string
-    );
+    const provider = new ethers.providers.WebSocketProvider(alchemyWebSockets);
     const contract = new ethers.Contract(contractAddress, ABI, provider);
     contract.on("Written", (account, tokenId, character, index) => {
       console.log({ account, tokenId, character, index });
