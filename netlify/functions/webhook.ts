@@ -43,6 +43,7 @@ const handler = async (event: HandlerEvent, context: HandlerEvent) => {
     });
     return { statusCode: 200, body: "Great" };
   } catch (e) {
+    console.log({ e });
     return { statusCode: 500, body: "Something went wrong." };
   }
 };
