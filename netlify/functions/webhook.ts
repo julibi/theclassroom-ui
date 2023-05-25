@@ -9,10 +9,12 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD";
 const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN as string;
 const CHATID = process.env.NEXT_PUBLIC_CHATID as string;
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
-const contractAddress = isProd ? "" : TCR_DEV;
-const alchemyWebSockets = isProd
-  ? process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_PROD_URL
-  : process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
+// const contractAddress = isProd ? "" : TCR_DEV;
+// const alchemyWebSockets = isProd
+//   ? process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_PROD_URL
+//   : process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
+const contractAddress = TCR_DEV;
+const alchemyWebSockets = process.env.NEXT_PUBLIC_ALCHEMY_WEBSOCKET_DEV_URL;
 
 const handler = async (event: HandlerEvent, context: HandlerContext) => {
   try {
