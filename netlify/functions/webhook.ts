@@ -23,7 +23,7 @@ const handler = async (event: HandlerEvent, context: HandlerEvent) => {
     );
     const contract = new ethers.Contract(contractAddress, ABI, provider);
     provider.once("block", () => {
-      console.log("block?"")
+      console.log("block?");
       contract.on("Written", (account, tokenId, character, index) => {
         console.log({ account, tokenId, character, index });
         bot.sendMessage(
