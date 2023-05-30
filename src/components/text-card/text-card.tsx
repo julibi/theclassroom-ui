@@ -38,7 +38,7 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       new Date(Number(snippet?.writtenAt) * 1000).toLocaleDateString("en-US"),
     [snippet?.writtenAt]
   );
-  const isProd = process.env.ENVIRONMENT == "PROD";
+  const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT == "PROD";
   const hasTranslation = useMemo(() => {
     return snippet?.translationIPFSHash.length > 0;
   }, [snippet?.translationIPFSHash]);
@@ -51,7 +51,7 @@ export const TextCard = ({ snippet }: TextCardProps) => {
           ? MOONPAGE_COLLECTION_ADDRESS_PROD
           : MOONPAGE_COLLECTION_ADDRESS_DEV
       }/${snippet.tokenId}`,
-    [snippet?.tokenId]
+    [isProd, snippet.tokenId]
   );
   const fetchText = useCallback(async () => {
     setTextPending(true);

@@ -74,11 +74,11 @@
 }
 
 .expanded {
-  white-space: normal;
+  white-space: break-spaces;
 }
 
 .readMoreLink {
-  margin-block-start: 12px;
+  margin-block: 12px;
   text-decoration: underline;
 }
 
@@ -88,4 +88,8 @@
 
 .origLang {
   text-transform: capitalize;
+}
+
+.languageToggle {
+  margin-block: 12px;
 }

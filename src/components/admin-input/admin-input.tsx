@@ -6,7 +6,7 @@ import { Button } from "../button";
 import { Textarea } from "../textarea";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 import ABI from "../../abis/TCR.json";
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import { AdminInputProps } from "./admin-input.types";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
@@ -27,7 +27,7 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: TCR_DEV,
+    address: TCR_PROD,
     abi: ABI,
     functionName: "setupCharacter",
     args: [name, textIPFSHash, ""],

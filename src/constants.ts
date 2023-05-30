@@ -7,7 +7,7 @@ export const MOONPAGE_MANAGER_ADDRESS_DEV =
 export const MOONPAGE_PROFILES_ADDRESS_DEV =
   "0xf2BFBd1ac95c3303642fCD06DB4b100d418D92d8";
 export const connectors = ["MetaMask", "Coinbase", "WalletConnect"] as const;
-export const projectId = 37; // Title: "Profiles are coming"
+export const projectId = 37;
 export const IPFS_BASE_URI = "https://ipfs.io/ipfs/";
 export const PINATA_GATE_URI = "https://moonpage.mypinata.cloud/ipfs/";
 export const MOONPAGE_COLLECTION_ADDRESS_PROD =
@@ -27,8 +27,8 @@ const loremipsum =
 
 export const CHARACTERS = [
   {
-    name: "SadGhuru2001",
-    img: "SadGhuru2001",
+    name: "Satya31415 (THE GURU)",
+    img: "Satya31415",
     id: 1,
     birthDate: "2023",
     birthPlace: "Silicon Valley, USA, Earth",
@@ -49,7 +49,7 @@ export const CHARACTERS = [
     img: "Xänder",
     id: 3,
     birthDate: "unknown",
-    birthPlace: "unknown, Oblong System",
+    birthPlace: "Space Station Ordovizium 74",
     checkIn: "Paid Premium",
     text: loremipsum,
   },
@@ -58,7 +58,7 @@ export const CHARACTERS = [
     img: "Ludgard",
     id: 4,
     birthDate: "1962",
-    birthPlace: "München, Germany, Earth",
+    birthPlace: "Lüneburg, Germany, Earth",
     checkIn: "Paid Premium",
     text: loremipsum,
   },
@@ -66,8 +66,8 @@ export const CHARACTERS = [
     name: "Moraine C. Williams",
     img: "Moraine",
     id: 5,
-    birthDate: "2100",
-    birthPlace: "Austin, Texas, USA, Earth",
+    birthDate: "1980",
+    birthPlace: "Austin (Texas), USA, Earth",
     checkIn: "Paid Premium",
     text: loremipsum,
   },
@@ -94,7 +94,7 @@ export const CHARACTERS = [
     img: "Neela",
     id: 8,
     birthDate: "2000",
-    birthPlace: "San Diego",
+    birthPlace: "San Diego (California), USA, Earth",
     checkIn: "Paid Premium",
     text: loremipsum,
   },
@@ -102,8 +102,8 @@ export const CHARACTERS = [
     name: "Lotti Schmidt",
     img: "Lotti",
     id: 9,
-    birthDate: "1949?",
-    birthPlace: "Amusement Park, Earth",
+    birthDate: "1940",
+    birthPlace: "Worpswede, Germany, Earth",
     checkIn: "Lottery",
     text: loremipsum,
   },
@@ -112,7 +112,7 @@ export const CHARACTERS = [
     img: "Ari",
     id: 10,
     birthDate: "1039,07",
-    birthPlace: "Sedimont (Lutzrig), ?",
+    birthPlace: "Sedimont Lutzrig, Germany, Earth",
     checkIn: "Lottery",
     text: loremipsum,
   },

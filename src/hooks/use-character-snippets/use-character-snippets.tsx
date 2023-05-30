@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useContractRead } from "wagmi";
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { Snippet } from "@/components/character-snippets/character-snippets.types";
 import { UseCharacterSnippetsProps } from "./use-character-snippets.types";
@@ -9,7 +9,7 @@ export const useCharacterSnippets = ({
   characterId,
 }: UseCharacterSnippetsProps) => {
   const { data, refetch: refetchSnippetsOfCharacter } = useContractRead({
-    address: TCR_DEV,
+    address: TCR_PROD,
     abi: ABI,
     functionName: "snippetsOfCharacter",
     args: [characterId],

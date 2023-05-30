@@ -14,7 +14,7 @@ import { useUser } from "@/hooks/use-user";
 import { WritingBoxProps } from "./writing-box.types";
 import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
@@ -44,7 +44,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: TCR_DEV,
+    address: TCR_PROD,
     abi: ABI,
     functionName: "write",
   });
@@ -102,7 +102,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     } catch (e) {
       console.log({ e });
     }
-  }, [text, uploadText, write]);
+  }, [text, uploadText, write, writingToken]);
 
   useEffect(() => {
     if (NFTsForWriting?.length) {
@@ -121,7 +121,13 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
 
       // refetchSnippetsOfCharacter();
     }
-  }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
+  }, [
+    writeStatus,
+    waitStatus,
+    refetchSnippetsOfCharacter,
+    reset,
+    refetchAllSnippets,
+  ]);
 
   useEffect(() => {
     if (storedValue) {

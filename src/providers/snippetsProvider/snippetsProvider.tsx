@@ -1,4 +1,4 @@
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import { createContext, useCallback, useMemo } from "react";
 import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
@@ -15,7 +15,7 @@ export const SnippetsContext = createContext(defaultContext);
 
 export const SnippetsProvider = ({ children }: SnippetsProviderProps) => {
   const { data: snippetsIndex } = useContractRead({
-    address: TCR_DEV,
+    address: TCR_PROD,
     abi: ABI,
     functionName: "index",
     args: [],

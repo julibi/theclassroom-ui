@@ -5,6 +5,9 @@ import styles from "./character-card.module.css";
 import { CharacterCardProps } from "./character-card.types";
 import { Title } from "../title";
 import { CHARACTERS } from "@/constants";
+import Skeleton from "react-loading-skeleton";
+import { detectLanguage } from "@/utils/detectLanguage";
+import { Toggle } from "../toggle";
 
 export const CharacterCard = ({
   characterId,
@@ -12,8 +15,14 @@ export const CharacterCard = ({
   className,
 }: CharacterCardProps) => {
   const [text, setText] = useState<null | string>(null);
+  const [translation, setTranslation] = useState<null | string>(null);
   const [textPending, setTextPending] = useState<boolean>(false);
+  const [translationPending, setTranslationPending] = useState<boolean>(false);
+  const [showTranslation, setShowTranslation] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const hasTranslation = useMemo(() => {
+    return character?.translationIpfsHash.length > 0;
+  }, [character?.translationIpfsHash]);
   const fetchText = useCallback(async () => {
     setTextPending(true);
     try {
@@ -31,9 +40,31 @@ export const CharacterCard = ({
     }
   }, [character]);
 
+  const fetchTranslation = useCallback(async () => {
+    // translation does not always exist
+    if (character?.translationIpfsHash?.length === 0) return;
+    setTranslationPending(true);
+    try {
+      // TODO: first try to fetch from my pinata gate?
+      const response = await fetch(
+        `https://ipfs.io/ipfs/${character?.translationIpfsHash}`
+      );
+      if (response.ok) {
+        const fetchedText = await response.text();
+        setTranslation(fetchedText);
+        setTranslationPending(false);
+      }
+    } catch (e: unknown) {
+      setTranslationPending(false);
+    }
+  }, [character]);
+
   useEffect(() => {
     fetchText();
-  }, [fetchText]);
+    fetchTranslation();
+  }, [fetchText, fetchTranslation]);
+
+  console.log({ translation });
 
   const characterData = useMemo(
     () => CHARACTERS.find((c) => c.id == characterId),
@@ -73,20 +104,52 @@ export const CharacterCard = ({
         </div>
       </div>
 
-      <span
-        className={cx(
-          styles.text,
-          isExpanded ? styles.expanded : styles.collapsed
-        )}
-      >
-        {text}
-      </span>
+      {showTranslation && hasTranslation ? (
+        <span
+          className={cx(
+            styles.text,
+            isExpanded ? styles.expanded : styles.collapsed
+          )}
+        >
+          {translation ? (
+            translation
+          ) : (
+            <Skeleton count={3} className={styles.skeleton} />
+          )}
+        </span>
+      ) : (
+        <span
+          className={cx(
+            styles.text,
+            isExpanded ? styles.expanded : styles.collapsed
+          )}
+        >
+          {text?.length ? (
+            text
+          ) : (
+            <Skeleton count={3} className={styles.skeleton} />
+          )}
+        </span>
+      )}
+
       <span
         onClick={() => setIsExpanded(isExpanded ? false : true)}
         className={styles.readMoreLink}
       >
         {isExpanded ? "Read Less" : "Read All"}
       </span>
+
+      <span className={styles.origLang}>{`Orig. language: ${
+        text ? detectLanguage(text) : "unknown"
+      }`}</span>
+      {hasTranslation && (
+        <Toggle
+          className={styles.languageToggle}
+          onChange={() => setShowTranslation(!showTranslation)}
+          label="Translate"
+          isChecked={showTranslation}
+        />
+      )}
     </div>
   );
 };

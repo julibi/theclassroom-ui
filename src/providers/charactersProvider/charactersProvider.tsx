@@ -7,7 +7,7 @@ import {
 } from "react";
 import { Address } from "wagmi";
 import { multicall } from "@wagmi/core";
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import {
   CharacterItem,
@@ -27,7 +27,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
 
   const fetchCharacters = useCallback(async () => {
     const call = {
-      address: TCR_DEV as Address,
+      address: TCR_PROD as Address,
       abi: ABI,
       functionName: "characters",
     };

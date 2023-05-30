@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useContractRead } from "wagmi";
 import { getAccount } from "@wagmi/core";
-import { TCR_DEV } from "@/constants";
+import { TCR_PROD } from "@/constants";
 import { routes } from "./routes";
 import { WalletConnection } from "../wallet-connection";
 import ABI from "../../abis/TCR.json";
@@ -14,7 +14,7 @@ export const Navbar = ({ className }: NavbarProps) => {
   const { address } = getAccount();
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const { data: readData } = useContractRead({
-    address: TCR_DEV,
+    address: TCR_PROD,
     abi: ABI,
     functionName: "admins",
     args: [address],

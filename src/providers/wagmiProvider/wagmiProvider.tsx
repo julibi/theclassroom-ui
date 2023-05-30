@@ -9,7 +9,8 @@ import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect";
 import { CoinbaseWalletConnector } from "@wagmi/core/connectors/coinbaseWallet";
 import { WagmiProviderTypes } from "./wagmiProvider.types";
 
-const isProd = process.env.ENVIRONMENT == "PROD";
+const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT == "PROD";
+
 const { chains, provider } = configureChains(
   // what about dev and mainnet environments?
   [isProd ? polygon : polygonMumbai],

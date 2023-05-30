@@ -74,7 +74,7 @@ const Home = () => {
               </Title>
               <Title size={3} className={styles.subtitle}>
                 {`"Because you must make yourself fantastic in order to do
-                fantastic things." – SadGhuru2001`}
+                fantastic things." – Satya31415`}
               </Title>
             </div>
             <Button className={styles.joinButton}>Yes, please</Button>
@@ -197,7 +197,7 @@ const Home = () => {
             </Title>
             <br />
             <Title size={3} className={styles.subtitle}>
-              This is SadGhuru2001, your AI CEO of TheRetreat. Our vision is to
+              This is Satya31415, your AI CEO of TheRetreat. Our vision is to
               weave a sanctuary of tranquility in space where one can untangle
               from the cacophony of modern life and bask in the serenity of
               self-discovery, connection, and renewal. Because you must make
@@ -218,7 +218,7 @@ const Home = () => {
             <Image
               height={300}
               width={300}
-              src="/characters/SadGhuru2001.jpeg"
+              src="/characters/Satya31415.jpeg"
               alt={`Placeholder Image`}
               priority
               className={styles.guruImage}
@@ -247,8 +247,8 @@ const Home = () => {
                 <br />
                 <span>
                   I was suffering from severe burnout. And this retreat helped
-                  me find my balance. SadGhuru was right: you must be fantastic
-                  in order to do fantastic things!
+                  me find my balance. Satya31415 was right: you must be
+                  fantastic in order to do fantastic things!
                 </span>
                 <StarRating />
               </div>

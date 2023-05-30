@@ -18,6 +18,7 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  white-space: break-spaces;
 }
 
 .skeleton {
@@ -27,7 +28,7 @@
 }
 
 .readMoreLink {
-  margin-block-end: 24px;
+  margin-block-end: 12px;
   text-decoration: underline;
 }
 
