@@ -5,7 +5,7 @@ export type PatientRecordProps = {
   birthPlace: string;
   checkIn: string;
   img: string;
-  text: string;
+  translationIpfsHash: string;
   withPic?: boolean;
   withButton?: boolean;
 };

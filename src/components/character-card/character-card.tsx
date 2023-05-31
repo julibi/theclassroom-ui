@@ -18,7 +18,7 @@ export const CharacterCard = ({
   const [translation, setTranslation] = useState<null | string>(null);
   const [textPending, setTextPending] = useState<boolean>(false);
   const [translationPending, setTranslationPending] = useState<boolean>(false);
-  const [showTranslation, setShowTranslation] = useState<boolean>(false);
+  const [showOriginal, setShowOriginal] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const hasTranslation = useMemo(() => {
     return character?.translationIpfsHash.length > 0;
@@ -64,8 +64,6 @@ export const CharacterCard = ({
     fetchTranslation();
   }, [fetchText, fetchTranslation]);
 
-  console.log({ translation });
-
   const characterData = useMemo(
     () => CHARACTERS.find((c) => c.id == characterId),
     [characterId]
@@ -104,14 +102,14 @@ export const CharacterCard = ({
         </div>
       </div>
 
-      {showTranslation && hasTranslation ? (
+      {!showOriginal && hasTranslation ? (
         <span
           className={cx(
             styles.text,
             isExpanded ? styles.expanded : styles.collapsed
           )}
         >
-          {translation ? (
+          {translation?.length ? (
             translation
           ) : (
             <Skeleton count={3} className={styles.skeleton} />
@@ -124,11 +122,7 @@ export const CharacterCard = ({
             isExpanded ? styles.expanded : styles.collapsed
           )}
         >
-          {text?.length ? (
-            text
-          ) : (
-            <Skeleton count={3} className={styles.skeleton} />
-          )}
+          {text ? text : <Skeleton count={3} className={styles.skeleton} />}
         </span>
       )}
 
@@ -139,15 +133,12 @@ export const CharacterCard = ({
         {isExpanded ? "Read Less" : "Read All"}
       </span>
 
-      <span className={styles.origLang}>{`Orig. language: ${
-        text ? detectLanguage(text) : "unknown"
-      }`}</span>
       {hasTranslation && (
         <Toggle
           className={styles.languageToggle}
-          onChange={() => setShowTranslation(!showTranslation)}
-          label="Translate"
-          isChecked={showTranslation}
+          onChange={() => setShowOriginal(!showOriginal)}
+          label={`Orig. language: ${detectLanguage(text as string) ?? ""}`}
+          isChecked={showOriginal}
         />
       )}
     </div>

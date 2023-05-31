@@ -1,22 +1,14 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import cx from "classnames";
 import styles from "./text-card.module.css";
 import { TextCardProps } from "./text-card.types";
 import { ProfileLink } from "../profile-link";
-import { useContractRead } from "wagmi";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import {
   MOONPAGE_COLLECTION_ADDRESS_DEV,
   MOONPAGE_COLLECTION_ADDRESS_PROD,
 } from "@/constants";
-import ABI from "../../abis/MoonpageCollection.json";
 import { Toggle } from "../toggle";
 import { detectLanguage } from "@/utils/detectLanguage";
 
@@ -24,15 +16,10 @@ export const TextCard = ({ snippet }: TextCardProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [text, setText] = useState<null | string>(null);
   const [textPending, setTextPending] = useState<boolean>(false);
-  const [translation, setTranslation] = useState<null | string>(null);
-  const [showTranslation, setShowTranslation] = useState<boolean>(false);
   const [translationPending, setTranslationPending] = useState<boolean>(false);
-  const { data: tokenOwner } = useContractRead({
-    address: MOONPAGE_COLLECTION_ADDRESS_DEV,
-    abi: ABI,
-    functionName: "ownerOf",
-    args: [snippet.tokenId],
-  });
+  const [translation, setTranslation] = useState<null | string>(null);
+  const [showOriginal, setShowOriginal] = useState<boolean>(false);
+
   const created = useMemo(
     () =>
       new Date(Number(snippet?.writtenAt) * 1000).toLocaleDateString("en-US"),
@@ -96,21 +83,27 @@ export const TextCard = ({ snippet }: TextCardProps) => {
 
   return (
     <div className={styles.textCard}>
-      {showTranslation && hasTranslation ? (
-        <span className={cx(styles.text, !isExpanded && styles.expanded)}>
-          {translation ? (
+      {!showOriginal && hasTranslation ? (
+        <span
+          className={cx(
+            styles.text,
+            isExpanded ? styles.expanded : styles.collapsed
+          )}
+        >
+          {translation?.length ? (
             translation
           ) : (
             <Skeleton count={3} className={styles.skeleton} />
           )}
         </span>
       ) : (
-        <span className={cx(styles.text, !isExpanded && styles.expanded)}>
-          {text?.length ? (
-            text
-          ) : (
-            <Skeleton count={3} className={styles.skeleton} />
+        <span
+          className={cx(
+            styles.text,
+            isExpanded ? styles.expanded : styles.collapsed
           )}
+        >
+          {text ? text : <Skeleton count={3} className={styles.skeleton} />}
         </span>
       )}
 
@@ -120,15 +113,13 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       >
         {isExpanded ? "Read Less" : "Read All"}
       </span>
-      <span className={styles.origLang}>{`Orig. language: ${
-        text ? detectLanguage(text) : "unknown"
-      }`}</span>
+
       {hasTranslation && (
         <Toggle
           className={styles.languageToggle}
-          onChange={() => setShowTranslation(!showTranslation)}
-          label="Translate"
-          isChecked={showTranslation}
+          onChange={() => setShowOriginal(!showOriginal)}
+          label={`Orig. language: ${detectLanguage(text as string) ?? ""}`}
+          isChecked={showOriginal}
         />
       )}
       <span className={styles.tokenId}>

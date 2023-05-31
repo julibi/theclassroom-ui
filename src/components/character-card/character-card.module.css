@@ -86,10 +86,6 @@
   cursor: pointer;
 } 
 
-.origLang {
-  text-transform: capitalize;
-}
-
 .languageToggle {
   margin-block: 12px;
 }

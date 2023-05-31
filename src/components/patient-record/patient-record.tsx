@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 import { Button } from "../button";
@@ -17,12 +17,14 @@ export const PatientRecord = ({
   birthPlace,
   checkIn,
   img,
-  text,
+  translationIpfsHash,
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
+  console.log({ translationIpfsHash });
   const router = useRouter();
   const { updateIndex } = useUI();
+  const [translation, setTranslation] = useState<null | string>(null);
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
     setShowFile(true);
@@ -31,7 +33,28 @@ export const PatientRecord = ({
   const toApp = useCallback(() => {
     router?.push("writingapp");
     updateIndex(id);
-  }, [router, id]);
+  }, [router, updateIndex, id]);
+
+  const fetchTranslation = useCallback(async () => {
+    try {
+      // TODO: first try to fetch from my pinata gate?
+      const response = await fetch(
+        `https://ipfs.io/ipfs/${translationIpfsHash}`
+      );
+      if (response.ok) {
+        const fetchedText = await response.text();
+        setTranslation(fetchedText);
+      }
+    } catch (e: unknown) {
+      // do nothing
+    }
+  }, [translationIpfsHash]);
+
+  useEffect(() => {
+    if (translationIpfsHash) {
+      fetchTranslation();
+    }
+  }, [fetchTranslation, translationIpfsHash]);
 
   return (
     <>
@@ -108,7 +131,7 @@ export const PatientRecord = ({
                 className={styles.infoLine}
               >{`Check In Type: ${checkIn}`}</span>
             </div>
-            <p className={styles.infoLine}>{text}</p>
+            <p className={styles.infoLine}>{translation}</p>
           </div>
         </Modal>
       )}

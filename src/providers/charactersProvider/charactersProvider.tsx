@@ -7,13 +7,13 @@ import {
 } from "react";
 import { Address } from "wagmi";
 import { multicall } from "@wagmi/core";
-import { TCR_PROD } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import {
   CharacterItem,
   CharactersApi,
   CharactersProviderProps,
 } from "./charactersProvider.types";
+import { getTCRContract } from "@/utils/getTCRContract";
 
 const defaultContext: CharactersApi = {
   characters: null,
@@ -27,7 +27,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
 
   const fetchCharacters = useCallback(async () => {
     const call = {
-      address: TCR_PROD as Address,
+      address: getTCRContract() as Address,
       abi: ABI,
       functionName: "characters",
     };
@@ -76,7 +76,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
         },
       ],
     });
-
+    console.log({ data });
     if (data.length && data[0]) {
       const definedCharacters: CharacterItem[] = data
         .filter((item: any) => !!item[0].length && !!item[1].length)

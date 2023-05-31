@@ -14,7 +14,6 @@ import { useUser } from "@/hooks/use-user";
 import { WritingBoxProps } from "./writing-box.types";
 import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
-import { TCR_PROD } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
@@ -24,6 +23,7 @@ import { translateWithDeepl } from "@/utils/translateWithDeepl";
 import { Minting } from "../minting";
 import pinToPinata from "@/utils/pinToPinata";
 import { useLocalStorage } from "@/hooks/use-local-storage";
+import { getTCRContract } from "@/utils/getTCRContract";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
@@ -44,7 +44,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: TCR_PROD,
+    address: getTCRContract(),
     abi: ABI,
     functionName: "write",
   });
