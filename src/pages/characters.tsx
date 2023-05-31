@@ -15,7 +15,7 @@ const Characters = () => {
   useEffect(() => {
     const array = CHARACTERS.sort((a, b) => 0.5 - Math.random());
 
-    setShuffledCharacters(array as PatientRecordProps);
+    setShuffledCharacters(array as PatientRecordProps[]);
   }, [characters]);
 
   return (
