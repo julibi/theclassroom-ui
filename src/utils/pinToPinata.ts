@@ -9,7 +9,7 @@ const pinToPinata = async (
   hash: string,
   isTranslation?: boolean
 ) => {
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV") return;
+  // if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV") return;
   let name;
   if (isTranslation) {
     name = `THERETREAT-translation-${tokenId}`;

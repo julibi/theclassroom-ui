@@ -1,12 +1,13 @@
 import React, { createContext, useMemo } from "react";
 import { useContractRead } from "wagmi";
-import { MOONPAGE_MANAGER_ADDRESS_DEV, projectId } from "@/constants";
+import { projectId } from "@/constants";
 import MANAGER_ABI from "../../abis/MoonpageManager.json";
 import {
   EditionReadResult,
   MoonpageApi,
   MoonpageProviderProps,
 } from "./moonpageProvider.types";
+import { MPManagerContract } from "@/utils/MPManagerContract";
 
 const defaultContext: MoonpageApi = {
   edition: undefined,
@@ -17,7 +18,7 @@ export const MoonpageContext = createContext(defaultContext);
 
 export const MoonpageProvider = ({ children }: MoonpageProviderProps) => {
   const { data: edition, refetch } = useContractRead({
-    address: MOONPAGE_MANAGER_ADDRESS_DEV,
+    address: MPManagerContract,
     abi: MANAGER_ABI,
     functionName: "editions",
     args: [projectId],

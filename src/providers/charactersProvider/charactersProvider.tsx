@@ -13,7 +13,7 @@ import {
   CharactersApi,
   CharactersProviderProps,
 } from "./charactersProvider.types";
-import { getTCRContract } from "@/utils/getTCRContract";
+import { TCRContract } from "@/utils/TCRContract";
 
 const defaultContext: CharactersApi = {
   characters: null,
@@ -27,67 +27,69 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
 
   const fetchCharacters = useCallback(async () => {
     const call = {
-      address: getTCRContract() as Address,
+      address: TCRContract as Address,
       abi: ABI,
       functionName: "characters",
     };
 
-    const data = await multicall({
-      contracts: [
-        {
-          ...call,
-          args: [1],
-        },
-        {
-          ...call,
-          args: [2],
-        },
-        {
-          ...call,
-          args: [3],
-        },
-        {
-          ...call,
-          args: [4],
-        },
-        {
-          ...call,
-          args: [5],
-        },
-        {
-          ...call,
-          args: [6],
-        },
-        {
-          ...call,
-          args: [7],
-        },
-        {
-          ...call,
-          args: [8],
-        },
-        {
-          ...call,
-          args: [9],
-        },
-        {
-          ...call,
-          args: [10],
-        },
-      ],
-    });
-    console.log({ data });
-    if (data.length && data[0]) {
-      const definedCharacters: CharacterItem[] = data
-        .filter((item: any) => !!item[0].length && !!item[1].length)
-        .map((item: any) => ({
-          name: item.name,
-          textIpfsHash: item.textIPFSHash,
-          translationIpfsHash: item.translationIPFSHash,
-          imageIpfsHash: item.imageIpfsHash,
-        }));
-
-      definedCharacters?.length && setCharacters(definedCharacters);
+    try {
+      const data = await multicall({
+        contracts: [
+          {
+            ...call,
+            args: [1],
+          },
+          {
+            ...call,
+            args: [2],
+          },
+          {
+            ...call,
+            args: [3],
+          },
+          {
+            ...call,
+            args: [4],
+          },
+          {
+            ...call,
+            args: [5],
+          },
+          {
+            ...call,
+            args: [6],
+          },
+          {
+            ...call,
+            args: [7],
+          },
+          {
+            ...call,
+            args: [8],
+          },
+          {
+            ...call,
+            args: [9],
+          },
+          {
+            ...call,
+            args: [10],
+          },
+        ],
+      });
+      if (data.length && data[0]) {
+        const definedCharacters: CharacterItem[] = data
+          .filter((item: any) => !!item[0].length && !!item[1].length)
+          .map((item: any) => ({
+            name: item.name,
+            textIpfsHash: item.textIPFSHash,
+            translationIpfsHash: item.translationIPFSHash,
+            imageIpfsHash: item.imageIpfsHash,
+          }));
+        definedCharacters?.length && setCharacters(definedCharacters);
+      }
+    } catch (e) {
+      console.log({ e });
     }
   }, []);
 

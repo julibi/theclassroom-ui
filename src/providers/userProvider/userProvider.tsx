@@ -6,11 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Address, useAccount, useContractRead } from "wagmi";
-import {
-  MOONPAGE_COLLECTION_ADDRESS_DEV,
-  MOONPAGE_MANAGER_ADDRESS_DEV,
-  projectId,
-} from "@/constants";
+import { projectId } from "@/constants";
 import { loop } from "@/utils/ loop";
 import { Abi } from "abitype";
 import { multicall } from "@wagmi/core";
@@ -19,6 +15,7 @@ import COLLECTION_ABI from "../../abis/MoonpageCollection.json";
 import MANAGER_ABI from "../../abis/MoonpageManager.json";
 import { NFT, UserApi, UserProviderProps } from "./userProvider.types";
 import { useSnippets } from "@/hooks/use-snippets";
+import { MPContract } from "@/utils/MPContract";
 
 const defaultContext: UserApi = {
   fetchNFTs: () => undefined,
@@ -27,20 +24,23 @@ const defaultContext: UserApi = {
 
 export const UserContext = createContext(defaultContext);
 
+const MOONPAGE_COLLECTION_CONTRACT = MPContract;
+
 export const UserProvider = ({ children }: UserProviderProps) => {
   const { address } = useAccount();
   const { allSnippets } = useSnippets();
 
   const [NFTs, setNFTs] = useState<null | NFT[]>(null);
   const { data: balanceOfAddress } = useContractRead({
-    address: MOONPAGE_COLLECTION_ADDRESS_DEV,
+    address: MPContract as Address,
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
     watch: true,
   });
+
   const { data: edition } = useContractRead({
-    address: MOONPAGE_MANAGER_ADDRESS_DEV,
+    address: MOONPAGE_COLLECTION_CONTRACT as Address,
     abi: MANAGER_ABI,
     functionName: "editions",
     args: [projectId],
@@ -50,7 +50,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     let callsForMulticalls: Call[] = [];
     loop(Number(balanceOfAddress), (i: number) => {
       callsForMulticalls.push({
-        address: MOONPAGE_COLLECTION_ADDRESS_DEV,
+        address: MOONPAGE_COLLECTION_CONTRACT as Address,
         abi: COLLECTION_ABI as Abi,
         functionName: "tokenOfOwnerByIndex",
         args: [address as Address, i],

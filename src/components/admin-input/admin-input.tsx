@@ -9,7 +9,7 @@ import ABI from "../../abis/TCR.json";
 import { AdminInputProps } from "./admin-input.types";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
-import { getTCRContract } from "@/utils/getTCRContract";
+import { TCRContract } from "@/utils/TCRContract";
 
 export const AdminInput = ({ refetch }: AdminInputProps) => {
   const [text, setText] = useState("");
@@ -27,7 +27,7 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: getTCRContract(),
+    address: TCRContract,
     abi: ABI,
     functionName: "setupCharacter",
     args: [name, textIPFSHash, ""],

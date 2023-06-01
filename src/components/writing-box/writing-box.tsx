@@ -23,7 +23,7 @@ import { translateWithDeepl } from "@/utils/translateWithDeepl";
 import { Minting } from "../minting";
 import pinToPinata from "@/utils/pinToPinata";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { getTCRContract } from "@/utils/getTCRContract";
+import { TCRContract } from "@/utils/TCRContract";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
@@ -44,7 +44,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: getTCRContract(),
+    address: TCRContract,
     abi: ABI,
     functionName: "write",
   });

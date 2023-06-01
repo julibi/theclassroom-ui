@@ -3,13 +3,13 @@ import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
 import { Snippet } from "@/components/character-snippets/character-snippets.types";
 import { UseCharacterSnippetsProps } from "./use-character-snippets.types";
-import { getTCRContract } from "@/utils/getTCRContract";
+import { TCRContract } from "@/utils/TCRContract";
 
 export const useCharacterSnippets = ({
   characterId,
 }: UseCharacterSnippetsProps) => {
   const { data, refetch: refetchSnippetsOfCharacter } = useContractRead({
-    address: getTCRContract(),
+    address: TCRContract,
     abi: ABI,
     functionName: "snippetsOfCharacter",
     args: [characterId],

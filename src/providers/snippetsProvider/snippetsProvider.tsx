@@ -3,7 +3,7 @@ import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
 import { SnippetsApi, SnippetsProviderProps } from "./snippetsProvider.types";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
-import { getTCRContract } from "@/utils/getTCRContract";
+import { TCRContract } from "@/utils/TCRContract";
 
 const defaultContext: SnippetsApi = {
   snippetsIndex: 0,
@@ -15,7 +15,7 @@ export const SnippetsContext = createContext(defaultContext);
 
 export const SnippetsProvider = ({ children }: SnippetsProviderProps) => {
   const { data: snippetsIndex } = useContractRead({
-    address: getTCRContract(),
+    address: TCRContract,
     abi: ABI,
     functionName: "index",
     args: [],

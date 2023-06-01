@@ -8,7 +8,7 @@ import { Button } from "../button";
 import { useUI } from "@/hooks/use-ui/use-ui";
 
 export const WalletConnection = () => {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, connector } = useAccount();
   const [name, setName] = useState<null | undefined | Address | string>(null);
   const { data: ensName, error: ensError } = useEnsName({
     address,

@@ -21,7 +21,6 @@ export const PatientRecord = ({
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
-  console.log({ translationIpfsHash });
   const router = useRouter();
   const { updateIndex } = useUI();
   const [translation, setTranslation] = useState<null | string>(null);

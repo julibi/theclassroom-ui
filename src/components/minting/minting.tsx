@@ -7,7 +7,6 @@ import { EditionCalcsType, MintingProps } from "./minting.types";
 import { Title } from "../title";
 import { Button } from "../button";
 import { useAccount } from "wagmi";
-import { MOONPAGE_COLLECTION_ADDRESS_DEV } from "@/constants";
 import COLLECTION_ABI from "../../abis/MoonpageCollection.json";
 import { projectId } from "@/constants";
 import { useContract } from "@/hooks/use-contract";
@@ -15,6 +14,7 @@ import { Abi } from "abitype";
 import { BigNumber } from "ethers";
 import { useMoonpage } from "@/hooks/use-moonpage";
 import { formatEther } from "ethers/lib/utils.js";
+import { MPContract } from "@/utils/MPContract";
 
 export const Minting = ({ className }: MintingProps) => {
   const BigZero = BigNumber.from("0");
@@ -28,8 +28,8 @@ export const Minting = ({ className }: MintingProps) => {
     leftSupplyTotal: BigZero,
   });
 
-  const { write, writeAsync, status, error, data } = useContract({
-    address: MOONPAGE_COLLECTION_ADDRESS_DEV,
+  const { writeAsync, status } = useContract({
+    address: MPContract,
     abi: COLLECTION_ABI as Abi,
     functionName: "publicMint",
     args: [projectId, amount],
@@ -46,7 +46,7 @@ export const Minting = ({ className }: MintingProps) => {
 
   const pending = useMemo(
     () => ["confirming", "fetching"].includes(status),
-    [status, data]
+    [status]
   );
 
   const handleDecrement = useCallback(() => {
