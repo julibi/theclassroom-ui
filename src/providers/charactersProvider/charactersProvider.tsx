@@ -5,8 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Address, useContractRead } from "wagmi";
-import { multicall } from "@wagmi/core";
+import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
 import {
   CharacterItem,
@@ -30,6 +29,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
     functionName: "characters",
     args: [1],
   });
+  console.log({ TCRContract, ABI, character1 });
   const { data: character2 } = useContractRead({
     address: TCRContract,
     abi: ABI,
