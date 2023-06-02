@@ -1,4 +1,4 @@
-import { Snippet } from "@/components/character-snippets/character-snippets.types";
+import { Snippet } from "@/components/text-card/text-card.types";
 import { Abi } from "abitype";
 import { ReactNode } from "react";
 import { Address } from "wagmi";

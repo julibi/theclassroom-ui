@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
-import { Snippet } from "@/components/character-snippets/character-snippets.types";
 import { UseCharacterSnippetsProps } from "./use-character-snippets.types";
 import { TCRContract } from "@/utils/TCRContract";
+import { Snippet } from "@/components/text-card/text-card.types";
 
 export const useCharacterSnippets = ({
   characterId,
