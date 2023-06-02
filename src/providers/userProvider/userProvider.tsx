@@ -12,7 +12,6 @@ import { Abi } from "abitype";
 import { multicall } from "@wagmi/core";
 import { Call } from "@/components/slider/slider.types";
 import COLLECTION_ABI from "../../abis/MoonpageCollection.json";
-import MANAGER_ABI from "../../abis/MoonpageManager.json";
 import { NFT, UserApi, UserProviderProps } from "./userProvider.types";
 import { useSnippets } from "@/hooks/use-snippets";
 import { MPContract } from "@/utils/MPContract";
@@ -37,7 +36,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
-    watch: true,
+    cacheOnBlock: true,
   });
 
   const fetchNFTs = useCallback(async () => {
