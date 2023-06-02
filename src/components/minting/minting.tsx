@@ -107,11 +107,9 @@ export const Minting = ({ className }: MintingProps) => {
             editionCalcs.totalSupply
           )}/${Number(editionCalcs.maxSupply)}`}</span>
         )}
-        {Number(editionCalcs.price) && (
-          <span className={styles.stat}>{`Price: ${formatEther(
-            editionCalcs.price
-          )} MATIC`}</span>
-        )}
+        <span className={styles.stat}>{`Price: ${formatEther(
+          editionCalcs?.price
+        )} MATIC`}</span>
       </div>
       <span className={styles.caution}>
         <FontAwesomeIcon
