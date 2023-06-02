@@ -7,6 +7,7 @@ import { CharacterSnippets } from "../character-snippets";
 import { WritingBox } from "../writing-box";
 import { Button } from "../button";
 import styles from "./carousel-slide.module.css";
+import { TextCard } from "../text-card";
 
 export const CarouselSlide = ({
   character,
@@ -27,7 +28,7 @@ export const CarouselSlide = ({
       executeScroll();
       updateScrollId(null);
     }
-  }, [scrollId]);
+  }, [characterId, scrollId, updateScrollId]);
 
   return (
     <div className={styles.carouselItemInner}>
@@ -45,8 +46,23 @@ export const CarouselSlide = ({
         ""
       )}
       <WritingBox characterId={characterId} />
-      <CharacterSnippets characterId={characterId} />
-      <div ref={lastTextRef} />
+      {characterSnippets?.length > 1 && (
+        <div>
+          {characterSnippets?.map((snippet, idx) => {
+            if (idx === characterSnippets.length - 1) {
+              return (
+                <>
+                  <div ref={lastTextRef} />
+                  <TextCard snippet={snippet} key={idx} id={snippet.tokenId} />
+                </>
+              );
+            }
+            return (
+              <TextCard snippet={snippet} key={idx} id={snippet.tokenId} />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const MoonpageProvider = ({ children }: MoonpageProviderProps) => {
     abi: MANAGER_ABI,
     functionName: "editions",
     args: [projectId],
-    watch: true,
+    structuralSharing: (prev, next) => (prev === next ? prev : next),
   }) as EditionReadResult;
 
   const api = useMemo(() => ({ edition, refetch }), [edition, refetch]);

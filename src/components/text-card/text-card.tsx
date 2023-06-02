@@ -8,6 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import {
   MOONPAGE_COLLECTION_ADDRESS_DEV,
   MOONPAGE_COLLECTION_ADDRESS_PROD,
+  PINATA_GATE_URI,
 } from "@/constants";
 import { Toggle } from "../toggle";
 import { detectLanguage } from "@/utils/detectLanguage";
@@ -66,6 +67,7 @@ export const TextCard = ({ snippet }: TextCardProps) => {
       const response = await fetch(
         `https://ipfs.io/ipfs/${snippet?.translationIPFSHash}`
       );
+
       if (response.ok) {
         const fetchedText = await response.text();
         setTranslation(fetchedText);

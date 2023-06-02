@@ -16,6 +16,7 @@ import MANAGER_ABI from "../../abis/MoonpageManager.json";
 import { NFT, UserApi, UserProviderProps } from "./userProvider.types";
 import { useSnippets } from "@/hooks/use-snippets";
 import { MPContract } from "@/utils/MPContract";
+import { useMoonpage } from "@/hooks/use-moonpage";
 
 const defaultContext: UserApi = {
   fetchNFTs: () => undefined,
@@ -24,11 +25,11 @@ const defaultContext: UserApi = {
 
 export const UserContext = createContext(defaultContext);
 
-const MOONPAGE_COLLECTION_CONTRACT = MPContract;
-
 export const UserProvider = ({ children }: UserProviderProps) => {
   const { address } = useAccount();
   const { allSnippets } = useSnippets();
+  const { edition } = useMoonpage();
+  const [hasFetchedNFTs, setHasFetchedNFTs] = useState(false);
 
   const [NFTs, setNFTs] = useState<null | NFT[]>(null);
   const { data: balanceOfAddress } = useContractRead({
@@ -36,54 +37,54 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
-    watch: true,
-  });
-
-  const { data: edition } = useContractRead({
-    address: MOONPAGE_COLLECTION_CONTRACT as Address,
-    abi: MANAGER_ABI,
-    functionName: "editions",
-    args: [projectId],
+    structuralSharing: (prev, next) => (prev === next ? prev : next),
   });
 
   const fetchNFTs = useCallback(async () => {
-    let callsForMulticalls: Call[] = [];
-    loop(Number(balanceOfAddress), (i: number) => {
-      callsForMulticalls.push({
-        address: MOONPAGE_COLLECTION_CONTRACT as Address,
-        abi: COLLECTION_ABI as Abi,
-        functionName: "tokenOfOwnerByIndex",
-        args: [address as Address, i],
+    try {
+      let callsForMulticalls: Call[] = [];
+      loop(Number(balanceOfAddress), (i: number) => {
+        callsForMulticalls.push({
+          address: MPContract as Address,
+          abi: COLLECTION_ABI as Abi,
+          functionName: "tokenOfOwnerByIndex",
+          args: [address as Address, i],
+        });
       });
-    });
-    const result = await multicall({
-      contracts: callsForMulticalls,
-    });
-    const Ids = result?.map((res) => Number(res));
-    // @ts-ignore Property 'startTokenId' does not exist on type '{}'.
-    const startTokenId = Number(edition?.startTokenId);
-    // @ts-ignore Property 'startTokenId' does not exist on type '{}'.
-    const currentTokenId = Number(edition?.currentTokenId);
-    const IdsOfProject = Ids.filter(
-      (id) => id >= startTokenId && currentTokenId >= id
-    );
+      const result = await multicall({
+        contracts: callsForMulticalls,
+      });
+      const Ids = result?.map((res) => Number(res));
+      // @ts-ignore Property 'startTokenId' does not exist on type '{}'.
+      const startTokenId = Number(edition?.startTokenId);
+      // @ts-ignore Property 'startTokenId' does not exist on type '{}'.
+      const currentTokenId = Number(edition?.currentTokenId);
+      const IdsOfProject = Ids.filter(
+        (id) => id >= startTokenId && currentTokenId >= id
+      );
 
-    const filteredNFTs = IdsOfProject.map((id) => {
-      const unshiftedCharacterId = id % 10;
-      const characterId = unshiftedCharacterId == 0 ? 10 : unshiftedCharacterId;
-      return {
-        id,
-        characterId,
-        written: !!allSnippets.find((snippet) => snippet.tokenId === id),
-      };
-    });
-
-    setNFTs(filteredNFTs);
-  }, [address, allSnippets, balanceOfAddress, edition]);
+      const filteredNFTs = IdsOfProject.map((id) => {
+        const unshiftedCharacterId = id % 10;
+        const characterId =
+          unshiftedCharacterId == 0 ? 10 : unshiftedCharacterId;
+        return {
+          id,
+          characterId,
+          written: !!allSnippets.find((snippet) => snippet.tokenId === id),
+        };
+      });
+      setNFTs(filteredNFTs);
+      setHasFetchedNFTs(true);
+    } catch (e) {
+      console.log({ e });
+    }
+  }, []);
 
   useEffect(() => {
-    fetchNFTs();
-  }, [fetchNFTs, balanceOfAddress]);
+    if (balanceOfAddress && edition && allSnippets && !hasFetchedNFTs) {
+      fetchNFTs();
+    }
+  }, [fetchNFTs, allSnippets, balanceOfAddress, edition, hasFetchedNFTs]);
 
   const api = useMemo(() => ({ fetchNFTs, NFTs }), [fetchNFTs, NFTs]);
   return <UserContext.Provider value={api}>{children}</UserContext.Provider>;

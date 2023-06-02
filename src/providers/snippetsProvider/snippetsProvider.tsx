@@ -140,6 +140,7 @@ export const SnippetsProvider = ({ children }: SnippetsProviderProps) => {
     }),
     [snippetsIndex, allSnippets, refetchAllSnippets]
   );
+
   return (
     <SnippetsContext.Provider value={api}>{children}</SnippetsContext.Provider>
   );

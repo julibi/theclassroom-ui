@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useAccount, useEnsName } from "wagmi";
+import React, { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import { Address } from "@wagmi/core";
 import style from "./wallet-connection.module.css";
 import { truncateAddress } from "@/utils/truncateAddress";
@@ -9,30 +9,21 @@ import { useUI } from "@/hooks/use-ui/use-ui";
 
 export const WalletConnection = () => {
   const { address, isConnected, connector } = useAccount();
-  const [name, setName] = useState<null | undefined | Address | string>(null);
-  const { data: ensName, error: ensError } = useEnsName({
-    address,
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { openSlider } = useUI();
   const [isModalOpen, setIsOpenModal] = useState(false);
 
-  // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
+  // // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
   useEffect(() => {
-    if (isConnected) {
-      const nm =
-        ensName && !ensError
-          ? ensName
-          : address
-          ? truncateAddress(address)
-          : null;
-
-      nm && setName(nm);
+    if (isConnected && address) {
+      setIsLoggedIn(true);
     }
-  }, [address, ensName, ensError, isConnected]);
+  }, [address, isConnected]);
 
   return (
     <div className={style.walletConnection}>
-      {name ? (
+      {isLoggedIn ? (
         <Button onClick={openSlider}>NFTs</Button>
       ) : (
         <Button onClick={() => setIsOpenModal(true)}>Connect</Button>
