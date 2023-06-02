@@ -29,7 +29,6 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
     functionName: "characters",
     args: [1],
   });
-  console.log({ TCRContract, ABI, character1 });
   const { data: character2 } = useContractRead({
     address: TCRContract,
     abi: ABI,
@@ -163,7 +162,6 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
       character9,
       character10,
     ];
-    console.log({ allCharacters });
     const definedCharacters: CharacterItem[] = allCharacters
       ?.filter((item: any) => item && !!item[0].length && !!item[1].length)
       ?.map((item: any, key) => ({

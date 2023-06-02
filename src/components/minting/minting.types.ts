@@ -8,5 +8,6 @@ export type EditionCalcsType = {
   totalSupply: BigNumber;
   maxSupply: BigNumber;
   leftSupplyTotal: BigNumber;
+  leftSupplyEdition: BigNumber;
   price: BigNumber;
 };

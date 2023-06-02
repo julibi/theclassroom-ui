@@ -26,6 +26,7 @@ export const Minting = ({ className }: MintingProps) => {
     maxSupply: BigZero,
     price: BigZero,
     leftSupplyTotal: BigZero,
+    leftSupplyEdition: BigZero,
   });
 
   const { writeAsync, status } = useContract({
@@ -40,9 +41,17 @@ export const Minting = ({ className }: MintingProps) => {
     enabled: !!editionCalcs.price && !!amount,
   });
   const isSoldOut = useMemo(
-    () => editionCalcs.totalSupply?.eq(editionCalcs.maxSupply),
-    [editionCalcs]
+    () =>
+      editionCalcs.totalSupply?.eq(editionCalcs.maxSupply) ||
+      editionCalcs.leftSupplyEdition.eq(BigZero),
+    [
+      BigZero,
+      editionCalcs.leftSupplyEdition,
+      editionCalcs.maxSupply,
+      editionCalcs.totalSupply,
+    ]
   );
+  console.log({ editionCalcs }, editionCalcs.leftSupplyEdition.eq(BigZero));
 
   const pending = useMemo(
     () => ["confirming", "fetching"].includes(status),
@@ -66,6 +75,7 @@ export const Minting = ({ className }: MintingProps) => {
     let newMaxSupply = BigNumber.from("0");
     let newLeftSupplyTotal = BigNumber.from("0");
     let newPrice = BigNumber.from("0");
+    let newleftSupplyEdition = BigNumber.from("0");
     if (!edition) return;
     newTotalSupply = edition.currentTokenId?.sub(edition.startTokenId);
     newMaxSupply = edition.endTokenId
@@ -75,12 +85,15 @@ export const Minting = ({ className }: MintingProps) => {
     newLeftSupplyTotal = edition?.currentEdLastTokenId
       .sub(edition?.currentTokenId)
       .add(BigNumber.from("1"));
-
+    newleftSupplyEdition = edition.currentEdLastTokenId?.sub(
+      edition.currentTokenId
+    );
     setEditionCalcs({
       totalSupply: newTotalSupply,
       maxSupply: newMaxSupply,
       leftSupplyTotal: newLeftSupplyTotal,
       price: newPrice,
+      leftSupplyEdition: newleftSupplyEdition,
     });
   }, [edition, amount]);
 
