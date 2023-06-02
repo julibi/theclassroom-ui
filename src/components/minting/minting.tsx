@@ -51,7 +51,6 @@ export const Minting = ({ className }: MintingProps) => {
       editionCalcs.totalSupply,
     ]
   );
-  console.log({ editionCalcs }, editionCalcs.leftSupplyEdition.eq(BigZero));
 
   const pending = useMemo(
     () => ["confirming", "fetching"].includes(status),
@@ -85,9 +84,9 @@ export const Minting = ({ className }: MintingProps) => {
     newLeftSupplyTotal = edition?.currentEdLastTokenId
       .sub(edition?.currentTokenId)
       .add(BigNumber.from("1"));
-    newleftSupplyEdition = edition.currentEdLastTokenId?.sub(
-      edition.currentTokenId
-    );
+    newleftSupplyEdition = edition.currentEdLastTokenId
+      ?.sub(edition.currentTokenId)
+      .add(BigNumber.from("1"));
     setEditionCalcs({
       totalSupply: newTotalSupply,
       maxSupply: newMaxSupply,
@@ -140,7 +139,8 @@ export const Minting = ({ className }: MintingProps) => {
           disabled={
             pending ||
             isSoldOut ||
-            amount === Number(editionCalcs.leftSupplyTotal)
+            amount === Number(editionCalcs.leftSupplyTotal) ||
+            amount === Number(editionCalcs.leftSupplyEdition)
           }
           onClick={handleIncrement}
         >
