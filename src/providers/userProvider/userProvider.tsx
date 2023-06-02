@@ -42,7 +42,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const fetchNFTs = useCallback(async () => {
     try {
       let callsForMulticalls: Call[] = [];
+      if (Number(balanceOfAddress) === 0) return;
+      console.log(Number(balanceOfAddress));
       loop(Number(balanceOfAddress), (i: number) => {
+        console.log(Number(balanceOfAddress));
         callsForMulticalls.push({
           address: MPContract as Address,
           abi: COLLECTION_ABI as Abi,

@@ -16,9 +16,14 @@ export const Carousel = ({ characters }: CarouselProps) => {
     return characters?.length ? characters?.length - 1 : 10;
   }, [characters]);
   const handlers = useSwipeable({
-    onSwipedLeft: () =>
-      activeIndex < totalIndex && updateIndex(activeIndex + 1),
-    onSwipedRight: () => activeIndex > 1 && updateIndex(activeIndex - 1),
+    onSwipedLeft: () => {
+      activeIndex === 0 ? updateIndex(9) : updateIndex(activeIndex - 1);
+    },
+    onSwipedRight: () => {
+      activeIndex === totalIndex
+        ? updateIndex(0)
+        : updateIndex(activeIndex + 1);
+    },
   });
 
   useEffect(() => {
@@ -47,15 +52,19 @@ export const Carousel = ({ characters }: CarouselProps) => {
       <div className={styles.buttons}>
         <Button
           className={styles.previousButton}
-          onClick={() => updateIndex(activeIndex - 1)}
-          disabled={activeIndex === 0}
+          onClick={() => {
+            activeIndex === 0 ? updateIndex(9) : updateIndex(activeIndex - 1);
+          }}
         >
           {"<"}
         </Button>
         <Button
           className={styles.nextButton}
-          onClick={() => updateIndex(activeIndex + 1)}
-          disabled={activeIndex === totalIndex}
+          onClick={() => {
+            activeIndex === totalIndex
+              ? updateIndex(0)
+              : updateIndex(activeIndex + 1);
+          }}
         >
           {">"}
         </Button>

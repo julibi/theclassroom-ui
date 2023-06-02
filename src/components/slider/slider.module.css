@@ -91,3 +91,13 @@
 .grey {
   color: grey;
 }
+
+.refetchText {
+  color: #ea175a;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  white-space: normal;
+  font-family: 'Courier New', Courier, monospace;
+  margin-block-end: 12px;
+}
