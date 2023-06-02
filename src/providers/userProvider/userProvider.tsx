@@ -37,7 +37,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
-    structuralSharing: (prev, next) => (prev === next ? prev : next),
+    watch: true,
   });
 
   const fetchNFTs = useCallback(async () => {
@@ -78,7 +78,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     } catch (e) {
       console.log({ e });
     }
-  }, []);
+  }, [
+    address,
+    allSnippets,
+    balanceOfAddress,
+    edition?.currentTokenId,
+    edition?.startTokenId,
+  ]);
 
   useEffect(() => {
     if (balanceOfAddress && edition && allSnippets && !hasFetchedNFTs) {

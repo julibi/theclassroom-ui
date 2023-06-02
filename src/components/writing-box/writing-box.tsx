@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   SyntheticEvent,
   useCallback,
   useEffect,
@@ -33,7 +32,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   );
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
-  const { NFTs } = useUser();
+  const { NFTs, fetchNFTs } = useUser();
   const { uploadText } = useIpfsTextUpload();
   const { refetchAllSnippets } = useSnippets();
   const { refetchSnippetsOfCharacter } = useCharacterSnippets({ characterId });
@@ -117,9 +116,9 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     if (writeStatus === "success" && waitStatus === "success") {
       setStatus("success");
       reset();
+      fetchNFTs();
       refetchAllSnippets();
-
-      // refetchSnippetsOfCharacter();
+      refetchSnippetsOfCharacter();
     }
   }, [
     writeStatus,
@@ -127,6 +126,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     refetchSnippetsOfCharacter,
     reset,
     refetchAllSnippets,
+    fetchNFTs,
   ]);
 
   useEffect(() => {
@@ -162,7 +162,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
         disabled={!!error || pending}
         pending={pending}
       >
-        Submit
+        {pending ? "..." : "Submit"}
       </Button>
     </div>
   );

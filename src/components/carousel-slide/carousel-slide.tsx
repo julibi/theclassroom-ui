@@ -3,7 +3,6 @@ import { useUI } from "@/hooks/use-ui";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { CarouselSlideProps } from "./carousel-slide.types";
 import { CharacterCard } from "../character-card";
-import { CharacterSnippets } from "../character-snippets";
 import { WritingBox } from "../writing-box";
 import { Button } from "../button";
 import styles from "./carousel-slide.module.css";

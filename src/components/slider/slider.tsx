@@ -12,8 +12,7 @@ import { useRouter } from "next/router";
 
 export const Slider = () => {
   const router = useRouter();
-  const { isSliderOpen, openSlider, closeSlider, updateIndex, updateScrollId } =
-    useUI();
+  const { isSliderOpen, openSlider, closeSlider, updateIndex } = useUI();
   const { NFTs } = useUser();
   const { characters } = useCharacters();
 
@@ -33,7 +32,6 @@ export const Slider = () => {
       updateIndex(characterId - 1);
       closeSlider();
       await delay(500);
-      updateScrollId(characterId);
     },
     [updateIndex]
   );
