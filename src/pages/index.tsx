@@ -127,14 +127,6 @@ const Home = () => {
             </Title>
           </div>
         </div>
-        <div className={styles.section}>
-          <div>
-            <Title size={1} className={styles.title}>
-              Next retreat launching in
-            </Title>
-            <Countdown endTime={1685642400} />
-          </div>
-        </div>
         <div className={cx(styles.section, styles.explanationSection)}>
           <Title size={1} className={styles.title}>
             How does it work?
