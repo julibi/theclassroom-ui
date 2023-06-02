@@ -165,7 +165,7 @@ export const CharactersProvider = ({ children }: CharactersProviderProps) => {
     ];
     console.log({ allCharacters });
     const definedCharacters: CharacterItem[] = allCharacters
-      ?.filter((item: any) => !!item[0].length && !!item[1].length)
+      ?.filter((item: any) => item && !!item[0].length && !!item[1].length)
       ?.map((item: any, key) => ({
         id: key + 1,
         name: item.name,
