@@ -3,7 +3,6 @@ import { useIpfsClient } from "../use-ipfs-client";
 
 export const useIpfsTextUpload = () => {
   const client = useIpfsClient();
-
   const uploadText = useCallback(
     async (text: string) => {
       try {

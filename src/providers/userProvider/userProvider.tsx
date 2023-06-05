@@ -89,10 +89,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   ]);
 
   useEffect(() => {
-    if (balance && edition && allSnippets && !hasFetchedNFTs) {
+    if (balance && edition && allSnippets) {
       fetchNFTs();
     }
-  }, [fetchNFTs, allSnippets, balance, edition, hasFetchedNFTs]);
+  }, [fetchNFTs, allSnippets, balance, edition]);
 
   const api = useMemo(() => ({ fetchNFTs, NFTs }), [fetchNFTs, NFTs]);
   return <UserContext.Provider value={api}>{children}</UserContext.Provider>;

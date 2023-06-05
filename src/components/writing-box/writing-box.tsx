@@ -21,15 +21,10 @@ import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
 import { Minting } from "../minting";
 import pinToPinata from "@/utils/pinToPinata";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 import { TCRContract } from "@/utils/TCRContract";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
-  const [storedValue, setValue] = useLocalStorage(
-    `TheRetreat-Character-${characterId.toString()}`,
-    text
-  );
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
   const { NFTs, fetchNFTs } = useUser();
@@ -73,14 +68,13 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     setWritingToken(e.target.value);
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setText("");
-    setValue("");
-  };
+    setStatus("idle");
+  }, []);
 
   const handleChange = (val: string) => {
     setText(val);
-    setValue(val);
   };
 
   const onSubmit = useCallback(async () => {
@@ -110,11 +104,10 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   }, [NFTsForWriting]);
 
   useEffect(() => {
-    if (writeStatus === "loading" || writeStatus === "success") {
+    if (writeStatus === "loading") {
       setStatus("pending");
     }
     if (writeStatus === "success" && waitStatus === "success") {
-      setStatus("success");
       reset();
       fetchNFTs();
       refetchAllSnippets();
@@ -128,12 +121,6 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     refetchAllSnippets,
     fetchNFTs,
   ]);
-
-  useEffect(() => {
-    if (storedValue) {
-      setText(storedValue);
-    }
-  }, []);
 
   if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
     return <Minting className={styles.mintingBox} />;

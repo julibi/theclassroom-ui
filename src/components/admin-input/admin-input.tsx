@@ -70,7 +70,6 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
       try {
         const textCID = await uploadText(text);
         const language = detectLanguage(text);
-
         let translation;
         let translationCID = "";
         if (language !== "english") {
