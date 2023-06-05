@@ -5,8 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Address, useAccount, useContractRead } from "wagmi";
-import { projectId } from "@/constants";
+import { Address, useAccount, useBalance, useContractRead } from "wagmi";
 import { loop } from "@/utils/ loop";
 import { Abi } from "abitype";
 import { multicall } from "@wagmi/core";
@@ -29,23 +28,24 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const { allSnippets } = useSnippets();
   const { edition } = useMoonpage();
   const [hasFetchedNFTs, setHasFetchedNFTs] = useState(false);
-
   const [NFTs, setNFTs] = useState<null | NFT[]>(null);
   const { data: balanceOfAddress } = useContractRead({
     address: MPContract as Address,
     abi: COLLECTION_ABI,
     functionName: "balanceOf",
     args: [address],
-    cacheOnBlock: true,
+    watch: true,
   });
+  const balance = useMemo(
+    () => (balanceOfAddress ? Math.floor(Number(balanceOfAddress)) : undefined),
+    [balanceOfAddress]
+  );
 
   const fetchNFTs = useCallback(async () => {
     try {
       let callsForMulticalls: Call[] = [];
-      if (Number(balanceOfAddress) === 0) return;
-      console.log(Number(balanceOfAddress));
-      loop(Number(balanceOfAddress), (i: number) => {
-        console.log(Number(balanceOfAddress));
+      if (balance === 0 || balance === undefined) return;
+      loop(balance, (i: number) => {
         callsForMulticalls.push({
           address: MPContract as Address,
           abi: COLLECTION_ABI as Abi,
@@ -83,16 +83,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [
     address,
     allSnippets,
-    balanceOfAddress,
+    balance,
     edition?.currentTokenId,
     edition?.startTokenId,
   ]);
 
   useEffect(() => {
-    if (balanceOfAddress && edition && allSnippets && !hasFetchedNFTs) {
+    if (balance && edition && allSnippets && !hasFetchedNFTs) {
       fetchNFTs();
     }
-  }, [fetchNFTs, allSnippets, balanceOfAddress, edition, hasFetchedNFTs]);
+  }, [fetchNFTs, allSnippets, balance, edition, hasFetchedNFTs]);
 
   const api = useMemo(() => ({ fetchNFTs, NFTs }), [fetchNFTs, NFTs]);
   return <UserContext.Provider value={api}>{children}</UserContext.Provider>;
