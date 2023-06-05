@@ -107,6 +107,9 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     if (writeStatus === "loading") {
       setStatus("pending");
     }
+    if (writeStatus === "error" || waitStatus === "error") {
+      setStatus("idle");
+    }
     if (writeStatus === "success" && waitStatus === "success") {
       reset();
       fetchNFTs();
