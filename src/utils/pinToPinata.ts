@@ -16,6 +16,7 @@ const pinToPinata = async (
   } else {
     name = `THERETREAT-${tokenId}`;
   }
+  console.log({ API_KEY, API_SECRET, name });
   try {
     await axios.post(
       url,

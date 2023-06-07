@@ -88,7 +88,8 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
         translationCID = translation ? await uploadText(translation) : "";
         await pinToPinata(writingToken as number, translationCID, true);
       }
-      await pinToPinata(writingToken as number, textCID);
+      await pinToPinata(writingToken as number, textCID, false);
+      console.log({ textCID, translation, translationCID, writingToken });
       write?.({
         recklesslySetUnpreparedArgs: [textCID, translationCID, writingToken],
       });
