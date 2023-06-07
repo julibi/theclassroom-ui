@@ -29,7 +29,7 @@ export const Slider = () => {
       closeSlider();
       await delay(500);
     },
-    [updateIndex]
+    [characters, closeSlider, updateIndex]
   );
 
   // TODO: just for now
