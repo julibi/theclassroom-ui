@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 import { Button } from "../button";
@@ -9,6 +9,7 @@ import { PatientRecordProps } from "./patient-record.types";
 import styles from "./patient-record.module.css";
 import { useRouter } from "next/router";
 import { useUI } from "@/hooks/use-ui";
+import { CHARACTERS } from "@/constants";
 
 export const PatientRecord = ({
   name,
@@ -17,43 +18,24 @@ export const PatientRecord = ({
   birthPlace,
   checkIn,
   img,
-  translationIpfsHash,
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
   const router = useRouter();
-  const { updateIndex } = useUI();
-  const [translation, setTranslation] = useState<null | string>(null);
+  const { updateIndex, updateShouldShuffle } = useUI();
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
     setShowFile(true);
   };
+  const characterData = useMemo(() => CHARACTERS.find((c) => c.id == id), [id]);
 
   const toApp = useCallback(() => {
+    updateShouldShuffle(false);
     router?.push("writingapp");
-    updateIndex(id);
-  }, [router, updateIndex, id]);
-
-  const fetchTranslation = useCallback(async () => {
-    try {
-      // TODO: first try to fetch from my pinata gate?
-      const response = await fetch(
-        `https://ipfs.io/ipfs/${translationIpfsHash}`
-      );
-      if (response.ok) {
-        const fetchedText = await response.text();
-        setTranslation(fetchedText);
-      }
-    } catch (e: unknown) {
-      // do nothing
-    }
-  }, [translationIpfsHash]);
-
-  useEffect(() => {
-    if (translationIpfsHash) {
-      fetchTranslation();
-    }
-  }, [fetchTranslation, translationIpfsHash]);
+    // coz activeId is not same as characterId, shifted by one
+    const newIndex = id === 0 ? 9 : id - 1;
+    updateIndex(newIndex);
+  }, [router, updateIndex, updateShouldShuffle, id]);
 
   return (
     <>
@@ -130,7 +112,9 @@ export const PatientRecord = ({
                 className={styles.infoLine}
               >{`Check In Type: ${checkIn}`}</span>
             </div>
-            <p className={styles.infoLine}>{translation}</p>
+            <p className={styles.infoLine}>
+              {characterData?.translation ?? characterData?.text ?? ""}
+            </p>
           </div>
         </Modal>
       )}

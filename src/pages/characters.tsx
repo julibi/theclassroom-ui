@@ -22,15 +22,7 @@ const Characters = () => {
     <div>
       <div className={styles.folders}>
         {shuffledCharacters?.map(
-          ({
-            id,
-            name,
-            birthDate,
-            birthPlace,
-            checkIn,
-            img,
-            translationIpfsHash,
-          }) => (
+          ({ id, name, birthDate, birthPlace, checkIn, img }) => (
             <PatientRecord
               key={id}
               name={name}
@@ -39,7 +31,6 @@ const Characters = () => {
               birthDate={birthDate}
               birthPlace={birthPlace}
               checkIn={checkIn}
-              translationIpfsHash={translationIpfsHash}
               withPic
               withButton
             />

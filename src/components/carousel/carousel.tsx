@@ -11,7 +11,7 @@ export const Carousel = ({ characters }: CarouselProps) => {
   const getRandomArbitrary = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
-  const { activeIndex, updateIndex } = useUI();
+  const { activeIndex, updateIndex, shouldShuffle } = useUI();
   const totalIndex = useMemo(() => {
     return characters?.length ? characters?.length - 1 : 10;
   }, [characters]);
@@ -27,9 +27,10 @@ export const Carousel = ({ characters }: CarouselProps) => {
   });
 
   useEffect(() => {
+    if (!shouldShuffle) return;
     const randomCharacterToShow = getRandomArbitrary(0, totalIndex);
     updateIndex(randomCharacterToShow);
-  }, []);
+  }, [shouldShuffle, totalIndex, updateIndex]);
 
   return (
     <div className={styles.carouselWrapper}>
