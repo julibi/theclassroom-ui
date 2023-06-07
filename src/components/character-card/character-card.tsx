@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import cx from "classnames";
 import Image from "next/image";
 import styles from "./character-card.module.css";
@@ -14,60 +14,15 @@ export const CharacterCard = ({
   character,
   className,
 }: CharacterCardProps) => {
-  const [text, setText] = useState<null | string>(null);
-  const [translation, setTranslation] = useState<null | string>(null);
-  const [textPending, setTextPending] = useState<boolean>(false);
-  const [translationPending, setTranslationPending] = useState<boolean>(false);
   const [showOriginal, setShowOriginal] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const hasTranslation = useMemo(() => {
-    return character?.translationIpfsHash.length > 0;
-  }, [character?.translationIpfsHash]);
-  const fetchText = useCallback(async () => {
-    setTextPending(true);
-    try {
-      // TODO: first try to fetch from my pinata gate?
-      const response = await fetch(
-        `https://ipfs.io/ipfs/${character?.textIpfsHash}`
-      );
-      if (response.ok) {
-        const fetchedText = await response.text();
-        setText(fetchedText);
-        setTextPending(false);
-      }
-    } catch (e: unknown) {
-      setTextPending(false);
-    }
-  }, [character]);
-
-  const fetchTranslation = useCallback(async () => {
-    // translation does not always exist
-    if (character?.translationIpfsHash?.length === 0) return;
-    setTranslationPending(true);
-    try {
-      // TODO: first try to fetch from my pinata gate?
-      const response = await fetch(
-        `https://ipfs.io/ipfs/${character?.translationIpfsHash}`
-      );
-      if (response.ok) {
-        const fetchedText = await response.text();
-        setTranslation(fetchedText);
-        setTranslationPending(false);
-      }
-    } catch (e: unknown) {
-      setTranslationPending(false);
-    }
-  }, [character]);
-
-  useEffect(() => {
-    fetchText();
-    fetchTranslation();
-  }, [fetchText, fetchTranslation]);
-
   const characterData = useMemo(
     () => CHARACTERS.find((c) => c.id == characterId),
     [characterId]
   );
+  const hasTranslation = useMemo(() => {
+    return !!characterData?.translation;
+  }, [characterData]);
 
   return (
     <div className={cx(styles.characterCard, className)}>
@@ -109,9 +64,7 @@ export const CharacterCard = ({
             isExpanded ? styles.expanded : styles.collapsed
           )}
         >
-          {translation?.length ? (
-            translation
-          ) : (
+          {characterData?.translation ?? (
             <Skeleton count={3} className={styles.skeleton} />
           )}
         </span>
@@ -122,7 +75,9 @@ export const CharacterCard = ({
             isExpanded ? styles.expanded : styles.collapsed
           )}
         >
-          {text ? text : <Skeleton count={3} className={styles.skeleton} />}
+          {characterData?.text ?? (
+            <Skeleton count={3} className={styles.skeleton} />
+          )}
         </span>
       )}
 
@@ -137,7 +92,9 @@ export const CharacterCard = ({
         <Toggle
           className={styles.languageToggle}
           onChange={() => setShowOriginal(!showOriginal)}
-          label={`Orig. language: ${detectLanguage(text as string) ?? ""}`}
+          label={`Orig. language: ${
+            detectLanguage(characterData?.text as string) ?? ""
+          }`}
           isChecked={showOriginal}
         />
       )}
