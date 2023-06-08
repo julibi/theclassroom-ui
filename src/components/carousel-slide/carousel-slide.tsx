@@ -7,6 +7,7 @@ import { WritingBox } from "../writing-box";
 import { Button } from "../button";
 import styles from "./carousel-slide.module.css";
 import { TextCard } from "../text-card";
+import { TEXTS_TO_HIDE } from "@/constants";
 
 export const CarouselSlide = ({
   character,
@@ -49,6 +50,7 @@ export const CarouselSlide = ({
       {characterSnippets?.length > 0 && (
         <div>
           {characterSnippets?.map((snippet, idx) => {
+            if (TEXTS_TO_HIDE.includes(snippet.tokenId)) return null;
             if (idx === characterSnippets.length - 1) {
               return (
                 <>

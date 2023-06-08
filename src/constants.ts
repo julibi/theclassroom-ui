@@ -25,6 +25,8 @@ export const ADMIN_ADDRESSES = [
   "0xF41eec0A18747d0E0737Fba72F6C70B6c3d1FB83",
 ];
 
+export const TEXTS_TO_HIDE = [36097, 36148, 36144, 36002];
+
 export const CHARACTERS = [
   {
     name: "Satya31415 (THE GURU)",
