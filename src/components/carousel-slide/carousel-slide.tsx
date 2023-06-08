@@ -14,6 +14,7 @@ export const CarouselSlide = ({
 }: CarouselSlideProps) => {
   const { scrollId, updateScrollId } = useUI();
   const { characterSnippets } = useCharacterSnippets({ characterId });
+
   const lastTextRef = useRef(null);
   const executeScroll = () => {
     // @ts-ignore
@@ -45,7 +46,7 @@ export const CarouselSlide = ({
         ""
       )}
       <WritingBox characterId={characterId} />
-      {characterSnippets?.length > 1 && (
+      {characterSnippets?.length > 0 && (
         <div>
           {characterSnippets?.map((snippet, idx) => {
             if (idx === characterSnippets.length - 1) {
