@@ -168,7 +168,7 @@ export const FAQTopics = [
   },
   {
     question: "When is the launch?",
-    answer: "1st June 2023, 20:00 CET.",
+    answer: "19th June 2023, 20:00 CET.",
   },
   {
     question: "Who is behind this",

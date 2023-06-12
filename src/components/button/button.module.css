@@ -10,10 +10,11 @@
   font-weight:600;
 }
 
-.button:hover {
+.button:hover:enabled {
   cursor: pointer;
   background-color: #940f4b;
-  box-shadow: 7px 4px 0 #61e8e8;
+  transform: translate(2px, 1px);
+  box-shadow: 2px 1px 0 #61e8e8;
 }
 
 .button:disabled {
