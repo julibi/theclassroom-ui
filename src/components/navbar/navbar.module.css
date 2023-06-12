@@ -18,3 +18,8 @@
   display: inline-block;
   margin: 12px;
 }
+
+.activeLink {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
