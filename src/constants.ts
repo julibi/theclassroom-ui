@@ -186,3 +186,15 @@ export const FAQTopics = [
       "Join our Telegram channel - a subchannel in the official Moonpage channel: https://t.me/moonpagedao/1836.",
   },
 ];
+
+// first text lenghts
+// ari: 1864
+// lotti: 1696
+// neela: 1578
+// King: 1332
+// moraine 1609
+// ludgard: 1816
+// rotten oak: 1814
+// malin: 1580
+// xänder: 3384
+// guru: 2723
