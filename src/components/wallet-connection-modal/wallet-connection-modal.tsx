@@ -40,7 +40,7 @@ export const WalletConnectionModal = ({
       }
       if (connector === "MetaMask") {
         isMobile
-          ? (selectedConnector = walletConnectConnector)
+          ? (selectedConnector = metaMaskConnector)
           : (selectedConnector = injectedConnector);
       }
       if (!selectedConnector) {
