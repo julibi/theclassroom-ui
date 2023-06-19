@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import { WagmiConfig, configureChains, createClient } from "wagmi";
-import { polygon, polygonMumbai, mainnet } from "@wagmi/core/chains";
+import { polygon, polygonMumbai } from "@wagmi/core/chains";
 import { publicProvider } from "@wagmi/core/providers/public";
+import { alchemyProvider } from "wagmi/providers/alchemy";
 import { infuraProvider } from "@wagmi/core/providers/infura";
 import { InjectedConnector } from "@wagmi/core/connectors/injected";
 import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask";
@@ -9,12 +10,16 @@ import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect";
 import { CoinbaseWalletConnector } from "@wagmi/core/connectors/coinbaseWallet";
 import { WagmiProviderTypes } from "./wagmiProvider.types";
 
-const isProd = process.env.ENVIRONMENT == "PROD";
-const { chains, provider } = configureChains(
-  // what about dev and mainnet environments?
-  [isProd ? polygon : polygonMumbai],
+const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT == "PROD";
 
+const { chains, provider } = configureChains(
+  [isProd ? polygon : polygonMumbai],
   [
+    alchemyProvider({
+      apiKey: isProd
+        ? (process.env.NEXT_PUBLIC_ALCHEMY_MAINNET_API_KEY as string)
+        : (process.env.NEXT_PUBLIC_ALCHEMY_MUMBAI_API_KEY as string),
+    }),
     infuraProvider({
       apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY as string,
       priority: 0,

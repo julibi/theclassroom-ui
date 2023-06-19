@@ -7,7 +7,7 @@ import { useCharacters } from "@/hooks/use-characters";
 
 const Admin = () => {
   const { characters, fetchCharacters } = useCharacters();
-  console.log({ characters });
+
   return (
     <div className={styles.admin}>
       <Title size={1} className={styles.title}>

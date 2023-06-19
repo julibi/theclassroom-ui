@@ -13,19 +13,21 @@ import { useUser } from "@/hooks/use-user";
 import { WritingBoxProps } from "./writing-box.types";
 import { useIpfsTextUpload } from "@/hooks/use-ipfs-text-upload";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
-import { TCR_DEV } from "@/constants";
 import ABI from "../../abis/TCR.json";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
 import { useSnippets } from "@/hooks/use-snippets";
 import { SelectDropdown } from "../select-dropdown";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
+import { Minting } from "../minting";
+import pinToPinata from "@/utils/pinToPinata";
+import { TCRContract } from "@/utils/TCRContract";
 
 export const WritingBox = ({ characterId }: WritingBoxProps) => {
   const [text, setText] = useState("");
   const [writingToken, setWritingToken] = useState<null | number>(null);
   const [status, setStatus] = useState("idle");
-  const { NFTs } = useUser();
+  const { NFTs, fetchNFTs } = useUser();
   const { uploadText } = useIpfsTextUpload();
   const { refetchAllSnippets } = useSnippets();
   const { refetchSnippetsOfCharacter } = useCharacterSnippets({ characterId });
@@ -36,7 +38,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: TCR_DEV,
+    address: TCRContract,
     abi: ABI,
     functionName: "write",
   });
@@ -53,7 +55,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
 
   const error = useMemo(() => {
     if (text.trim().length < 30) {
-      return "At least 50 characters.";
+      return "At least 30 characters.";
     } else if (text.trim().length > 2000) {
       return "Max 2000 characters.";
     } else {
@@ -66,8 +68,13 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
     setWritingToken(e.target.value);
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setText("");
+    setStatus("idle");
+  }, []);
+
+  const handleChange = (val: string) => {
+    setText(val);
   };
 
   const onSubmit = useCallback(async () => {
@@ -84,10 +91,13 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
       write?.({
         recklesslySetUnpreparedArgs: [textCID, translationCID, writingToken],
       });
+      translationCID &&
+        (await pinToPinata(writingToken as number, translationCID, true));
+      await pinToPinata(writingToken as number, textCID, false);
     } catch (e) {
       console.log({ e });
     }
-  }, [text, uploadText, write]);
+  }, [text, uploadText, write, writingToken]);
 
   useEffect(() => {
     if (NFTsForWriting?.length) {
@@ -96,25 +106,33 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
   }, [NFTsForWriting]);
 
   useEffect(() => {
-    if (writeStatus === "loading" || writeStatus === "success") {
+    if (writeStatus === "loading") {
       setStatus("pending");
     }
-    if (writeStatus === "success" && waitStatus === "success") {
-      setStatus("success");
-      reset();
-      refetchAllSnippets();
-
-      // refetchSnippetsOfCharacter();
+    if (writeStatus === "error" || waitStatus === "error") {
+      setStatus("idle");
     }
-  }, [writeStatus, waitStatus, refetchSnippetsOfCharacter]);
+    if (writeStatus === "success" && waitStatus === "success") {
+      reset();
+      fetchNFTs();
+      refetchAllSnippets();
+      refetchSnippetsOfCharacter();
+    }
+  }, [
+    writeStatus,
+    waitStatus,
+    refetchSnippetsOfCharacter,
+    reset,
+    refetchAllSnippets,
+    fetchNFTs,
+  ]);
 
   if (NFTsForWriting === undefined || NFTsForWriting?.length === 0) {
-    return null;
+    return <Minting className={styles.mintingBox} />;
   }
   return (
     <div className={styles.writingBoxWrapper}>
       <Title size={2}>Continue the story</Title>
-
       {NFTsForWriting?.length > 1 && (
         <SelectDropdown
           options={NFTsForWriting?.map((nft) => nft.id)}
@@ -126,7 +144,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
       <Textarea
         className={styles.writingBox}
         text={text}
-        onChange={(value) => setText(value)}
+        onChange={handleChange}
         disabled={pending}
       />
 
@@ -136,7 +154,7 @@ export const WritingBox = ({ characterId }: WritingBoxProps) => {
         disabled={!!error || pending}
         pending={pending}
       >
-        Submit
+        {pending ? "..." : "Submit"}
       </Button>
     </div>
   );

@@ -1,9 +1,9 @@
-import { TCR_DEV } from "@/constants";
 import { createContext, useCallback, useMemo } from "react";
 import { useContractRead } from "wagmi";
 import ABI from "../../abis/TCR.json";
 import { SnippetsApi, SnippetsProviderProps } from "./snippetsProvider.types";
 import { useCharacterSnippets } from "@/hooks/use-character-snippets";
+import { TCRContract } from "@/utils/TCRContract";
 
 const defaultContext: SnippetsApi = {
   snippetsIndex: 0,
@@ -15,7 +15,7 @@ export const SnippetsContext = createContext(defaultContext);
 
 export const SnippetsProvider = ({ children }: SnippetsProviderProps) => {
   const { data: snippetsIndex } = useContractRead({
-    address: TCR_DEV,
+    address: TCRContract,
     abi: ABI,
     functionName: "index",
     args: [],
@@ -140,6 +140,7 @@ export const SnippetsProvider = ({ children }: SnippetsProviderProps) => {
     }),
     [snippetsIndex, allSnippets, refetchAllSnippets]
   );
+
   return (
     <SnippetsContext.Provider value={api}>{children}</SnippetsContext.Provider>
   );

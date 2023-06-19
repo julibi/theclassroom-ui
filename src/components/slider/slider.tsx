@@ -12,11 +12,9 @@ import { useRouter } from "next/router";
 
 export const Slider = () => {
   const router = useRouter();
-  const { isSliderOpen, openSlider, closeSlider, updateIndex, updateScrollId } =
-    useUI();
-  const { NFTs } = useUser();
+  const { isSliderOpen, openSlider, closeSlider, updateIndex } = useUI();
+  const { NFTs, fetchNFTs } = useUser();
   const { characters } = useCharacters();
-
   const toggleSlider = useCallback(() => {
     isSliderOpen ? closeSlider() : openSlider();
   }, [isSliderOpen, closeSlider, openSlider]);
@@ -27,15 +25,11 @@ export const Slider = () => {
     async (characterId: number) => {
       if (characters?.[characterId - 1] === undefined) return;
 
-      if (router?.route !== "writingapp") {
-        router.push("writingapp");
-      }
       updateIndex(characterId - 1);
       closeSlider();
       await delay(500);
-      updateScrollId(characterId);
     },
-    [updateIndex]
+    [characters, closeSlider, updateIndex]
   );
 
   // TODO: just for now
@@ -64,27 +58,39 @@ export const Slider = () => {
             NFTs
           </Title>
           <div>
-            {NFTs?.map(({ id, characterId, written }) => {
-              const characterName = characters
-                ? characters[characterId - 1]?.name
-                : null;
+            {NFTs && !!NFTs.length ? (
+              NFTs.map(({ id, characterId, written }) => {
+                const characterName = characters
+                  ? characters[characterId - 1]?.name
+                  : null;
 
-              return (
-                <Button
-                  className={cx(styles.nft, written && styles.grey)}
-                  key={id}
-                  onClick={() => handleClickNFT(characterId)}
-                >
-                  <span className={styles.blockSpan}>{`# ${id}`}</span>
-                  <span
-                    className={styles.blockSpan}
-                  >{`Character: ${characterName}`}</span>
-                  <span className={styles.blockSpan}>
-                    {written ? "Written" : "Unwritten"}
-                  </span>
+                return (
+                  <Button
+                    className={cx(styles.nft, written && styles.grey)}
+                    key={id}
+                    onClick={() => handleClickNFT(characterId)}
+                    disabled={router?.route !== "/writingapp"}
+                  >
+                    <span className={styles.blockSpan}>{`# ${id}`}</span>
+                    <span
+                      className={styles.blockSpan}
+                    >{`Character: ${characterName}`}</span>
+                    <span className={styles.blockSpan}>
+                      {written ? "Written" : "Unwritten"}
+                    </span>
+                  </Button>
+                );
+              })
+            ) : (
+              <>
+                <span className={styles.refetchText}>
+                  Not seeing your NFTs? Sorry, try refetching them.
+                </span>
+                <Button className={styles.nft} onClick={fetchNFTs}>
+                  Refetch
                 </Button>
-              );
-            })}
+              </>
+            )}
           </div>
         </div>
       </div>

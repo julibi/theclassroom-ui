@@ -25,7 +25,7 @@ export function useContract({
     args,
     // @ts-ignore
     overrides,
-    multiplier: 30,
+    multiplier: 40,
     isEnabled: enabled,
   });
 

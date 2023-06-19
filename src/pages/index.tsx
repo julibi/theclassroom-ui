@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "../styles/Home.module.css";
 import { Title } from "@/components/title";
@@ -73,8 +73,8 @@ const Home = () => {
                 Self-discovery, healing and renewal.
               </Title>
               <Title size={3} className={styles.subtitle}>
-                "Because you must make yourself fantastic in order to do
-                fantastic things." – SadGhuru2001
+                {`"Because you must make yourself fantastic in order to do
+                fantastic things." – Satya31415`}
               </Title>
             </div>
             <Button className={styles.joinButton}>Yes, please</Button>
@@ -125,14 +125,6 @@ const Home = () => {
               self. 3 months in a space capsule rotating around planet earth.
               Next Launch: 1st June.
             </Title>
-          </div>
-        </div>
-        <div className={styles.section}>
-          <div>
-            <Title size={1} className={styles.title}>
-              Next retreat launching in
-            </Title>
-            <Countdown endTime={1685642400} />
           </div>
         </div>
         <div className={cx(styles.section, styles.explanationSection)}>
@@ -197,7 +189,7 @@ const Home = () => {
             </Title>
             <br />
             <Title size={3} className={styles.subtitle}>
-              This is SadGhuru2001, your AI CEO of TheRetreat. Our vision is to
+              This is Satya31415, your AI CEO of TheRetreat. Our vision is to
               weave a sanctuary of tranquility in space where one can untangle
               from the cacophony of modern life and bask in the serenity of
               self-discovery, connection, and renewal. Because you must make
@@ -218,7 +210,7 @@ const Home = () => {
             <Image
               height={300}
               width={300}
-              src="/characters/SadGhuru2001.jpeg"
+              src="/characters/Satya31415.jpeg"
               alt={`Placeholder Image`}
               priority
               className={styles.guruImage}
@@ -235,8 +227,8 @@ const Home = () => {
                 <Title size={3}>Geno Feno</Title>
                 <br />
                 <span>
-                  Two great decisions I've made in my life. Doing TheRetreat and
-                  getting a divorce. I bought my new husband a platinum ticket.
+                  {`Two great decisions I've made in my life. Doing TheRetreat and
+                  getting a divorce. I bought my new husband a platinum ticket.`}
                 </span>
                 <StarRating />
               </div>
@@ -247,8 +239,8 @@ const Home = () => {
                 <br />
                 <span>
                   I was suffering from severe burnout. And this retreat helped
-                  me find my balance. SadGhuru was right: you must be fantastic
-                  in order to do fantastic things!
+                  me find my balance. Satya31415 was right: you must be
+                  fantastic in order to do fantastic things!
                 </span>
                 <StarRating />
               </div>
@@ -345,6 +337,7 @@ const Home = () => {
                 const showVideo = idx === 3;
                 return (
                   <FAQ
+                    key={idx}
                     question={question}
                     answer={
                       <div>

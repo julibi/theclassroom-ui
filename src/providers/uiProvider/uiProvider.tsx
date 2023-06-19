@@ -9,6 +9,8 @@ const defaultContext: UIApi = {
   updateIndex: () => undefined,
   scrollId: null,
   updateScrollId: () => undefined,
+  shouldShuffle: true,
+  updateShouldShuffle: () => undefined,
 };
 
 export const UIContext = createContext(defaultContext);
@@ -16,19 +18,14 @@ export const UIContext = createContext(defaultContext);
 export const UIProvider = ({ children }: UIProviderProps) => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [shouldShuffle, updateShouldShuffle] = useState(true);
   const [scrollId, setScrollId] = useState<null | number>(null);
-  const updateIndex = useCallback(
-    (newIndex: number) => {
-      setActiveIndex(newIndex);
-    },
-    [activeIndex]
-  );
-  const updateScrollId = useCallback(
-    (newId: number | null) => {
-      setScrollId(newId);
-    },
-    [activeIndex]
-  );
+  const updateIndex = useCallback((newIndex: number) => {
+    setActiveIndex(newIndex);
+  }, []);
+  const updateScrollId = useCallback((newId: number | null) => {
+    setScrollId(newId);
+  }, []);
   const openSlider = () => {
     setIsSliderOpen(true);
   };
@@ -45,8 +42,18 @@ export const UIProvider = ({ children }: UIProviderProps) => {
       updateIndex,
       scrollId,
       updateScrollId,
+      shouldShuffle,
+      updateShouldShuffle,
     }),
-    [isSliderOpen, openSlider, closeSlider]
+    [
+      isSliderOpen,
+      activeIndex,
+      updateIndex,
+      scrollId,
+      updateScrollId,
+      shouldShuffle,
+      updateShouldShuffle,
+    ]
   );
   return <UIContext.Provider value={api}>{children}</UIContext.Provider>;
 };

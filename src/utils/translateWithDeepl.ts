@@ -1,4 +1,5 @@
 export const translateWithDeepl = async (text: string, targetLang: string) => {
+  console.log({ text });
   const authKey = process.env.NEXT_PUBLIC_DEEPL_API_KEY;
   // @ts-ignore
   const params = new URLSearchParams({
@@ -7,7 +8,7 @@ export const translateWithDeepl = async (text: string, targetLang: string) => {
     text,
   });
 
-  return fetch("https://api-free.deepl.com/v2/translate", {
+  return fetch("https://api.deepl.com/v2/translate", {
     method: "POST",
     body: params,
     headers: {
@@ -22,7 +23,7 @@ export const translateWithDeepl = async (text: string, targetLang: string) => {
         response.translations.map((translation) => translation.text).join(" ")
     )
     .catch((error) => {
-      console.error(error);
+      console.error({ error });
       return "Could not translate";
     });
 };

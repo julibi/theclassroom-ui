@@ -1,0 +1,9 @@
+import {
+  MOONPAGE_PROFILES_ADDRESS_DEV,
+  MOONPAGE_PROFILES_ADDRESS_PROD,
+} from "@/constants";
+
+const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT == "PROD";
+export const MPProfilesContract = isProd
+  ? MOONPAGE_PROFILES_ADDRESS_PROD
+  : MOONPAGE_PROFILES_ADDRESS_DEV;

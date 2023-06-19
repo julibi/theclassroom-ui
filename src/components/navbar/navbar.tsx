@@ -1,48 +1,37 @@
-import cx from "classnames";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import { useContractRead } from "wagmi";
-import { getAccount } from "@wagmi/core";
-import { TCR_DEV } from "@/constants";
+import cx from "classnames";
 import { routes } from "./routes";
 import { WalletConnection } from "../wallet-connection";
-import ABI from "../../abis/TCR.json";
 import styles from "./navbar.module.css";
 import { NavbarProps } from "./navbar.types";
 
 export const Navbar = ({ className }: NavbarProps) => {
-  const { address } = getAccount();
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const { data: readData } = useContractRead({
-    address: TCR_DEV,
-    abi: ABI,
-    functionName: "admins",
-    args: [address],
-  });
-
-  // because of this UI hydration error: https://nextjs.org/docs/messages/react-hydration-error
-  useEffect(() => {
-    setIsAdmin(!!readData as boolean);
-  }, [readData]);
-
+  const isActive = (pathname: string, routename: string) => {
+    if (pathname === "/" && routename === "home") {
+      return true;
+    } else if (pathname === "/writingapp" && routename === "app") {
+      return true;
+    } else return false;
+  };
+  const router = useRouter();
   return (
     <div className={cx(styles.navbar, className)}>
       <ul className={styles.list}>
         {routes?.map((route) => (
-          <li key={route.name} className={styles.listItem}>
+          <li
+            key={route.name}
+            className={cx(
+              styles.listItem,
+              isActive(router.pathname, route.name) && styles.activeLink
+            )}
+          >
             <Link href={route.path} passHref>
               {route.name}
             </Link>
           </li>
         ))}
-
-        {/* {!!isAdmin && (
-          <li key="admin" className={styles.listItem}>
-            <Link href={"/admin"} passHref>
-              {"admin"}
-            </Link>
-          </li>
-        )} */}
         <li key="walletconnection" className={styles.listItem}>
           <WalletConnection />
         </li>

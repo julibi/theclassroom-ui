@@ -6,10 +6,10 @@ import { Button } from "../button";
 import { Textarea } from "../textarea";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 import ABI from "../../abis/TCR.json";
-import { TCR_DEV } from "@/constants";
 import { AdminInputProps } from "./admin-input.types";
 import { detectLanguage } from "@/utils/detectLanguage";
 import { translateWithDeepl } from "@/utils/translateWithDeepl";
+import { TCRContract } from "@/utils/TCRContract";
 
 export const AdminInput = ({ refetch }: AdminInputProps) => {
   const [text, setText] = useState("");
@@ -27,7 +27,7 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
     data,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: TCR_DEV,
+    address: TCRContract,
     abi: ABI,
     functionName: "setupCharacter",
     args: [name, textIPFSHash, ""],
@@ -70,13 +70,11 @@ export const AdminInput = ({ refetch }: AdminInputProps) => {
       try {
         const textCID = await uploadText(text);
         const language = detectLanguage(text);
-
         let translation;
         let translationCID = "";
         if (language !== "english") {
           translation = await translateWithDeepl(text, "EN");
           translationCID = translation ? await uploadText(translation) : "";
-          console.log({ language });
         }
 
         write?.({

@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useCharacters } from "@/hooks/use-characters";
 import { Carousel } from "@/components/carousel";
-import styles from "@/styles/Home.module.css";
+import { useAccount } from "wagmi";
 
 export default function WritingApp() {
-  const { characters, fetchCharacters } = useCharacters();
+  const { characters } = useCharacters();
 
   return (
     <main>

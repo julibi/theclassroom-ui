@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
 export type CharacterItem = {
+  id: number;
   name: string;
-  textIpfsHash: string;
-  translationIpfsHash: string;
-  imageIpfsHash: string;
+  text: string;
+  translation?: string;
+  img?: string;
+  birthDate: string;
+  birthPlace: string;
+  checkIn: string;
 };
 
 export type CharactersApi = {

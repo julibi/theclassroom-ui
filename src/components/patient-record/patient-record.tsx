@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 import { Button } from "../button";
@@ -9,6 +9,7 @@ import { PatientRecordProps } from "./patient-record.types";
 import styles from "./patient-record.module.css";
 import { useRouter } from "next/router";
 import { useUI } from "@/hooks/use-ui";
+import { CHARACTERS } from "@/constants";
 
 export const PatientRecord = ({
   name,
@@ -16,21 +17,25 @@ export const PatientRecord = ({
   birthDate,
   birthPlace,
   checkIn,
-  text,
+  img,
   withPic = false,
   withButton = false,
 }: PatientRecordProps) => {
   const router = useRouter();
-  const { updateIndex } = useUI();
+  const { updateIndex, updateShouldShuffle } = useUI();
   const [showFile, setShowFile] = useState(false);
   const openFile = () => {
     setShowFile(true);
   };
+  const characterData = useMemo(() => CHARACTERS.find((c) => c.id == id), [id]);
 
   const toApp = useCallback(() => {
+    updateShouldShuffle(false);
     router?.push("writingapp");
-    updateIndex(id);
-  }, [router, id]);
+    // coz activeId is not same as characterId, shifted by one
+    const newIndex = id === 0 ? 9 : id - 1;
+    updateIndex(newIndex);
+  }, [router, updateIndex, updateShouldShuffle, id]);
 
   return (
     <>
@@ -40,7 +45,7 @@ export const PatientRecord = ({
             <div className={styles.redFilter} />
             <Image
               className={styles.image}
-              src={`/characters/${name}.jpeg`}
+              src={`/characters/${img}.jpeg`}
               alt={`Image of ${name}`}
               priority
               height={120}
@@ -107,7 +112,9 @@ export const PatientRecord = ({
                 className={styles.infoLine}
               >{`Check In Type: ${checkIn}`}</span>
             </div>
-            <p className={styles.infoLine}>{text}</p>
+            <p className={styles.infoLine}>
+              {characterData?.translation ?? characterData?.text ?? ""}
+            </p>
           </div>
         </Modal>
       )}

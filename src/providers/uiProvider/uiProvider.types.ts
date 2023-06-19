@@ -8,6 +8,8 @@ export type UIApi = {
   updateIndex: (x: number) => void;
   scrollId: null | number;
   updateScrollId: (x: number | null) => void;
+  shouldShuffle: boolean;
+  updateShouldShuffle: (x: boolean) => void;
 };
 
 export type UIProviderProps = {
