@@ -15,6 +15,7 @@ import {
   injectedConnector,
   coinbaseConnector,
   walletConnectConnector,
+  metaMaskConnector,
 } from "@/providers/wagmiProvider/wagmiProvider";
 import { connectors } from "@/constants";
 import { Title } from "../title";
@@ -38,7 +39,9 @@ export const WalletConnectionModal = ({
         selectedConnector = walletConnectConnector;
       }
       if (connector === "MetaMask") {
-        selectedConnector = injectedConnector;
+        isMobile
+          ? (selectedConnector = walletConnectConnector)
+          : (selectedConnector = injectedConnector);
       }
       if (!selectedConnector) {
         setConnectError("Connector is undefined.");
@@ -74,7 +77,6 @@ export const WalletConnectionModal = ({
             key={connector}
             className={styles.connector}
             onClick={() => handleConnect(connector)}
-            disabled={connector === "MetaMask" && isMobile}
           >
             <Image
               src={`/${connector}.png`}

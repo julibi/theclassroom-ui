@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import { Address } from "@wagmi/core";
 import style from "./wallet-connection.module.css";
-import { truncateAddress } from "@/utils/truncateAddress";
 import { WalletConnectionModal } from "../wallet-connection-modal/wallet-connection-modal";
 import { Button } from "../button";
 import { useUI } from "@/hooks/use-ui/use-ui";
