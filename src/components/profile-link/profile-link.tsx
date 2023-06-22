@@ -10,7 +10,8 @@ import { AccountAvatar } from "../avatar";
 export const ProfileLink = ({ address }: ProfileLinkProps) => {
   const [fallbackImage, setFallbackImage] = useState<null | string>(null);
   const profile = useProfile(address);
-
+  console.log({ profile, address });
+  console.log("profile.name: ", profile?.name);
   if (profile) {
     return (
       <div className={styles.wrapper}>
@@ -31,7 +32,7 @@ export const ProfileLink = ({ address }: ProfileLinkProps) => {
           rel="noreferrer"
           className={styles.link}
         >
-          {profile.name}
+          {profile.name || truncateAddress(address)}
         </a>
       </div>
     );
