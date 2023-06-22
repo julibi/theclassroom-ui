@@ -13,7 +13,7 @@ export const ProfileLink = ({ address }: ProfileLinkProps) => {
 
   return (
     <div className={styles.wrapper}>
-      {profile?.imageIPFSHash ? (
+      {profile?.imageIPFSHash?.length > 0 ? (
         <Image
           className={styles.image}
           onError={() => {
@@ -34,7 +34,7 @@ export const ProfileLink = ({ address }: ProfileLinkProps) => {
         rel="noreferrer"
         className={styles.link}
       >
-        {profile.name ?? truncateAddress(address)}
+        {profile?.name?.length > 0 ? profile.name : truncateAddress(address)}
       </a>
     </div>
   );
