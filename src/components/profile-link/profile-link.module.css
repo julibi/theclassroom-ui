@@ -15,12 +15,3 @@
   margin-inline-end: 12px;
 }
 
-.defaultAvatarAndAddress {
-  display: flex;
-  align-items: center;
-}
-
-.truncatedAddress {
-  margin-inline-start: 12px;
-  display: inline-block;
-}

@@ -10,11 +10,10 @@ import { AccountAvatar } from "../avatar";
 export const ProfileLink = ({ address }: ProfileLinkProps) => {
   const [fallbackImage, setFallbackImage] = useState<null | string>(null);
   const profile = useProfile(address);
-  console.log({ profile, address });
-  console.log("profile.name: ", profile?.name);
-  if (profile) {
-    return (
-      <div className={styles.wrapper}>
+
+  return (
+    <div className={styles.wrapper}>
+      {profile?.imageIPFSHash ? (
         <Image
           className={styles.image}
           onError={() => {
@@ -26,24 +25,17 @@ export const ProfileLink = ({ address }: ProfileLinkProps) => {
           alt={`Image of ${address}`}
           priority
         />
-        <a
-          href={`https://moonpage.io/profile/${address}`}
-          target="_blank"
-          rel="noreferrer"
-          className={styles.link}
-        >
-          {profile.name || truncateAddress(address)}
-        </a>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.defaultAvatarAndAddress}>
+      ) : (
         <AccountAvatar address={address} />
-        <span className={styles.truncatedAddress}>
-          {truncateAddress(address)}
-        </span>
-      </div>
-    );
-  }
+      )}
+      <a
+        href={`https://moonpage.io/profile/${address}`}
+        target="_blank"
+        rel="noreferrer"
+        className={styles.link}
+      >
+        {profile.name ?? truncateAddress(address)}
+      </a>
+    </div>
+  );
 };
